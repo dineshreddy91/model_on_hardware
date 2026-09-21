@@ -1,0 +1,17 @@
+__pycache__/
+.pytest_cache/
+.Xil/
+*.jou
+*.log
+*.pb
+*.dcp
+*.tar
+*.bin
+*.o
+xsim.dir/
+aws_f2/classifier_head/build/checkpoints/
+aws_f2/classifier_head/build/reports/
+aws_f2/classifier_head/build/src_post_encryption/
+aws_f2/classifier_head/build/scripts/to_aws/
+aws_f2/classifier_head/software/runtime/test_*
+!aws_f2/classifier_head/software/src/test_*.c
