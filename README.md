@@ -13,8 +13,8 @@ their original copyright headers and are accompanied by `AWS_HDK_LICENSE.txt`.
   classifier weights stored in inferred block RAM.
 - An AXI-Lite control path that loads a 1024-element INT8 activation, runs the
   three dot products, and returns signed 32-bit accumulators.
-- A host-side hardware test with the expected accumulators
-  `26198`, `35544`, and `-38063`.
+- A host-side hardware test that waits for the accelerator's `done` status and
+  verifies the expected accumulators `26198`, `35544`, and `-38063`.
 - A reusable 32-lane signed INT8 dot-product tile and Vivado simulations.
 - Tools that pack all 732 checkpoint tensors into 32 striped HBM images.
 - A 42-stage execution plan and activation calibration for all 237 linear
@@ -22,10 +22,15 @@ their original copyright headers and are accompanied by `AWS_HDK_LICENSE.txt`.
 - A C++ HBM loader with optional readback verification.
 
 The v2 AWS F2 design completed place and route with its worst reported timing
-path meeting timing at **+0.080 ns slack**. This repository does not claim that
-the entire 0.8B model currently executes in FPGA fabric. The custom AFI contains
-the classifier-head proof of concept; the remaining vision, sequence, attention,
-normalization, and HBM execution engines still need implementation.
+path meeting timing at **+0.080 ns slack**. AWS created AFI
+`afi-058c641e7c54ae442` / AGFI `agfi-0d2a6c428a2d5bdfb`; the image loaded into
+F2 slot 0 with status `ok`. Five consecutive hardware runs reproduced all three
+reference accumulators exactly.
+
+This repository does not claim that the entire 0.8B model currently executes in
+FPGA fabric. The custom AFI contains the classifier-head proof of concept; the
+remaining vision, sequence, attention, normalization, and HBM execution engines
+still need implementation.
 
 ## Repository layout
 

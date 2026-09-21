@@ -19,6 +19,8 @@
 #define ADDR_ACCUMULATOR1 0x0c
 #define ADDR_ACCUMULATOR2 0x10
 #define ADDR_STATUS 0x14
+#define STATUS_BUSY (1u << 1)
+#define STATUS_DONE (1u << 2)
 
 int main(void) {
     pci_bar_handle_t handle = PCI_BAR_HANDLE_INIT;
@@ -52,10 +54,10 @@ int main(void) {
     uint32_t status = 0;
     for (int poll = 0; poll < 10000; ++poll) {
         fpga_pci_peek(handle, ADDR_STATUS, &status);
-        if (status & 2) break;
+        if ((status & STATUS_DONE) && !(status & STATUS_BUSY)) break;
         usleep(10);
     }
-    if (!(status & 2)) {
+    if (!(status & STATUS_DONE) || (status & STATUS_BUSY)) {
         fprintf(stderr, "timeout, status=0x%08x\n", status);
         return 1;
     }
