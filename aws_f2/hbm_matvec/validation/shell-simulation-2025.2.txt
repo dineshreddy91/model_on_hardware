@@ -1,0 +1,18 @@
+
+****** xsim v2025.2 (64-bit)
+  **** SW Build 6299465 on Fri Nov 14 12:34:56 MST 2025
+  **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+  **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+  **** Start of session at: Tue Sep 22 03:54:49 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/shell_sim/xsim_script.tcl
+# xsim {shell_sim} -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+PASS HBM shell: repeated commands, all 32 banks, AXI stalls, 32 rows, invalid shape and AXI fault
+$finish called at time : 62216 ns : File "/home/ubuntu/model_on_hardware/aws_f2/hbm_matvec/sim/tb_hbm_shell.sv" Line 93
+exit
+INFO: xsimkernel Simulation Memory Usage: 268528 KB (Peak: 333804 KB), Simulation CPU Usage: 1820 ms
+INFO: [Common 17-206] Exiting xsim at Tue Sep 22 03:54:53 2026...

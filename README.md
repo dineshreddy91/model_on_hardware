@@ -28,9 +28,12 @@ F2 slot 0 with status `ok`. Five consecutive hardware runs reproduced all three
 reference accumulators exactly.
 
 This repository does not claim that the entire 0.8B model currently executes in
-FPGA fabric. The custom AFI contains the classifier-head proof of concept; the
-remaining vision, sequence, attention, normalization, and HBM execution engines
-still need implementation.
+FPGA fabric. The currently loaded HBM AFI, `afi-0c11d6d84c69c667d` /
+`agfi-0c98e7286f4bae29b`, executes real-weight INT8 matrix operations from physical
+HBM. Three runs each matched all 6,144 QKV and 768 vision outputs exactly.
+The remaining vision, sequence, attention, scaling, and normalization operations
+still need implementation. See
+[the matrix engine validation record](full_model/MATVEC.md).
 
 ## Repository layout
 
@@ -104,3 +107,9 @@ measure distance, closing velocity, LiDAR geometry, or machine stopping time.
 A safety product must keep deterministic sensor validation, distance and
 stopping calculations, watchdogs, degraded-mode behavior, and the physical stop
 path outside this model.
+
+The new [HBM shell integration](aws_f2/hbm_matvec/README.md) connects the matrix
+engine to real HBM through the F2 small shell's AXI crossbar. Routed timing
+passes, the AFI is loaded, and physical HBM weight readback and all six matrix
+tests pass. The host uses BAR4 programmed I/O. See the integration's validation
+records for counts, timings, and the scope of these tests.

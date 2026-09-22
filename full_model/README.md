@@ -18,9 +18,12 @@ This project is the end-to-end FPGA implementation workspace for
 - The C++ host loader validates the complete HBM image and its physical F2 addresses.
 
 This does not yet mean that the complete model is executing on the FPGA. The HBM
-reader, tiled matrix array, vector/nonlinear unit, gated-delta state engine,
-attention engine, and microcoded scheduler remain to be integrated into the AWS
-shell design.
+bank reader and streaming matrix-vector engine now pass integrated RTL simulation
+and standalone synthesis; see [MATVEC.md](MATVEC.md). The physical HBM shell
+integration has passed routed timing and physical hardware validation for two
+real-weight matrices, each on three runs; see
+[the HBM integration](../aws_f2/hbm_matvec/README.md). The parallel matrix array, vector/nonlinear unit, gated-delta state
+engine, attention engine, and microcoded scheduler remain unfinished.
 
 ## Memory layout
 
@@ -74,3 +77,11 @@ OpenJEV is a three-label natural-language-inference classifier. It does not dire
 estimate distance, closing velocity, lidar geometry, or machine stopping distance.
 A production safety controller must keep deterministic sensor validation, distance
 calculation, watchdogs, degraded-mode handling, and stop outputs outside the VLM.
+
+## Restore lost generated weights
+
+`tools/restore_quantized_checkpoint.py ORIGINAL_SAFETENSORS hbm_manifest.json OUTPUT`
+reconstructs the per-channel INT8 checkpoint and refuses to write it unless every
+tensor matches the saved shape, dtype, and SHA256. Recovery from Hugging Face
+revision `f004f37e52695d6ddfb914a64dbf93942839ba1e` reproduced all 732 tensors,
+and rebuilding the packed images reproduced all 32 saved bank hashes.

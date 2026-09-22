@@ -15,3 +15,12 @@ aws_f2/classifier_head/build/src_post_encryption/
 aws_f2/classifier_head/build/scripts/to_aws/
 aws_f2/classifier_head/software/runtime/test_*
 !aws_f2/classifier_head/software/src/test_*.c
+
+aws_f2/hbm_matvec/build/checkpoints/
+aws_f2/hbm_matvec/build/reports/
+aws_f2/hbm_matvec/build/src_post_encryption/
+aws_f2/hbm_matvec/build/scripts/to_aws/
+aws_f2/hbm_matvec/design/openjev_int8_matvec.sv
+aws_f2/hbm_matvec/design/openjev_hbm_weight_reader.sv
+aws_f2/hbm_matvec/build/scripts/build_all.tcl
+aws_f2/hbm_matvec/build/scripts/build_level_1_cl.tcl

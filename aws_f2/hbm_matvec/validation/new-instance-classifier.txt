@@ -1,0 +1,9 @@
+label 0: FPGA=26198 expected=26198 PASS
+label 1: FPGA=35544 expected=35544 PASS
+label 2: FPGA=-38063 expected=-38063 PASS
+label 0: FPGA=26198 expected=26198 PASS
+label 1: FPGA=35544 expected=35544 PASS
+label 2: FPGA=-38063 expected=-38063 PASS
+label 0: FPGA=26198 expected=26198 PASS
+label 1: FPGA=35544 expected=35544 PASS
+label 2: FPGA=-38063 expected=-38063 PASS

@@ -1,0 +1,546 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
+| Date         : Tue Sep 22 04:58:31 2026
+| Host         : ip-172-31-16-42 running 64-bit Ubuntu 24.04.1 LTS
+| Command      : report_drc -file /home/ubuntu/fpga-build/cl_dram_hbm_dma/build/checkpoints/openjev_hbm_matvec_v2.repaired.drc.rpt
+| Design       : top
+| Device       : xcvu47p-fsvh2892-2-e
+| Speed File   : -2
+| Design State : Fully Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Report DRC
+
+Table of Contents
+-----------------
+1. REPORT SUMMARY
+2. REPORT DETAILS
+
+1. REPORT SUMMARY
+-----------------
+            Netlist: netlist
+          Floorplan: checkpoint_cl_dram_hbm_dma.openjev_hbm_matvec_v2.post_route.VIOLATED
+      Design limits: <entire design considered>
+           Ruledeck: default
+             Max checks: <unlimited>
+             Checks found: 97
++-----------+----------+-----------------------------------------+--------+
+| Rule      | Severity | Description                             | Checks |
++-----------+----------+-----------------------------------------+--------+
+| BIIVRC-1  | Warning  | Bank IO standard internal Vref conflict | 1      |
+| BUFC-1    | Warning  | Input Buffer Connections                | 91     |
+| DPOP-4    | Warning  | MREG Output pipelining                  | 2      |
+| FLBO-1    | Warning  | Pblock overlap                          | 1      |
+| RTSTAT-10 | Warning  | No routable loads                       | 1      |
+| HDPRA-57  | Advisory | Gap with Location Constraints           | 1      |
++-----------+----------+-----------------------------------------+--------+
+
+2. REPORT DETAILS
+-----------------
+BIIVRC-1#1 Warning
+Bank IO standard internal Vref conflict  - IOBank:74
+Conflicting INTERNAL_VREF constraint in Bank 74.  Some ports in this bank, for example, M_DQ[16]   (POD12_DCI, Vref=0.840V) 
+ at site L34 conflict with constrained INTERNAL_VREF of 0.600V.M_DQ[16]
+Related violations: <none>
+
+BUFC-1#1 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.DDR_CLK/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.DDR_CLK macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#2 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[0].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[0].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#3 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[10].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[10].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#4 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[11].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[11].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#5 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[12].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[12].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#6 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[13].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[13].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#7 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[14].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[14].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#8 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[15].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[15].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#9 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[16].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[16].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#10 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[17].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[17].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#11 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[18].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[18].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#12 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[19].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[19].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#13 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[1].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[1].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#14 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[20].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[20].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#15 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[21].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[21].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#16 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[22].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[22].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#17 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[23].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[23].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#18 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[24].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[24].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#19 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[25].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[25].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#20 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[26].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[26].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#21 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[27].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[27].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#22 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[28].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[28].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#23 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[29].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[29].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#24 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[2].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[2].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#25 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[30].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[30].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#26 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[31].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[31].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#27 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[32].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[32].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#28 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[33].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[33].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#29 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[34].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[34].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#30 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[35].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[35].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#31 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[36].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[36].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#32 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[37].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[37].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#33 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[38].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[38].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#34 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[39].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[39].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#35 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[3].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[3].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#36 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[40].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[40].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#37 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[41].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[41].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#38 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[42].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[42].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#39 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[43].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[43].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#40 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[44].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[44].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#41 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[45].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[45].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#42 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[46].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[46].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#43 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[47].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[47].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#44 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[48].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[48].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#45 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[49].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[49].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#46 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[4].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[4].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#47 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[50].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[50].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#48 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[51].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[51].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#49 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[52].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[52].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#50 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[53].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[53].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#51 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[54].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[54].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#52 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[55].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[55].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#53 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[56].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[56].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#54 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[57].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[57].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#55 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[58].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[58].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#56 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[59].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[59].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#57 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[5].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[5].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#58 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[60].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[60].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#59 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[61].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[61].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#60 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[62].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[62].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#61 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[63].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[63].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#62 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[6].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[6].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#63 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[7].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[7].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#64 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[8].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[8].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#65 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[9].DDR_DQ/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk2[9].DDR_DQ macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#66 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk3[0].DDR_ECC/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk3[0].DDR_ECC macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#67 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk3[1].DDR_ECC/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk3[1].DDR_ECC macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#68 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk3[2].DDR_ECC/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk3[2].DDR_ECC macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#69 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk3[3].DDR_ECC/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk3[3].DDR_ECC macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#70 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk3[4].DDR_ECC/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk3[4].DDR_ECC macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#71 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk3[5].DDR_ECC/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk3[5].DDR_ECC macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#72 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk3[6].DDR_ECC/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk3[6].DDR_ECC macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#73 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk3[7].DDR_ECC/IBUFCTRL_INST (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk3[7].DDR_ECC macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#74 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk4[0].DDR_DQS_DP/IBUFCTRL (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk4[0].DDR_DQS_DP macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#75 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk4[10].DDR_DQS_DP/IBUFCTRL (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk4[10].DDR_DQS_DP macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#76 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk4[11].DDR_DQS_DP/IBUFCTRL (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk4[11].DDR_DQS_DP macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#77 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk4[12].DDR_DQS_DP/IBUFCTRL (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk4[12].DDR_DQS_DP macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#78 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk4[13].DDR_DQS_DP/IBUFCTRL (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk4[13].DDR_DQS_DP macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#79 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk4[14].DDR_DQS_DP/IBUFCTRL (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk4[14].DDR_DQS_DP macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#80 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk4[15].DDR_DQS_DP/IBUFCTRL (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk4[15].DDR_DQS_DP macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#81 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk4[16].DDR_DQS_DP/IBUFCTRL (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk4[16].DDR_DQS_DP macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#82 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk4[17].DDR_DQS_DP/IBUFCTRL (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk4[17].DDR_DQS_DP macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#83 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk4[1].DDR_DQS_DP/IBUFCTRL (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk4[1].DDR_DQS_DP macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#84 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk4[2].DDR_DQS_DP/IBUFCTRL (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk4[2].DDR_DQS_DP macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#85 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk4[3].DDR_DQS_DP/IBUFCTRL (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk4[3].DDR_DQS_DP macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#86 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk4[4].DDR_DQS_DP/IBUFCTRL (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk4[4].DDR_DQS_DP macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#87 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk4[5].DDR_DQS_DP/IBUFCTRL (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk4[5].DDR_DQS_DP macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#88 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk4[6].DDR_DQS_DP/IBUFCTRL (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk4[6].DDR_DQS_DP macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#89 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk4[7].DDR_DQS_DP/IBUFCTRL (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk4[7].DDR_DQS_DP macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#90 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk4[8].DDR_DQS_DP/IBUFCTRL (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk4[8].DDR_DQS_DP macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+BUFC-1#91 Warning
+Input Buffer Connections  
+Input buffer WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk4[9].DDR_DQS_DP/IBUFCTRL (in WRAPPER/CL/SH_DDR/genblk1.IS_DDR_IO.genblk4[9].DDR_DQS_DP macro) has no loads. It is recommended to have an input buffer drive an internal load.
+Related violations: <none>
+
+DPOP-4#1 Warning
+MREG Output pipelining  
+DSP WRAPPER/CL/CL_DRAM_DMA_AXI_MSTR/allocation_end3 multiplier stage WRAPPER/CL/CL_DRAM_DMA_AXI_MSTR/allocation_end3/P[47:0] is not pipelined (MREG=0). Pipelining the multiplier function will improve performance and will save significant power so it is suggested whenever possible to fully pipeline this function.  If this multiplier was inferred, it is suggested to describe an additional register stage after this function.  If there is no registered adder/accumulator following the multiply function, two pipeline stages are suggested to allow both the MREG and PREG registers to be used.  If the DSP48 was instantiated in the design, it is suggested to set both the MREG and PREG attributes to 1 when performing multiply functions.
+Related violations: <none>
+
+DPOP-4#2 Warning
+MREG Output pipelining  
+DSP WRAPPER/CL/CL_DRAM_DMA_AXI_MSTR/byte_count_reg multiplier stage WRAPPER/CL/CL_DRAM_DMA_AXI_MSTR/byte_count_reg/P[47:0] is not pipelined (MREG=0). Pipelining the multiplier function will improve performance and will save significant power so it is suggested whenever possible to fully pipeline this function.  If this multiplier was inferred, it is suggested to describe an additional register stage after this function.  If there is no registered adder/accumulator following the multiply function, two pipeline stages are suggested to allow both the MREG and PREG registers to be used.  If the DSP48 was instantiated in the design, it is suggested to set both the MREG and PREG attributes to 1 when performing multiply functions.
+Related violations: <none>
+
+FLBO-1#1 Warning
+Pblock overlap  - PBlock:pblock_CL_SLR1_XBAR
+pblock_CL_SLR1_XBAR overlaps with pblock_CL_SLR1:95.87%, pblock_CL:95.87%.
+Related violations: <none>
+
+RTSTAT-10#1 Warning
+No routable loads  
+1855 net(s) have no routable loads. The problem bus(es) and/or net(s) are WRAPPER/RL_SHIM/PCIM_AXI_REG_SLC/AXI_REGISTER_SLICE/inst/ar.ar_pipe/M_PAYLOAD_DATA[0],
+WRAPPER/RL_SHIM/PCIM_AXI_REG_SLC/AXI_REGISTER_SLICE/inst/ar.ar_pipe/M_PAYLOAD_DATA[1],
+WRAPPER/RL_SHIM/PCIM_AXI_REG_SLC/AXI_REGISTER_SLICE/inst/ar.ar_pipe/M_PAYLOAD_DATA[2],
+WRAPPER/RL_SHIM/PCIM_AXI_REG_SLC/AXI_REGISTER_SLICE/inst/ar.ar_pipe/M_PAYLOAD_DATA[3],
+WRAPPER/RL_SHIM/PCIM_AXI_REG_SLC/AXI_REGISTER_SLICE/inst/ar.ar_pipe/M_PAYLOAD_DATA[4],
+WRAPPER/RL_SHIM/PCIM_AXI_REG_SLC/AXI_REGISTER_SLICE/inst/ar.ar_pipe/M_PAYLOAD_DATA[5],
+WRAPPER/RL_SHIM/PCIM_AXI_REG_SLC/AXI_REGISTER_SLICE/inst/ar.ar_pipe/M_PAYLOAD_DATA[6],
+WRAPPER/RL_SHIM/PCIM_AXI_REG_SLC/AXI_REGISTER_SLICE/inst/aw.aw_pipe/M_PAYLOAD_DATA[0],
+WRAPPER/RL_SHIM/PCIM_AXI_REG_SLC/AXI_REGISTER_SLICE/inst/aw.aw_pipe/M_PAYLOAD_DATA[1],
+WRAPPER/RL_SHIM/PCIM_AXI_REG_SLC/AXI_REGISTER_SLICE/inst/aw.aw_pipe/M_PAYLOAD_DATA[2],
+WRAPPER/RL_SHIM/PCIM_AXI_REG_SLC/AXI_REGISTER_SLICE/inst/aw.aw_pipe/M_PAYLOAD_DATA[3],
+WRAPPER/RL_SHIM/PCIM_AXI_REG_SLC/AXI_REGISTER_SLICE/inst/aw.aw_pipe/M_PAYLOAD_DATA[4],
+WRAPPER/RL_SHIM/PCIM_AXI_REG_SLC/AXI_REGISTER_SLICE/inst/aw.aw_pipe/M_PAYLOAD_DATA[5],
+WRAPPER/RL_SHIM/PCIM_AXI_REG_SLC/AXI_REGISTER_SLICE/inst/aw.aw_pipe/M_PAYLOAD_DATA[6],
+WRAPPER/RL_SHIM/PCIM_AXI_REG_SLC/AXI_REGISTER_SLICE/inst/w.w_pipe/M_PAYLOAD_DATA[576:0]
+ (the first 15 of 1026 listed nets/buses).
+Related violations: <none>
+
+HDPRA-57#1 Advisory
+Gap with Location Constraints  
+RP pblock 'pblock_CL' contains a gap with location constraints that likely will impact implementation results.  If possible, it is best to avoid gaps within an RP. If that cannot be done, nested pblock may be required in the pblock to minimize crossings. Also, you may need to add a static EXCLUDE_PLACEMENT pblock that covers the gap and add contains only essential logic to this pblock.  TAG='57_G79_RP1_S'.   Sites in gap: SLICE_X117Y357, SLICE_X117Y358, SLICE_X117Y359, SLICE_X118Y357,
+SLICE_X118Y358, SLICE_X118Y359, SLICE_X119Y357, SLICE_X119Y358,
+SLICE_X119Y359, SLICE_X120Y357, SLICE_X120Y358, SLICE_X120Y359,
+SLICE_X121Y357, SLICE_X121Y358, SLICE_X121Y359
+ (the first 15 of 540 listed)
+Related violations: <none>
+
+
