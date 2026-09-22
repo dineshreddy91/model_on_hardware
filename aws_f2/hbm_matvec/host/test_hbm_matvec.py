@@ -15,6 +15,9 @@ from pathlib import Path
 
 
 class F2Device:
+    IMAGE_ID = 0x48424D31
+    REJECT_STATUS_MASK = 5
+
     def __init__(self, slot: int = 0):
         self.slot = slot
         self.lib = C.CDLL("libfpga_mgmt.so")
@@ -45,9 +48,9 @@ class F2Device:
             self.check(self.lib.fpga_mgmt_init(), "management init")
             self.check(self.lib.fpga_pci_attach(self.slot, 0, 0, 0, C.byref(self.handle)), "BAR0 attach")
             self.resources.callback(self.lib.fpga_pci_detach, self.handle)
-            if self.read(0x500) != 0x48424D31:
-                raise RuntimeError("Loaded AFI is not the OpenJEV HBM matrix engine")
-            if self.read(0x504) & 5:
+            if self.read(0x500) != self.IMAGE_ID:
+                raise RuntimeError(f"Loaded AFI has the wrong design identity; expected {self.IMAGE_ID:#x}")
+            if self.read(0x504) & self.REJECT_STATUS_MASK:
                 raise RuntimeError("Engine is busy or faulted; reload AFI before testing")
             self.check(self.lib.fpga_pci_attach(self.slot, 0, 4, 0, C.byref(self.memory_handle)), "BAR4 attach")
             self.resources.callback(self.lib.fpga_pci_detach, self.memory_handle)

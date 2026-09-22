@@ -1,0 +1,19 @@
+
+****** xsim v2025.2 (64-bit)
+  **** SW Build 6299465 on Fri Nov 14 12:34:56 MST 2025
+  **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+  **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+  **** Start of session at: Tue Sep 22 21:24:44 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/openjev_model_shell/xsim_script.tcl
+# xsim {openjev_model_shell} -testplusarg directory=/home/ubuntu/openjev-shell-sim-v8/fixture -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+PASS host register framing, partial-record rejection, integrated program -> dispatch -> tensor/weight AXI -> committed outputs: 7 instructions, 108624 cycles (simulation only)
+$finish called at time : 2210770 ns : File "/home/ubuntu/openjev-model-integration-v8/aws_f2/full_model/sim/tb_openjev_model_shell.sv" Line 176
+exit
+INFO: xsimkernel Simulation Memory Usage: 284644 KB (Peak: 337108 KB), Simulation CPU Usage: 2680 ms
+INFO: [Common 17-206] Exiting xsim at Tue Sep 22 21:24:49 2026...
+PASS integrated AXI graph numerical outputs: logits=[2.281569242477417, 1.1346125602722168, 0.47125115990638733], probabilities=[0.6751264333724976, 0.21442140638828278, 0.1104520931839943]

@@ -1,0 +1,2 @@
+PASS attention protocol: 18 commands, masks, causal offsets, stalls, bus/numeric/domain faults, reset
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_attention.sv:78: $finish called at 1794340000 (1ps)

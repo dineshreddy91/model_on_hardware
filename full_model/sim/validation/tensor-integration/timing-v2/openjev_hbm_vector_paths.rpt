@@ -1,0 +1,533 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+--------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version      : Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
+| Date              : Tue Sep 22 17:12:32 2026
+| Host              : ip-172-31-16-42 running 64-bit Ubuntu 24.04.1 LTS
+| Command           : report_timing -max_paths 5 -file openjev_hbm_vector_paths.rpt
+| Design            : openjev_hbm_vector
+| Device            : xcvu47p-fsvh2892
+| Speed File        : -2L  PRODUCTION 1.30 05-01-2022
+| Design State      : Synthesized
+| Temperature Grade : E
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (VIOLATED) :        -0.933ns  (required time - arrival time)
+  Source:                 vector_unit/length_reg[2]/C
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Destination:            vector_unit/qa_reg[28]/D
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Path Group:             clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            4.000ns  (clk rise@4.000ns - clk rise@0.000ns)
+  Data Path Delay:        4.915ns  (logic 1.861ns (37.864%)  route 3.054ns (62.136%))
+  Logic Levels:           24  (CARRY8=10 LUT1=1 LUT2=2 LUT4=1 LUT5=5 LUT6=5)
+  Clock Path Skew:        -0.008ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.020ns = ( 4.020 - 4.000 ) 
+    Source Clock Delay      (SCD):    0.028ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=13537, unset)        0.028     0.028    vector_unit/clk
+                         FDRE                                         r  vector_unit/length_reg[2]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_FDRE_C_Q)         0.077     0.105 f  vector_unit/length_reg[2]/Q
+                         net (fo=6, unplaced)         0.159     0.264    vector_unit/length_reg_n_0_[2]
+                         LUT1 (Prop_LUT1_I0_O)        0.037     0.301 r  vector_unit/qa[27]_i_32/O
+                         net (fo=1, unplaced)         0.023     0.324    vector_unit/qa[27]_i_32_n_0
+                         CARRY8 (Prop_CARRY8_S[1]_CO[7])
+                                                      0.197     0.521 r  vector_unit/qa_reg[27]_i_12/CO[7]
+                         net (fo=1, unplaced)         0.005     0.526    vector_unit/qa_reg[27]_i_12_n_0
+                         CARRY8 (Prop_CARRY8_CI_O[2])
+                                                      0.067     0.593 f  vector_unit/qa_reg[27]_i_34/O[2]
+                         net (fo=6, unplaced)         0.207     0.800    vector_unit/magnitude1[11]
+                         LUT5 (Prop_LUT5_I4_O)        0.070     0.870 r  vector_unit/qa[27]_i_20/O
+                         net (fo=4, unplaced)         0.197     1.067    vector_unit/qa[27]_i_20_n_0
+                         LUT6 (Prop_LUT6_I4_O)        0.038     1.105 f  vector_unit/qa[24]_i_28/O
+                         net (fo=3, unplaced)         0.191     1.296    vector_unit/qa[24]_i_28_n_0
+                         LUT6 (Prop_LUT6_I4_O)        0.038     1.334 r  vector_unit/qa[24]_i_13/O
+                         net (fo=1, unplaced)         0.098     1.432    vector_unit/qa[24]_i_13_n_0
+                         LUT6 (Prop_LUT6_I1_O)        0.125     1.557 f  vector_unit/qa[24]_i_6/O
+                         net (fo=26, unplaced)        0.240     1.797    vector_unit/qa[24]_i_6_n_0
+                         LUT2 (Prop_LUT2_I1_O)        0.070     1.867 f  vector_unit/qa[7]_i_143/O
+                         net (fo=8, unplaced)         0.213     2.080    vector_unit/qa[7]_i_143_n_0
+                         LUT2 (Prop_LUT2_I0_O)        0.070     2.150 f  vector_unit/qa[7]_i_125/O
+                         net (fo=6, unplaced)         0.207     2.357    vector_unit/qa[7]_i_125_n_0
+                         LUT4 (Prop_LUT4_I3_O)        0.072     2.429 r  vector_unit/qa[7]_i_133/O
+                         net (fo=1, unplaced)         0.218     2.647    vector_unit/round_shift25[2]
+                         CARRY8 (Prop_CARRY8_DI[1]_CO[7])
+                                                      0.127     2.774 r  vector_unit/qa_reg[7]_i_97/CO[7]
+                         net (fo=1, unplaced)         0.005     2.779    vector_unit/qa_reg[7]_i_97_n_0
+                         CARRY8 (Prop_CARRY8_CI_CO[6])
+                                                      0.092     2.871 r  vector_unit/qa_reg[7]_i_75/CO[6]
+                         net (fo=24, unplaced)        0.191     3.062    vector_unit/qa_reg[7]_i_75_n_1
+                         LUT6 (Prop_LUT6_I2_O)        0.038     3.100 r  vector_unit/qa[7]_i_94/O
+                         net (fo=1, unplaced)         0.185     3.285    vector_unit/qa[7]_i_94_n_0
+                         LUT5 (Prop_LUT5_I0_O)        0.037     3.322 r  vector_unit/qa[7]_i_69/O
+                         net (fo=1, unplaced)         0.029     3.351    vector_unit/qa[7]_i_69_n_0
+                         CARRY8 (Prop_CARRY8_S[5]_CO[7])
+                                                      0.166     3.517 f  vector_unit/qa_reg[7]_i_46/CO[7]
+                         net (fo=1, unplaced)         0.005     3.522    vector_unit/qa_reg[7]_i_46_n_0
+                         CARRY8 (Prop_CARRY8_CI_CO[2])
+                                                      0.057     3.579 f  vector_unit/qa_reg[7]_i_35/CO[2]
+                         net (fo=1, unplaced)         0.185     3.764    vector_unit/round_shift23
+                         LUT5 (Prop_LUT5_I0_O)        0.038     3.802 r  vector_unit/qa[7]_i_26/O
+                         net (fo=1, unplaced)         0.020     3.822    vector_unit/qa[7]_i_26_n_0
+                         CARRY8 (Prop_CARRY8_S[0]_CO[7])
+                                                      0.199     4.021 r  vector_unit/qa_reg[7]_i_12/CO[7]
+                         net (fo=1, unplaced)         0.005     4.026    vector_unit/qa_reg[7]_i_12_n_0
+                         CARRY8 (Prop_CARRY8_CI_CO[7])
+                                                      0.022     4.048 r  vector_unit/qa_reg[15]_i_11/CO[7]
+                         net (fo=1, unplaced)         0.005     4.053    vector_unit/qa_reg[15]_i_11_n_0
+                         CARRY8 (Prop_CARRY8_CI_CO[7])
+                                                      0.022     4.075 r  vector_unit/qa_reg[22]_i_12/CO[7]
+                         net (fo=1, unplaced)         0.005     4.080    vector_unit/qa_reg[22]_i_12_n_0
+                         CARRY8 (Prop_CARRY8_CI_O[0])
+                                                      0.056     4.136 f  vector_unit/qa_reg[30]_i_18/O[0]
+                         net (fo=1, unplaced)         0.185     4.321    vector_unit/round_shift20[24]
+                         LUT6 (Prop_LUT6_I5_O)        0.038     4.359 f  vector_unit/qa[30]_i_7/O
+                         net (fo=30, unplaced)        0.243     4.602    vector_unit/qa[30]_i_7_n_0
+                         LUT5 (Prop_LUT5_I1_O)        0.070     4.672 r  vector_unit/qa[29]_i_2/O
+                         net (fo=2, unplaced)         0.185     4.857    vector_unit/qa[29]_i_2_n_0
+                         LUT5 (Prop_LUT5_I0_O)        0.038     4.895 r  vector_unit/qa[28]_i_1/O
+                         net (fo=1, unplaced)         0.048     4.943    vector_unit/qa[28]_i_1_n_0
+                         FDRE                                         r  vector_unit/qa_reg[28]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        4.000     4.000 r  
+                                                      0.000     4.000 r  clk (IN)
+                         net (fo=13537, unset)        0.020     4.020    vector_unit/clk
+                         FDRE                                         r  vector_unit/qa_reg[28]/C
+                         clock pessimism              0.000     4.020    
+                         clock uncertainty           -0.035     3.985    
+                         FDRE (Setup_FDRE_C_D)        0.025     4.010    vector_unit/qa_reg[28]
+  -------------------------------------------------------------------
+                         required time                          4.010    
+                         arrival time                          -4.943    
+  -------------------------------------------------------------------
+                         slack                                 -0.933    
+
+Slack (VIOLATED) :        -0.933ns  (required time - arrival time)
+  Source:                 vector_unit/length_reg[2]/C
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Destination:            vector_unit/qa_reg[29]/D
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Path Group:             clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            4.000ns  (clk rise@4.000ns - clk rise@0.000ns)
+  Data Path Delay:        4.915ns  (logic 1.861ns (37.864%)  route 3.054ns (62.136%))
+  Logic Levels:           24  (CARRY8=10 LUT1=1 LUT2=2 LUT4=1 LUT5=5 LUT6=5)
+  Clock Path Skew:        -0.008ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.020ns = ( 4.020 - 4.000 ) 
+    Source Clock Delay      (SCD):    0.028ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=13537, unset)        0.028     0.028    vector_unit/clk
+                         FDRE                                         r  vector_unit/length_reg[2]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_FDRE_C_Q)         0.077     0.105 f  vector_unit/length_reg[2]/Q
+                         net (fo=6, unplaced)         0.159     0.264    vector_unit/length_reg_n_0_[2]
+                         LUT1 (Prop_LUT1_I0_O)        0.037     0.301 r  vector_unit/qa[27]_i_32/O
+                         net (fo=1, unplaced)         0.023     0.324    vector_unit/qa[27]_i_32_n_0
+                         CARRY8 (Prop_CARRY8_S[1]_CO[7])
+                                                      0.197     0.521 r  vector_unit/qa_reg[27]_i_12/CO[7]
+                         net (fo=1, unplaced)         0.005     0.526    vector_unit/qa_reg[27]_i_12_n_0
+                         CARRY8 (Prop_CARRY8_CI_O[2])
+                                                      0.067     0.593 f  vector_unit/qa_reg[27]_i_34/O[2]
+                         net (fo=6, unplaced)         0.207     0.800    vector_unit/magnitude1[11]
+                         LUT5 (Prop_LUT5_I4_O)        0.070     0.870 r  vector_unit/qa[27]_i_20/O
+                         net (fo=4, unplaced)         0.197     1.067    vector_unit/qa[27]_i_20_n_0
+                         LUT6 (Prop_LUT6_I4_O)        0.038     1.105 f  vector_unit/qa[24]_i_28/O
+                         net (fo=3, unplaced)         0.191     1.296    vector_unit/qa[24]_i_28_n_0
+                         LUT6 (Prop_LUT6_I4_O)        0.038     1.334 r  vector_unit/qa[24]_i_13/O
+                         net (fo=1, unplaced)         0.098     1.432    vector_unit/qa[24]_i_13_n_0
+                         LUT6 (Prop_LUT6_I1_O)        0.125     1.557 f  vector_unit/qa[24]_i_6/O
+                         net (fo=26, unplaced)        0.240     1.797    vector_unit/qa[24]_i_6_n_0
+                         LUT2 (Prop_LUT2_I1_O)        0.070     1.867 f  vector_unit/qa[7]_i_143/O
+                         net (fo=8, unplaced)         0.213     2.080    vector_unit/qa[7]_i_143_n_0
+                         LUT2 (Prop_LUT2_I0_O)        0.070     2.150 f  vector_unit/qa[7]_i_125/O
+                         net (fo=6, unplaced)         0.207     2.357    vector_unit/qa[7]_i_125_n_0
+                         LUT4 (Prop_LUT4_I3_O)        0.072     2.429 r  vector_unit/qa[7]_i_133/O
+                         net (fo=1, unplaced)         0.218     2.647    vector_unit/round_shift25[2]
+                         CARRY8 (Prop_CARRY8_DI[1]_CO[7])
+                                                      0.127     2.774 r  vector_unit/qa_reg[7]_i_97/CO[7]
+                         net (fo=1, unplaced)         0.005     2.779    vector_unit/qa_reg[7]_i_97_n_0
+                         CARRY8 (Prop_CARRY8_CI_CO[6])
+                                                      0.092     2.871 r  vector_unit/qa_reg[7]_i_75/CO[6]
+                         net (fo=24, unplaced)        0.191     3.062    vector_unit/qa_reg[7]_i_75_n_1
+                         LUT6 (Prop_LUT6_I2_O)        0.038     3.100 r  vector_unit/qa[7]_i_94/O
+                         net (fo=1, unplaced)         0.185     3.285    vector_unit/qa[7]_i_94_n_0
+                         LUT5 (Prop_LUT5_I0_O)        0.037     3.322 r  vector_unit/qa[7]_i_69/O
+                         net (fo=1, unplaced)         0.029     3.351    vector_unit/qa[7]_i_69_n_0
+                         CARRY8 (Prop_CARRY8_S[5]_CO[7])
+                                                      0.166     3.517 f  vector_unit/qa_reg[7]_i_46/CO[7]
+                         net (fo=1, unplaced)         0.005     3.522    vector_unit/qa_reg[7]_i_46_n_0
+                         CARRY8 (Prop_CARRY8_CI_CO[2])
+                                                      0.057     3.579 f  vector_unit/qa_reg[7]_i_35/CO[2]
+                         net (fo=1, unplaced)         0.185     3.764    vector_unit/round_shift23
+                         LUT5 (Prop_LUT5_I0_O)        0.038     3.802 r  vector_unit/qa[7]_i_26/O
+                         net (fo=1, unplaced)         0.020     3.822    vector_unit/qa[7]_i_26_n_0
+                         CARRY8 (Prop_CARRY8_S[0]_CO[7])
+                                                      0.199     4.021 r  vector_unit/qa_reg[7]_i_12/CO[7]
+                         net (fo=1, unplaced)         0.005     4.026    vector_unit/qa_reg[7]_i_12_n_0
+                         CARRY8 (Prop_CARRY8_CI_CO[7])
+                                                      0.022     4.048 r  vector_unit/qa_reg[15]_i_11/CO[7]
+                         net (fo=1, unplaced)         0.005     4.053    vector_unit/qa_reg[15]_i_11_n_0
+                         CARRY8 (Prop_CARRY8_CI_CO[7])
+                                                      0.022     4.075 r  vector_unit/qa_reg[22]_i_12/CO[7]
+                         net (fo=1, unplaced)         0.005     4.080    vector_unit/qa_reg[22]_i_12_n_0
+                         CARRY8 (Prop_CARRY8_CI_O[0])
+                                                      0.056     4.136 f  vector_unit/qa_reg[30]_i_18/O[0]
+                         net (fo=1, unplaced)         0.185     4.321    vector_unit/round_shift20[24]
+                         LUT6 (Prop_LUT6_I5_O)        0.038     4.359 f  vector_unit/qa[30]_i_7/O
+                         net (fo=30, unplaced)        0.243     4.602    vector_unit/qa[30]_i_7_n_0
+                         LUT5 (Prop_LUT5_I1_O)        0.070     4.672 r  vector_unit/qa[29]_i_2/O
+                         net (fo=2, unplaced)         0.185     4.857    vector_unit/qa[29]_i_2_n_0
+                         LUT5 (Prop_LUT5_I2_O)        0.038     4.895 r  vector_unit/qa[29]_i_1/O
+                         net (fo=1, unplaced)         0.048     4.943    vector_unit/qa[29]_i_1_n_0
+                         FDRE                                         r  vector_unit/qa_reg[29]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        4.000     4.000 r  
+                                                      0.000     4.000 r  clk (IN)
+                         net (fo=13537, unset)        0.020     4.020    vector_unit/clk
+                         FDRE                                         r  vector_unit/qa_reg[29]/C
+                         clock pessimism              0.000     4.020    
+                         clock uncertainty           -0.035     3.985    
+                         FDRE (Setup_FDRE_C_D)        0.025     4.010    vector_unit/qa_reg[29]
+  -------------------------------------------------------------------
+                         required time                          4.010    
+                         arrival time                          -4.943    
+  -------------------------------------------------------------------
+                         slack                                 -0.933    
+
+Slack (VIOLATED) :        -0.901ns  (required time - arrival time)
+  Source:                 vector_unit/length_reg[2]/C
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Destination:            vector_unit/qa_reg[27]/D
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Path Group:             clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            4.000ns  (clk rise@4.000ns - clk rise@0.000ns)
+  Data Path Delay:        4.883ns  (logic 1.829ns (37.456%)  route 3.054ns (62.544%))
+  Logic Levels:           24  (CARRY8=10 LUT1=1 LUT2=2 LUT4=2 LUT5=3 LUT6=6)
+  Clock Path Skew:        -0.008ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.020ns = ( 4.020 - 4.000 ) 
+    Source Clock Delay      (SCD):    0.028ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=13537, unset)        0.028     0.028    vector_unit/clk
+                         FDRE                                         r  vector_unit/length_reg[2]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_FDRE_C_Q)         0.077     0.105 f  vector_unit/length_reg[2]/Q
+                         net (fo=6, unplaced)         0.159     0.264    vector_unit/length_reg_n_0_[2]
+                         LUT1 (Prop_LUT1_I0_O)        0.037     0.301 r  vector_unit/qa[27]_i_32/O
+                         net (fo=1, unplaced)         0.023     0.324    vector_unit/qa[27]_i_32_n_0
+                         CARRY8 (Prop_CARRY8_S[1]_CO[7])
+                                                      0.197     0.521 r  vector_unit/qa_reg[27]_i_12/CO[7]
+                         net (fo=1, unplaced)         0.005     0.526    vector_unit/qa_reg[27]_i_12_n_0
+                         CARRY8 (Prop_CARRY8_CI_O[2])
+                                                      0.067     0.593 f  vector_unit/qa_reg[27]_i_34/O[2]
+                         net (fo=6, unplaced)         0.207     0.800    vector_unit/magnitude1[11]
+                         LUT5 (Prop_LUT5_I4_O)        0.070     0.870 r  vector_unit/qa[27]_i_20/O
+                         net (fo=4, unplaced)         0.197     1.067    vector_unit/qa[27]_i_20_n_0
+                         LUT6 (Prop_LUT6_I4_O)        0.038     1.105 f  vector_unit/qa[24]_i_28/O
+                         net (fo=3, unplaced)         0.191     1.296    vector_unit/qa[24]_i_28_n_0
+                         LUT6 (Prop_LUT6_I4_O)        0.038     1.334 r  vector_unit/qa[24]_i_13/O
+                         net (fo=1, unplaced)         0.098     1.432    vector_unit/qa[24]_i_13_n_0
+                         LUT6 (Prop_LUT6_I1_O)        0.125     1.557 f  vector_unit/qa[24]_i_6/O
+                         net (fo=26, unplaced)        0.240     1.797    vector_unit/qa[24]_i_6_n_0
+                         LUT2 (Prop_LUT2_I1_O)        0.070     1.867 f  vector_unit/qa[7]_i_143/O
+                         net (fo=8, unplaced)         0.213     2.080    vector_unit/qa[7]_i_143_n_0
+                         LUT2 (Prop_LUT2_I0_O)        0.070     2.150 f  vector_unit/qa[7]_i_125/O
+                         net (fo=6, unplaced)         0.207     2.357    vector_unit/qa[7]_i_125_n_0
+                         LUT4 (Prop_LUT4_I3_O)        0.072     2.429 r  vector_unit/qa[7]_i_133/O
+                         net (fo=1, unplaced)         0.218     2.647    vector_unit/round_shift25[2]
+                         CARRY8 (Prop_CARRY8_DI[1]_CO[7])
+                                                      0.127     2.774 r  vector_unit/qa_reg[7]_i_97/CO[7]
+                         net (fo=1, unplaced)         0.005     2.779    vector_unit/qa_reg[7]_i_97_n_0
+                         CARRY8 (Prop_CARRY8_CI_CO[6])
+                                                      0.092     2.871 r  vector_unit/qa_reg[7]_i_75/CO[6]
+                         net (fo=24, unplaced)        0.191     3.062    vector_unit/qa_reg[7]_i_75_n_1
+                         LUT6 (Prop_LUT6_I2_O)        0.038     3.100 r  vector_unit/qa[7]_i_94/O
+                         net (fo=1, unplaced)         0.185     3.285    vector_unit/qa[7]_i_94_n_0
+                         LUT5 (Prop_LUT5_I0_O)        0.037     3.322 r  vector_unit/qa[7]_i_69/O
+                         net (fo=1, unplaced)         0.029     3.351    vector_unit/qa[7]_i_69_n_0
+                         CARRY8 (Prop_CARRY8_S[5]_CO[7])
+                                                      0.166     3.517 f  vector_unit/qa_reg[7]_i_46/CO[7]
+                         net (fo=1, unplaced)         0.005     3.522    vector_unit/qa_reg[7]_i_46_n_0
+                         CARRY8 (Prop_CARRY8_CI_CO[2])
+                                                      0.057     3.579 f  vector_unit/qa_reg[7]_i_35/CO[2]
+                         net (fo=1, unplaced)         0.185     3.764    vector_unit/round_shift23
+                         LUT5 (Prop_LUT5_I0_O)        0.038     3.802 r  vector_unit/qa[7]_i_26/O
+                         net (fo=1, unplaced)         0.020     3.822    vector_unit/qa[7]_i_26_n_0
+                         CARRY8 (Prop_CARRY8_S[0]_CO[7])
+                                                      0.199     4.021 r  vector_unit/qa_reg[7]_i_12/CO[7]
+                         net (fo=1, unplaced)         0.005     4.026    vector_unit/qa_reg[7]_i_12_n_0
+                         CARRY8 (Prop_CARRY8_CI_CO[7])
+                                                      0.022     4.048 r  vector_unit/qa_reg[15]_i_11/CO[7]
+                         net (fo=1, unplaced)         0.005     4.053    vector_unit/qa_reg[15]_i_11_n_0
+                         CARRY8 (Prop_CARRY8_CI_CO[7])
+                                                      0.022     4.075 r  vector_unit/qa_reg[22]_i_12/CO[7]
+                         net (fo=1, unplaced)         0.005     4.080    vector_unit/qa_reg[22]_i_12_n_0
+                         CARRY8 (Prop_CARRY8_CI_O[0])
+                                                      0.056     4.136 r  vector_unit/qa_reg[30]_i_18/O[0]
+                         net (fo=1, unplaced)         0.185     4.321    vector_unit/round_shift20[24]
+                         LUT6 (Prop_LUT6_I5_O)        0.038     4.359 r  vector_unit/qa[30]_i_7/O
+                         net (fo=30, unplaced)        0.243     4.602    vector_unit/qa[30]_i_7_n_0
+                         LUT4 (Prop_LUT4_I2_O)        0.038     4.640 r  vector_unit/qa[27]_i_3/O
+                         net (fo=1, unplaced)         0.185     4.825    vector_unit/qa[27]_i_3_n_0
+                         LUT6 (Prop_LUT6_I3_O)        0.038     4.863 r  vector_unit/qa[27]_i_1/O
+                         net (fo=1, unplaced)         0.048     4.911    vector_unit/qa[27]_i_1_n_0
+                         FDRE                                         r  vector_unit/qa_reg[27]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        4.000     4.000 r  
+                                                      0.000     4.000 r  clk (IN)
+                         net (fo=13537, unset)        0.020     4.020    vector_unit/clk
+                         FDRE                                         r  vector_unit/qa_reg[27]/C
+                         clock pessimism              0.000     4.020    
+                         clock uncertainty           -0.035     3.985    
+                         FDRE (Setup_FDRE_C_D)        0.025     4.010    vector_unit/qa_reg[27]
+  -------------------------------------------------------------------
+                         required time                          4.010    
+                         arrival time                          -4.911    
+  -------------------------------------------------------------------
+                         slack                                 -0.901    
+
+Slack (VIOLATED) :        -0.901ns  (required time - arrival time)
+  Source:                 vector_unit/length_reg[2]/C
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Destination:            vector_unit/qa_reg[30]/D
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Path Group:             clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            4.000ns  (clk rise@4.000ns - clk rise@0.000ns)
+  Data Path Delay:        4.883ns  (logic 1.829ns (37.456%)  route 3.054ns (62.544%))
+  Logic Levels:           24  (CARRY8=10 LUT1=1 LUT2=2 LUT4=2 LUT5=3 LUT6=6)
+  Clock Path Skew:        -0.008ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.020ns = ( 4.020 - 4.000 ) 
+    Source Clock Delay      (SCD):    0.028ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=13537, unset)        0.028     0.028    vector_unit/clk
+                         FDRE                                         r  vector_unit/length_reg[2]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_FDRE_C_Q)         0.077     0.105 f  vector_unit/length_reg[2]/Q
+                         net (fo=6, unplaced)         0.159     0.264    vector_unit/length_reg_n_0_[2]
+                         LUT1 (Prop_LUT1_I0_O)        0.037     0.301 r  vector_unit/qa[27]_i_32/O
+                         net (fo=1, unplaced)         0.023     0.324    vector_unit/qa[27]_i_32_n_0
+                         CARRY8 (Prop_CARRY8_S[1]_CO[7])
+                                                      0.197     0.521 r  vector_unit/qa_reg[27]_i_12/CO[7]
+                         net (fo=1, unplaced)         0.005     0.526    vector_unit/qa_reg[27]_i_12_n_0
+                         CARRY8 (Prop_CARRY8_CI_O[2])
+                                                      0.067     0.593 f  vector_unit/qa_reg[27]_i_34/O[2]
+                         net (fo=6, unplaced)         0.207     0.800    vector_unit/magnitude1[11]
+                         LUT5 (Prop_LUT5_I4_O)        0.070     0.870 r  vector_unit/qa[27]_i_20/O
+                         net (fo=4, unplaced)         0.197     1.067    vector_unit/qa[27]_i_20_n_0
+                         LUT6 (Prop_LUT6_I4_O)        0.038     1.105 f  vector_unit/qa[24]_i_28/O
+                         net (fo=3, unplaced)         0.191     1.296    vector_unit/qa[24]_i_28_n_0
+                         LUT6 (Prop_LUT6_I4_O)        0.038     1.334 r  vector_unit/qa[24]_i_13/O
+                         net (fo=1, unplaced)         0.098     1.432    vector_unit/qa[24]_i_13_n_0
+                         LUT6 (Prop_LUT6_I1_O)        0.125     1.557 f  vector_unit/qa[24]_i_6/O
+                         net (fo=26, unplaced)        0.240     1.797    vector_unit/qa[24]_i_6_n_0
+                         LUT2 (Prop_LUT2_I1_O)        0.070     1.867 f  vector_unit/qa[7]_i_143/O
+                         net (fo=8, unplaced)         0.213     2.080    vector_unit/qa[7]_i_143_n_0
+                         LUT2 (Prop_LUT2_I0_O)        0.070     2.150 f  vector_unit/qa[7]_i_125/O
+                         net (fo=6, unplaced)         0.207     2.357    vector_unit/qa[7]_i_125_n_0
+                         LUT4 (Prop_LUT4_I3_O)        0.072     2.429 r  vector_unit/qa[7]_i_133/O
+                         net (fo=1, unplaced)         0.218     2.647    vector_unit/round_shift25[2]
+                         CARRY8 (Prop_CARRY8_DI[1]_CO[7])
+                                                      0.127     2.774 r  vector_unit/qa_reg[7]_i_97/CO[7]
+                         net (fo=1, unplaced)         0.005     2.779    vector_unit/qa_reg[7]_i_97_n_0
+                         CARRY8 (Prop_CARRY8_CI_CO[6])
+                                                      0.092     2.871 r  vector_unit/qa_reg[7]_i_75/CO[6]
+                         net (fo=24, unplaced)        0.191     3.062    vector_unit/qa_reg[7]_i_75_n_1
+                         LUT6 (Prop_LUT6_I2_O)        0.038     3.100 r  vector_unit/qa[7]_i_94/O
+                         net (fo=1, unplaced)         0.185     3.285    vector_unit/qa[7]_i_94_n_0
+                         LUT5 (Prop_LUT5_I0_O)        0.037     3.322 r  vector_unit/qa[7]_i_69/O
+                         net (fo=1, unplaced)         0.029     3.351    vector_unit/qa[7]_i_69_n_0
+                         CARRY8 (Prop_CARRY8_S[5]_CO[7])
+                                                      0.166     3.517 f  vector_unit/qa_reg[7]_i_46/CO[7]
+                         net (fo=1, unplaced)         0.005     3.522    vector_unit/qa_reg[7]_i_46_n_0
+                         CARRY8 (Prop_CARRY8_CI_CO[2])
+                                                      0.057     3.579 f  vector_unit/qa_reg[7]_i_35/CO[2]
+                         net (fo=1, unplaced)         0.185     3.764    vector_unit/round_shift23
+                         LUT5 (Prop_LUT5_I0_O)        0.038     3.802 r  vector_unit/qa[7]_i_26/O
+                         net (fo=1, unplaced)         0.020     3.822    vector_unit/qa[7]_i_26_n_0
+                         CARRY8 (Prop_CARRY8_S[0]_CO[7])
+                                                      0.199     4.021 r  vector_unit/qa_reg[7]_i_12/CO[7]
+                         net (fo=1, unplaced)         0.005     4.026    vector_unit/qa_reg[7]_i_12_n_0
+                         CARRY8 (Prop_CARRY8_CI_CO[7])
+                                                      0.022     4.048 r  vector_unit/qa_reg[15]_i_11/CO[7]
+                         net (fo=1, unplaced)         0.005     4.053    vector_unit/qa_reg[15]_i_11_n_0
+                         CARRY8 (Prop_CARRY8_CI_CO[7])
+                                                      0.022     4.075 r  vector_unit/qa_reg[22]_i_12/CO[7]
+                         net (fo=1, unplaced)         0.005     4.080    vector_unit/qa_reg[22]_i_12_n_0
+                         CARRY8 (Prop_CARRY8_CI_O[0])
+                                                      0.056     4.136 r  vector_unit/qa_reg[30]_i_18/O[0]
+                         net (fo=1, unplaced)         0.185     4.321    vector_unit/round_shift20[24]
+                         LUT6 (Prop_LUT6_I5_O)        0.038     4.359 r  vector_unit/qa[30]_i_7/O
+                         net (fo=30, unplaced)        0.243     4.602    vector_unit/qa[30]_i_7_n_0
+                         LUT4 (Prop_LUT4_I2_O)        0.038     4.640 f  vector_unit/qa[30]_i_2/O
+                         net (fo=1, unplaced)         0.185     4.825    vector_unit/qa[30]_i_2_n_0
+                         LUT6 (Prop_LUT6_I0_O)        0.038     4.863 r  vector_unit/qa[30]_i_1/O
+                         net (fo=1, unplaced)         0.048     4.911    vector_unit/qa[30]_i_1_n_0
+                         FDRE                                         r  vector_unit/qa_reg[30]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        4.000     4.000 r  
+                                                      0.000     4.000 r  clk (IN)
+                         net (fo=13537, unset)        0.020     4.020    vector_unit/clk
+                         FDRE                                         r  vector_unit/qa_reg[30]/C
+                         clock pessimism              0.000     4.020    
+                         clock uncertainty           -0.035     3.985    
+                         FDRE (Setup_FDRE_C_D)        0.025     4.010    vector_unit/qa_reg[30]
+  -------------------------------------------------------------------
+                         required time                          4.010    
+                         arrival time                          -4.911    
+  -------------------------------------------------------------------
+                         slack                                 -0.901    
+
+Slack (VIOLATED) :        -0.828ns  (required time - arrival time)
+  Source:                 vector_unit/scalar_unit/k_reg[2]/C
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Destination:            vector_unit/scalar_unit/alu_a_q_reg[17]/D
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Path Group:             clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            4.000ns  (clk rise@4.000ns - clk rise@0.000ns)
+  Data Path Delay:        4.810ns  (logic 1.834ns (38.129%)  route 2.976ns (61.871%))
+  Logic Levels:           24  (CARRY8=10 LUT1=1 LUT2=2 LUT4=1 LUT5=5 LUT6=5)
+  Clock Path Skew:        -0.008ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.020ns = ( 4.020 - 4.000 ) 
+    Source Clock Delay      (SCD):    0.028ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=13537, unset)        0.028     0.028    vector_unit/scalar_unit/clk
+                         FDRE                                         r  vector_unit/scalar_unit/k_reg[2]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_FDRE_C_Q)         0.077     0.105 f  vector_unit/scalar_unit/k_reg[2]/Q
+                         net (fo=6, unplaced)         0.159     0.264    vector_unit/scalar_unit/k_reg_n_0_[2]
+                         LUT1 (Prop_LUT1_I0_O)        0.037     0.301 r  vector_unit/scalar_unit/alu_a_q[30]_i_101/O
+                         net (fo=1, unplaced)         0.023     0.324    vector_unit/scalar_unit/alu_a_q[30]_i_101_n_0
+                         CARRY8 (Prop_CARRY8_S[1]_CO[7])
+                                                      0.197     0.521 r  vector_unit/scalar_unit/alu_a_q_reg[30]_i_61/CO[7]
+                         net (fo=1, unplaced)         0.005     0.526    vector_unit/scalar_unit/alu_a_q_reg[30]_i_61_n_0
+                         CARRY8 (Prop_CARRY8_CI_CO[7])
+                                                      0.022     0.548 r  vector_unit/scalar_unit/alu_a_q_reg[25]_i_54/CO[7]
+                         net (fo=1, unplaced)         0.005     0.553    vector_unit/scalar_unit/alu_a_q_reg[25]_i_54_n_0
+                         CARRY8 (Prop_CARRY8_CI_O[5])
+                                                      0.116     0.669 f  vector_unit/scalar_unit/alu_a_q_reg[25]_i_53/O[5]
+                         net (fo=5, unplaced)         0.159     0.828    vector_unit/scalar_unit/magnitude1[22]
+                         LUT5 (Prop_LUT5_I1_O)        0.053     0.881 r  vector_unit/scalar_unit/alu_a_q[30]_i_27/O
+                         net (fo=4, unplaced)         0.197     1.078    vector_unit/scalar_unit/alu_a_q[30]_i_27_n_0
+                         LUT6 (Prop_LUT6_I0_O)        0.038     1.116 r  vector_unit/scalar_unit/alu_a_q[25]_i_48/O
+                         net (fo=4, unplaced)         0.197     1.313    vector_unit/scalar_unit/alu_a_q[25]_i_48_n_0
+                         LUT6 (Prop_LUT6_I5_O)        0.038     1.351 r  vector_unit/scalar_unit/alu_a_q[25]_i_12/O
+                         net (fo=7, unplaced)         0.165     1.516    vector_unit/scalar_unit/alu_a_q[25]_i_12_n_0
+                         LUT6 (Prop_LUT6_I0_O)        0.090     1.606 r  vector_unit/scalar_unit/alu_a_q[25]_i_3/O
+                         net (fo=28, unplaced)        0.242     1.848    vector_unit/scalar_unit/alu_a_q[25]_i_3_n_0
+                         LUT2 (Prop_LUT2_I1_O)        0.038     1.886 f  vector_unit/scalar_unit/alu_a_q[7]_i_134/O
+                         net (fo=8, unplaced)         0.213     2.099    vector_unit/scalar_unit/alu_a_q[7]_i_134_n_0
+                         LUT2 (Prop_LUT2_I0_O)        0.038     2.137 f  vector_unit/scalar_unit/alu_a_q[7]_i_116/O
+                         net (fo=6, unplaced)         0.207     2.344    vector_unit/scalar_unit/alu_a_q[7]_i_116_n_0
+                         LUT4 (Prop_LUT4_I3_O)        0.072     2.416 r  vector_unit/scalar_unit/alu_a_q[7]_i_124/O
+                         net (fo=1, unplaced)         0.218     2.634    vector_unit/scalar_unit/alu_a_q[7]_i_124_n_0
+                         CARRY8 (Prop_CARRY8_DI[1]_CO[7])
+                                                      0.127     2.761 r  vector_unit/scalar_unit/alu_a_q_reg[7]_i_87/CO[7]
+                         net (fo=1, unplaced)         0.005     2.766    vector_unit/scalar_unit/alu_a_q_reg[7]_i_87_n_0
+                         CARRY8 (Prop_CARRY8_CI_CO[6])
+                                                      0.092     2.858 r  vector_unit/scalar_unit/alu_a_q_reg[7]_i_65/CO[6]
+                         net (fo=24, unplaced)        0.191     3.049    vector_unit/scalar_unit/alu_a_q_reg[7]_i_65_n_1
+                         LUT6 (Prop_LUT6_I2_O)        0.038     3.087 r  vector_unit/scalar_unit/alu_a_q[7]_i_84/O
+                         net (fo=1, unplaced)         0.185     3.272    vector_unit/scalar_unit/alu_a_q[7]_i_84_n_0
+                         LUT5 (Prop_LUT5_I0_O)        0.037     3.309 r  vector_unit/scalar_unit/alu_a_q[7]_i_59/O
+                         net (fo=1, unplaced)         0.029     3.338    vector_unit/scalar_unit/alu_a_q[7]_i_59_n_0
+                         CARRY8 (Prop_CARRY8_S[5]_CO[7])
+                                                      0.166     3.504 f  vector_unit/scalar_unit/alu_a_q_reg[7]_i_36/CO[7]
+                         net (fo=1, unplaced)         0.005     3.509    vector_unit/scalar_unit/alu_a_q_reg[7]_i_36_n_0
+                         CARRY8 (Prop_CARRY8_CI_CO[2])
+                                                      0.057     3.566 f  vector_unit/scalar_unit/alu_a_q_reg[7]_i_25/CO[2]
+                         net (fo=1, unplaced)         0.185     3.751    vector_unit/scalar_unit/round_shift031_out
+                         LUT5 (Prop_LUT5_I0_O)        0.038     3.789 r  vector_unit/scalar_unit/alu_a_q[7]_i_15/O
+                         net (fo=1, unplaced)         0.020     3.809    vector_unit/scalar_unit/alu_a_q[7]_i_15_n_0
+                         CARRY8 (Prop_CARRY8_S[0]_CO[7])
+                                                      0.199     4.008 r  vector_unit/scalar_unit/alu_a_q_reg[7]_i_4/CO[7]
+                         net (fo=1, unplaced)         0.005     4.013    vector_unit/scalar_unit/alu_a_q_reg[7]_i_4_n_0
+                         CARRY8 (Prop_CARRY8_CI_CO[7])
+                                                      0.022     4.035 r  vector_unit/scalar_unit/alu_a_q_reg[15]_i_5/CO[7]
+                         net (fo=1, unplaced)         0.005     4.040    vector_unit/scalar_unit/alu_a_q_reg[15]_i_5_n_0
+                         CARRY8 (Prop_CARRY8_CI_O[1])
+                                                      0.076     4.116 r  vector_unit/scalar_unit/alu_a_q_reg[22]_i_7/O[1]
+                         net (fo=1, unplaced)         0.183     4.299    vector_unit/scalar_unit/alu_a_q_reg[22]_i_7_n_14
+                         LUT6 (Prop_LUT6_I0_O)        0.038     4.337 r  vector_unit/scalar_unit/alu_a_q[17]_i_6/O
+                         net (fo=1, unplaced)         0.185     4.522    vector_unit/scalar_unit/alu_a_q[17]_i_6_n_0
+                         LUT5 (Prop_LUT5_I4_O)        0.038     4.560 r  vector_unit/scalar_unit/alu_a_q[17]_i_2/O
+                         net (fo=2, unplaced)         0.140     4.700    vector_unit/scalar_unit/alu_a_q[17]_i_2_n_0
+                         LUT5 (Prop_LUT5_I0_O)        0.090     4.790 r  vector_unit/scalar_unit/alu_a_q[17]_i_1/O
+                         net (fo=1, unplaced)         0.048     4.838    vector_unit/scalar_unit/alu_a[17]
+                         FDRE                                         r  vector_unit/scalar_unit/alu_a_q_reg[17]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        4.000     4.000 r  
+                                                      0.000     4.000 r  clk (IN)
+                         net (fo=13537, unset)        0.020     4.020    vector_unit/scalar_unit/clk
+                         FDRE                                         r  vector_unit/scalar_unit/alu_a_q_reg[17]/C
+                         clock pessimism              0.000     4.020    
+                         clock uncertainty           -0.035     3.985    
+                         FDRE (Setup_FDRE_C_D)        0.025     4.010    vector_unit/scalar_unit/alu_a_q_reg[17]
+  -------------------------------------------------------------------
+                         required time                          4.010    
+                         arrival time                          -4.838    
+  -------------------------------------------------------------------
+                         slack                                 -0.828    
+
+
+
+

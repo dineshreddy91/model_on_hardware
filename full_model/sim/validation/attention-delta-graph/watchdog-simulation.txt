@@ -1,0 +1,2 @@
+PASS attention and gated-delta bounded watchdog, sticky fault, reset
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_operator_watchdog.sv:29: $finish called at 240000 (1ps)

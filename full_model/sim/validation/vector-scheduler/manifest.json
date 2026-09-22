@@ -1,0 +1,44 @@
+{
+  "kind": "simulation-and-out-of-context-synthesis",
+  "full_model_inference": false,
+  "deployed_in_afi": false,
+  "model_revision": "f004f37e52695d6ddfb914a64dbf93942839ba1e",
+  "simulation_command": "bash full_model/sim/run_vector_scheduler.sh OUTPUT_DIRECTORY",
+  "rtl_sha256": {
+    "full_model/rtl/openjev_command_scheduler.sv": "7b8a83fd47a72cdf94e582fc8799b3762bb17fe3412ba797c42e8d2c43f84e50",
+    "full_model/rtl/openjev_fp32_pkg.sv": "ba6ab76c09d5b6c03165c3c0bc86981dafa9fab58be7ea559aed2bbb49f68586",
+    "full_model/rtl/openjev_hbm_activation_writer.sv": "7dbdbfbb15ff3a6127bdc57dc30f5fa7a1aea3665d2c4e78146fe63ca20c6359",
+    "full_model/rtl/openjev_hbm_vector.sv": "89378342379b9f980550482f817bfad81b709b0c128efe7bbb09c1aa4ad5d831",
+    "full_model/rtl/openjev_hbm_weight_reader.sv": "4d475b22f1e8f01439fa97088c9a69f0fbef71400b8416f3a30300ae6d82e572",
+    "full_model/rtl/openjev_int8_dot_tile.sv": "a030eeaa7cd47b2cff0680b2e7df0a460a0586fa5ccd2e26926595b48933c864",
+    "full_model/rtl/openjev_int8_matvec.sv": "967298f3f5f52034df9f99925f4e051bdec29695d9d7d42659f3071ca7f8a9e6",
+    "full_model/rtl/openjev_scalar.sv": "7cdb2d8ac114cdfc916a334e13fc45afaf93c6cb991faa5a8cb797c2a9598277",
+    "full_model/rtl/openjev_scaled_int32.sv": "3776814d9a17ac4d82475e00da20f8f4907fd4c9581ae99c9130773f98dcd78b",
+    "full_model/rtl/openjev_vector.sv": "4b10b04278dcb200a2fa8f7194ff8a5e5102f2668ca49da4cbd85d1c8e5c43bb"
+  },
+  "tests": {
+    "fp32_exact_vectors": 120156,
+    "scalar_cases": 1001,
+    "vector_cases": 132,
+    "vector_outputs": 2772,
+    "scheduled_hbm_commands": 134,
+    "scheduled_hbm_outputs": 8925,
+    "scheduler_scenarios": 19
+  },
+  "synthesis": {
+    "tool": "Vivado 2025.2",
+    "part": "xcvu47p-fsvh2892-2L-e",
+    "scope": "out_of_context",
+    "target_clock_ns": 4.0,
+    "routed_timing_closed": false,
+    "openjev_command_scheduler": {
+      "wns_ns": 1.43,
+      "constraints_met": true
+    },
+    "openjev_hbm_vector": {
+      "wns_ns": -7.691,
+      "constraints_met": false
+    },
+    "scheduler_enabled_engines": "vector (0) only"
+  }
+}

@@ -1,0 +1,2 @@
+PASS graph chain: real attention -> stored tensor -> real gated delta, 12 committed values
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_graph_chain.sv:114: $finish called at 22580000 (1ps)

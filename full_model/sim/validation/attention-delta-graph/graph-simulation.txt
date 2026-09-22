@@ -1,0 +1,2 @@
+PASS graph sequencer: 14 scenarios plus reset
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_graph_sequencer.sv:93: $finish called at 3020 (1s)

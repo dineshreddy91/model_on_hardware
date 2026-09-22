@@ -1,0 +1,2 @@
+PASS two consecutive integrated program executions -> dispatch -> tensor/weight AXI -> committed outputs: 7 instructions, 104531 cycles (simulation only)
+full_model/sim/tb_openjev_model_core.sv:132: $finish called at 2090970000 (1ps)

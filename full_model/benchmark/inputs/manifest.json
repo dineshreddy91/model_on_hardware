@@ -1,0 +1,28 @@
+{
+  "model": "AlexWortega/openjev/qwen3.5-0.8b-nli-v2s-long",
+  "model_revision": "f004f37e52695d6ddfb914a64dbf93942839ba1e",
+  "requested_execution": "full-model FPGA only",
+  "inference_status": "not_run_missing_full_model_hardware",
+  "loaded_afi": "agfi-0c98e7286f4bae29b",
+  "input_source": "https://zefan-cai.github.io/open-jev/",
+  "inputs": [
+    {
+      "file": "gameplay-doom.jpg",
+      "url": "https://zefan-cai.github.io/open-jev/media/gameplay-doom.jpg",
+      "sha256": "48674ebec3e9e187d74ce11b8b11b6f343fc5eac98333392e26c8aaacf8a9f38"
+    },
+    {
+      "file": "gameplay-trex.jpg",
+      "url": "https://zefan-cai.github.io/open-jev/media/gameplay-trex.jpg",
+      "sha256": "15670001eef8f56b4abe1098072810488e8f680e729df3bbab273f6fc7a48109"
+    }
+  ],
+  "missing_hardware": [
+    "vision embedding and position handling",
+    "scaled matrix outputs, bias, normalization and nonlinear operations",
+    "vision and language attention",
+    "gated-delta recurrent state",
+    "activation memory and full graph scheduling"
+  ],
+  "predictions": null
+}

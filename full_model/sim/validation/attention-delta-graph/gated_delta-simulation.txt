@@ -1,0 +1,2 @@
+PASS gated-delta protocol: 7 commands, state import/reuse/export, stalls, bus/numeric/domain faults, reset
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_gated_delta.sv:90: $finish called at 18982170000 (1ps)

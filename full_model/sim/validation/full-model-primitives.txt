@@ -1,0 +1,16 @@
+Generated 655360 independently rounded conversion vectors
+PASS HBM activation writer: 322 committed words, all 32 banks, both halves, independent AW/W, delayed/error B, bounds and framing
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_hbm_activation_writer.sv:132: $finish called at 17856000 (1ps)
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/rtl/openjev_scaled_int32.sv:30: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in '+accumulator[31:0]').
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/rtl/openjev_scaled_int32.sv:31: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'scale[15:0]').
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/rtl/openjev_scaled_int32.sv:31: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'scale[15:0]').
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/rtl/openjev_scaled_int32.sv:33: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in '+accumulator[31:0]').
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/rtl/openjev_scaled_int32.sv:33: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'scale[15:0]').
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/rtl/openjev_scaled_int32.sv:39: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'scale[15:0]').
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/rtl/openjev_scaled_int32.sv:39: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'scale[15:0]').
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/rtl/openjev_scaled_int32.sv:45: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'rounded[24:0]').
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/rtl/openjev_scaled_int32.sv:48: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'rounded[24:0]').
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/rtl/openjev_scaled_int32.sv:53: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'rounded[24:0]').
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/rtl/openjev_scaled_int32.sv:54: sorry: constant selects in always_* processes are not fully supported (the process will be sensitive to all bits in 'scale[15:0]').
+PASS scaled INT32: 655360 vectors, exhaustive binary16 patterns, integer extremes, ties-to-even, stalls and nonfinite errors
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_scaled_int32.sv:44: $finish called at 2652071000 (1ps)

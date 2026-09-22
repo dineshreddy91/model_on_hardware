@@ -1,0 +1,66 @@
+bank 0 bytes=28848128 address=0x1000000000
+bank 1 bytes=28848128 address=0x1020000000
+bank 2 bytes=28848128 address=0x1040000000
+bank 3 bytes=28848128 address=0x1060000000
+bank 4 bytes=28848128 address=0x1080000000
+bank 5 bytes=28848128 address=0x10a0000000
+bank 6 bytes=28848128 address=0x10c0000000
+bank 7 bytes=28848128 address=0x10e0000000
+bank 8 bytes=28848128 address=0x1100000000
+bank 9 bytes=28848128 address=0x1120000000
+bank 10 bytes=28848128 address=0x1140000000
+bank 11 bytes=28848128 address=0x1160000000
+bank 12 bytes=28848128 address=0x1180000000
+bank 13 bytes=28848128 address=0x11a0000000
+bank 14 bytes=28848128 address=0x11c0000000
+bank 15 bytes=28848128 address=0x11e0000000
+bank 16 bytes=28848128 address=0x1200000000
+bank 17 bytes=28848128 address=0x1220000000
+bank 18 bytes=28848128 address=0x1240000000
+bank 19 bytes=28848128 address=0x1260000000
+bank 20 bytes=28848128 address=0x1280000000
+bank 21 bytes=28848128 address=0x12a0000000
+bank 22 bytes=28848128 address=0x12c0000000
+bank 23 bytes=28848128 address=0x12e0000000
+bank 24 bytes=28848128 address=0x1300000000
+bank 25 bytes=28848128 address=0x1320000000
+bank 26 bytes=28848128 address=0x1340000000
+bank 27 bytes=28848128 address=0x1360000000
+bank 28 bytes=28848128 address=0x1380000000
+bank 29 bytes=28848128 address=0x13a0000000
+bank 30 bytes=28848128 address=0x13c0000000
+bank 31 bytes=28848128 address=0x13e0000000
+validated_bytes=923140096
+transport=pci_bar4
+loaded bank 0
+loaded bank 1
+loaded bank 2
+loaded bank 3
+loaded bank 4
+loaded bank 5
+loaded bank 6
+loaded bank 7
+loaded bank 8
+loaded bank 9
+loaded bank 10
+loaded bank 11
+loaded bank 12
+loaded bank 13
+loaded bank 14
+loaded bank 15
+loaded bank 16
+loaded bank 17
+loaded bank 18
+loaded bank 19
+loaded bank 20
+loaded bank 21
+loaded bank 22
+loaded bank 23
+loaded bank 24
+loaded bank 25
+loaded bank 26
+loaded bank 27
+loaded bank 28
+loaded bank 29
+loaded bank 30
+loaded bank 31

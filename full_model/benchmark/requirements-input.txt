@@ -1,0 +1,8 @@
+# CPU input preparation only; no CPU model inference is used.
+# Install torch==2.9.0 and torchvision==0.24.0 from the CPU wheel index.
+transformers==5.17.0
+torch==2.9.0
+torchvision==0.24.0
+pillow>=10,<13
+numpy>=1.26,<3
+pydantic>=2,<3

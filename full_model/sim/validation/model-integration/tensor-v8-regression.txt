@@ -1,0 +1,29 @@
+PASS bounded integer conversions: 9216 exhaustive values
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_small_integer.sv:15: $finish called at 0 (1ps)
+PASS registered FP32 ALU: 120156 bit-exact values with output stalls
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_fp32_alu.sv:28: $finish called at 14418760000 (1ps)
+PASS special activations protocol: 646 cases
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_special.sv:25: $finish called at 4631630000 (1ps)
+PASS HBM element: 393 accesses, 32 banks, strobes, AW/W stalls, bounds, protection, timeout, read error
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_hbm_element.sv:128: $finish called at 37830000 (1ps)
+PASS tensor address: 94 cases, interleaved gates, rank-four strides, bounds and descriptor errors
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_tensor_address.sv:65: $finish called at 119020000 (1ps)
+PASS tensor view through AXI HBM: 393 accesses, 32 banks, strobes, AW/W stalls, bounds, protection, timeout, read error
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_tensor_memory.sv:140: $finish called at 198110000 (1ps)
+PASS loaded tensor-ID table through AXI HBM: 393 accesses, 32 banks, strobes, AW/W stalls, bounds, protection, timeout, read error
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_tensor_port.sv:154: $finish called at 242360000 (1ps)
+PASS head dispatcher: grouped-query attention, recurrent heads, committed writes, invalid dimensions
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_head_dispatch.sv:63: $finish called at 343880000 (1ps)
+PASS row quantizer protocol, output stalls, invalid shape and NaN rejection
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_quantize_row.sv:45: $finish called at 3222450000 (1ps)
+PASS rotary memory protocol, committed writes and invalid dimension rejection
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_rope.sv:60: $finish called at 535360000 (1ps)
+PASS causal convolution memory protocol, committed writes and invalid dimensions, NaN, sticky faults and bus errors
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_causal_conv.sv:70: $finish called at 5060870000 (1ps)
+PASS special activations: 646 values; max scaled errors [7.602574614296032e-08, 2.1311454891309936e-07]; tolerance 2e-6
+PASS multihead numerical mapping: 76 committed outputs/state values; max abs error 7.8752834e-08
+PASS row quantization: 11 rows, 12637 exact scales/INT8 outputs
+PASS registered FP32 ALU: 12060 bit-exact values with output stalls
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_fp32_alu.sv:28: $finish called at 1447240000 (1ps)
+PASS full/partial rotary embedding: 3 cases, 928 bit-exact outputs
+PASS causal convolution: 4 cases, 6208 bit-exact outputs
