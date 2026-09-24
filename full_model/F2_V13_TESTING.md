@@ -52,8 +52,8 @@ The replacement F2 `i-049c97612201b3b80` is reachable as
 `ec2-user@ec2-44-204-90-121.compute-1.amazonaws.com`. Its FPGA SDK and
 Python test environment are installed; the 49 host/program tests pass.
 The validated tar has been copied to `/home/ec2-user/openjev_full_model_v13.Developer_CL.tar`
-and its SHA-256 matches the builder. IAM profile attachment is verified. Both hardware smoke tests passed; the full-model test is running;
-no full-model FPGA result has been measured yet. The paths below refer to the restored builder artifacts.
+and its SHA-256 matches the builder. IAM profile attachment is verified. Both hardware smoke tests and both full-model executions completed;
+see measured results below. The paths below refer to the restored builder artifacts.
 Loading the AFI replaces the design in FPGA slot 0. Use its returned global
 `agfi-...` ID:
 
@@ -90,6 +90,21 @@ benchmark in order, stopping on any failure. Status is in
 while this job is active. All 32 bank hashes, compiled program binaries and
 both input/reference provenances passed preflight checks.
 
-Latest captured progress: Box Runner at `text.18.mlp_gate.matrix`, 1,076
-instructions retired after 2,340 seconds. No completed full-model result yet.
-The baseline remains provisional; see [baseline audit](BASELINE_AUDIT.md).
+## Completed hardware test — September 24, 2026
+
+Both complete model requests finished on v13 with no CPU model fallback.
+Each retired 1,290 instructions (the graph also includes END). Both synthetic
+smoke runs passed. Raw evidence: [full-model results](sim/validation/model-integration/v13/full-model-results.json).
+
+| Input | FPGA cycles | Start-to-completion (ms) | Request latency (ms) | Maximum logit error | Maximum probability error |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Box Runner | 674725510056 | 2698903.331 | 2699046.412 | 0.270663 | 0.016018 |
+| Doom | 675124638762 | 2700499.446 | 2700585.964 | 0.214551 | 0.022787 |
+
+Request latency includes CPU preprocessing, transfers and FPGA execution;
+195461.979 ms of initial setup is excluded. It ends before label decoding and
+reference comparison. These are single runs, not latency percentiles.
+Both top classes match the provisional offline CPU oracle. No numerical
+acceptance threshold or native-model parity has been established, so this is
+execution completion, not a model-correctness pass. See [baseline audit](BASELINE_AUDIT.md).
+The v14 parallel revision is building separately; no hardware speedup is yet measured.

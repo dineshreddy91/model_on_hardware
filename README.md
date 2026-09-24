@@ -10,13 +10,13 @@ as v13 AFI `afi-00f49a1efd465abda` / `agfi-03b2976d4db937929` on AWS F2.
 Routed validation passes setup (+0.023 ns), hold (+0.001 ns), bus skew and
 routing checks, with zero DRC errors. Both synthetic hardware smoke runs pass.
 
-**Box Runner completed full-model execution on v13:** 1,290 instructions
-retired, with a measured request latency of **2,699,046 ms (about 45 minutes)**.
-The top class matches the provisional CPU oracle, but maximum logit error is
-0.270663 and maximum probability error is 0.016018; correctness is not yet
-established. [Raw partial results](full_model/sim/validation/model-integration/v13/box-runner-partial-results.json).
-Doom is still running as of September 24, 04:17 UTC. This serialized prototype
-has not demonstrated competitive GPU latency or cost.
+**Both full-model FPGA executions completed without CPU model fallback.**
+Box Runner request latency was **2,699,046 ms**; Doom was **2,700,586 ms**
+(about 45 minutes each). Each retired 1,290 instructions. Both top classes
+match the provisional CPU oracle, but maximum logit errors are 0.270663 and
+0.214551 respectively; model correctness remains unestablished.
+[Measured results and timing scope](full_model/F2_V13_TESTING.md#completed-hardware-test--september-24-2026).
+This serialized prototype has not demonstrated competitive GPU latency or cost.
 
 **Parallel RTL v14 is implemented and its full shell build is running.** It adds
 four attention query lanes and a 64-byte HBM read buffer. Attention simulation
