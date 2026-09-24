@@ -1,0 +1,34 @@
+Generated 655360 independently rounded conversion vectors
+PASS all 63488 finite binary16 conversions, signed zero and subnormals
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_half.sv:17: $finish called at 0 (1ps)
+PASS scaled INT32: 655360 vectors, exhaustive binary16 patterns, integer extremes, ties-to-even, stalls and nonfinite errors
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_scaled_int32.sv:49: $finish called at 23623591000 (1ps)
+PASS row operators: tensor mapping, output stalls, committed writes and bus faults
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_row_ops.sv:64: $finish called at 40676720000 (1ps)
+PASS table operators: stalls, committed writes, duplicate slots, bounds and bus faults
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_table_ops.sv:74: $finish called at 28703530000 (1ps)
+PASS batched HBM matrix: 6210 exact INT32 outputs, striped weights, stalls, committed writes, invalid shape
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_matrix_rows.sv:81: $finish called at 1068530000 (1ps)
+CORE_PERF run=0 read_latency=0 cycles=110560 axi_transactions=943
+CORE_PERF run=1 read_latency=0 cycles=110561 axi_transactions=943
+PASS two consecutive integrated program executions -> dispatch -> tensor/weight AXI -> committed outputs: 7 instructions, 110561 cycles (simulation only)
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_model_core.sv:141: $finish called at 2211570000 (1ps)
+PASS row arithmetic: 19 cases, 13523 outputs, maximum scaled error 6.8646842e-07
+PASS four table operators: 15 cases, 30515 bit-exact outputs
+PASS integrated AXI graph numerical outputs: logits=[2.281569242477417, 1.1346125602722168, 0.47125115990638733], probabilities=[0.6751264333724976, 0.21442140638828278, 0.1104520931839943]
+============================= test session starts ==============================
+platform darwin -- Python 3.10.18, pytest-8.4.1, pluggy-1.6.0
+rootdir: /Users/dineshreddy/vlmrun/vlm-lab
+configfile: pyproject.toml
+plugins: dash-3.3.0, anyio-4.9.0, logfire-4.33.0, asyncio-1.1.0, harvest-1.10.5, typeguard-4.5.1, dependency-0.6.1
+asyncio: mode=strict, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 49 items
+
+full_model/program/tests/test_core_smoke.py .
+full_model/program/tests/test_execution.py ......
+full_model/program/tests/test_model_runtime.py ................
+full_model/program/tests/test_program.py ................
+full_model/program/tests/test_reference_comparison.py .....
+full_model/program/tests/test_reference_graph.py .....
+
+============================== 49 passed in 6.09s ==============================

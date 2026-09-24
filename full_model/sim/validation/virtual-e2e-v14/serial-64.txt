@@ -1,0 +1,4 @@
+CORE_PERF run=0 read_latency=64 cycles=162010 axi_transactions=1128
+CORE_PERF run=1 read_latency=64 cycles=162011 axi_transactions=1128
+PASS two consecutive integrated program executions -> dispatch -> tensor/weight AXI -> committed outputs: 7 instructions, 162011 cycles (simulation only)
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_model_core.sv:141: $finish called at 3240570000 (1ps)

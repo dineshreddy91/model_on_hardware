@@ -1,0 +1,2 @@
+PASS attention numerical reference: 30 commands, 7668 values, max absolute error 6.61029001e-07
+PASS serial parity; multiquery aggregate cycle speedup 1.537x (simulation only)
