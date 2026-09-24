@@ -1,0 +1,1125 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+--------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version      : Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
+| Date              : Thu Sep 24 05:45:19 2026
+| Host              : ip-172-31-16-42 running 64-bit Ubuntu 24.04.1 LTS
+| Command           : report_timing -delay_type max -max_paths 10 -file /home/ubuntu/openjev-v14-validation/setup_paths.rpt
+| Design            : top
+| Device            : xcvu47p-fsvh2892
+| Speed File        : -2  PRODUCTION 1.30 05-01-2022
+| Design State      : Routed
+| Temperature Grade : E
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (VIOLATED) :        -0.111ns  (required time - arrival time)
+  Source:                 WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/HBM_SNGLBLI_INTF_AXI<15>_INST/ACLK
+                            (rising edge-triggered cell HBM_SNGLBLI_INTF_AXI clocked by clk_out1_cl_hbm_mmcm  {rise@0.000ns fall@1.111ns period=2.222ns})
+  Destination:            WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i_reg[130]/CE
+                            (rising edge-triggered cell FDRE clocked by clk_out1_cl_hbm_mmcm  {rise@0.000ns fall@1.111ns period=2.222ns})
+  Path Group:             clk_out1_cl_hbm_mmcm
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            2.222ns  (clk_out1_cl_hbm_mmcm rise@2.222ns - clk_out1_cl_hbm_mmcm rise@0.000ns)
+  Data Path Delay:        2.191ns  (logic 0.499ns (22.772%)  route 1.692ns (77.228%))
+  Logic Levels:           1  (LUT2=1)
+  Clock Path Skew:        -0.018ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    8.797ns = ( 11.019 - 2.222 ) 
+    Source Clock Delay      (SCD):    8.096ns
+    Clock Pessimism Removal (CPR):    -0.719ns
+  Clock Uncertainty:      0.064ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.107ns
+    Phase Error              (PE):    0.000ns
+  Clock Net Delay (Source):      1.715ns (routing 0.675ns, distribution 1.040ns)
+  Clock Net Delay (Destination): 1.634ns (routing 0.616ns, distribution 1.018ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Partition      PBlock               Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------------------------------------------
+                         (clock clk_out1_cl_hbm_mmcm rise edge)
+                                                      0.000     0.000 r                                      
+    BJ4                                               0.000     0.000 r  static                              <hidden>
+                         net (fo=0)                   0.100     0.100    static                              <hidden>/<hidden>/<hidden>/<hidden>
+    HPIOBDIFFINBUF_X0Y130
+                         DIFFINBUF (Prop_DIFFINBUF_HPIOBDIFFINBUF_DIFF_IN_P_O)
+                                                      0.863     0.963 r  static                              <hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=1, routed)           0.050     1.013    static                              <hidden>/<hidden>/<hidden>/<hidden>
+    BJ4                  IBUFCTRL (Prop_IBUFCTRL_HPIOB_M_I_O)
+                                                      0.000     1.013 r  static                              <hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=1, routed)           0.348     1.361    static                              <hidden>/<hidden>/<hidden>
+    BUFGCE_X0Y122        BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     1.389 r  static                              <hidden>/<hidden>/<hidden>
+                         net (fo=3, routed)           1.811     3.200    static                              <hidden>/<hidden>/<hidden>/<hidden>/<hidden>
+    SLR Crossing[1->0]   
+    MMCM_X0Y2            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                     -0.127     3.073 r  static                              <hidden>/<hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=2, routed)           0.245     3.318    static                              <hidden>/<hidden>/<hidden>
+    BUFGCE_X0Y70         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     3.346 r  static                              <hidden>/<hidden>/<hidden>
+                         net (fo=921, routed)         2.890     6.236    boundary                            WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clk_in1
+    MMCM_X0Y0            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                     -0.127     6.109 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/mmcme4_adv_inst/CLKOUT0
+                         net (fo=2, routed)           0.244     6.353    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clk_out1_cl_hbm_mmcm
+    BUFGCE_X0Y14         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     6.381 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clkout1_buf/O
+    X3Y1 (CLOCK_ROOT)    net (fo=3829, routed)        1.715     8.096    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/AXI_15_ACLK
+    BLI_HBM_AXI_INTF_X15Y0
+                         HBM_SNGLBLI_INTF_AXI                         r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/HBM_SNGLBLI_INTF_AXI<15>_INST/ACLK
+  -------------------------------------------------------------------    -------------------------------------------------------
+    BLI_HBM_AXI_INTF_X15Y0
+                         HBM_SNGLBLI_INTF_AXI (Prop_BLI_AXI_BLI_HBM_AXI_INTF_ACLK_WREADY_PIPE)
+                                                      0.464     8.560 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/HBM_SNGLBLI_INTF_AXI<15>_INST/WREADY_PIPE
+                         net (fo=5, routed)           0.758     9.317    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_axi_wready
+    SLICE_X84Y11         LUT2 (Prop_A6LUT_SLICEL_I0_O)
+                                                      0.035     9.352 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i[255]_i_1/O
+                         net (fo=257, routed)         0.934    10.287    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/p_1_in
+    SLICE_X69Y75         FDRE                                         r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i_reg[130]/CE
+  -------------------------------------------------------------------    -------------------------------------------------------
+
+                         (clock clk_out1_cl_hbm_mmcm rise edge)
+                                                      2.222     2.222 r                                      
+    BJ4                                               0.000     2.222 r  static                              <hidden>
+                         net (fo=0)                   0.079     2.301    static                              <hidden>/<hidden>/<hidden>/<hidden>
+    HPIOBDIFFINBUF_X0Y130
+                         DIFFINBUF (Prop_DIFFINBUF_HPIOBDIFFINBUF_DIFF_IN_P_O)
+                                                      0.750     3.052 r  static                              <hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=1, routed)           0.040     3.092    static                              <hidden>/<hidden>/<hidden>/<hidden>
+    BJ4                  IBUFCTRL (Prop_IBUFCTRL_HPIOB_M_I_O)
+                                                      0.000     3.092 r  static                              <hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=1, routed)           0.309     3.401    static                              <hidden>/<hidden>/<hidden>
+    BUFGCE_X0Y122        BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024     3.425 r  static                              <hidden>/<hidden>/<hidden>
+                         net (fo=3, routed)           1.624     5.049    static                              <hidden>/<hidden>/<hidden>/<hidden>/<hidden>
+    SLR Crossing[1->0]   
+    MMCM_X0Y2            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                      0.630     5.679 r  static                              <hidden>/<hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=2, routed)           0.215     5.894    static                              <hidden>/<hidden>/<hidden>
+    BUFGCE_X0Y70         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024     5.918 r  static                              <hidden>/<hidden>/<hidden>
+                         net (fo=921, routed)         2.599     8.517    boundary                            WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clk_in1
+    MMCM_X0Y0            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                      0.630     9.147 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/mmcme4_adv_inst/CLKOUT0
+                         net (fo=2, routed)           0.214     9.361    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clk_out1_cl_hbm_mmcm
+    BUFGCE_X0Y14         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024     9.385 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clkout1_buf/O
+    X3Y1 (CLOCK_ROOT)    net (fo=3829, routed)        1.634    11.019    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/aclk
+    SLICE_X69Y75         FDRE                                         r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i_reg[130]/C
+                         clock pessimism             -0.719    10.300                                            
+                         clock uncertainty           -0.064    10.236                                            
+    SLICE_X69Y75         FDRE (Setup_BFF_SLICEL_C_CE)
+                                                     -0.060    10.176    reconfigurable   pblock_CL/pblock_CL_SLR0
+                                                                                                                 WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i_reg[130]
+  -------------------------------------------------------------------
+                         required time                         10.176                                            
+                         arrival time                         -10.287                                            
+  -------------------------------------------------------------------
+                         slack                                 -0.111                                            
+
+Slack (VIOLATED) :        -0.111ns  (required time - arrival time)
+  Source:                 WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/HBM_SNGLBLI_INTF_AXI<15>_INST/ACLK
+                            (rising edge-triggered cell HBM_SNGLBLI_INTF_AXI clocked by clk_out1_cl_hbm_mmcm  {rise@0.000ns fall@1.111ns period=2.222ns})
+  Destination:            WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i_reg[133]/CE
+                            (rising edge-triggered cell FDRE clocked by clk_out1_cl_hbm_mmcm  {rise@0.000ns fall@1.111ns period=2.222ns})
+  Path Group:             clk_out1_cl_hbm_mmcm
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            2.222ns  (clk_out1_cl_hbm_mmcm rise@2.222ns - clk_out1_cl_hbm_mmcm rise@0.000ns)
+  Data Path Delay:        2.191ns  (logic 0.499ns (22.772%)  route 1.692ns (77.228%))
+  Logic Levels:           1  (LUT2=1)
+  Clock Path Skew:        -0.018ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    8.797ns = ( 11.019 - 2.222 ) 
+    Source Clock Delay      (SCD):    8.096ns
+    Clock Pessimism Removal (CPR):    -0.719ns
+  Clock Uncertainty:      0.064ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.107ns
+    Phase Error              (PE):    0.000ns
+  Clock Net Delay (Source):      1.715ns (routing 0.675ns, distribution 1.040ns)
+  Clock Net Delay (Destination): 1.634ns (routing 0.616ns, distribution 1.018ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Partition      PBlock               Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------------------------------------------
+                         (clock clk_out1_cl_hbm_mmcm rise edge)
+                                                      0.000     0.000 r                                      
+    BJ4                                               0.000     0.000 r  static                              <hidden>
+                         net (fo=0)                   0.100     0.100    static                              <hidden>/<hidden>/<hidden>/<hidden>
+    HPIOBDIFFINBUF_X0Y130
+                         DIFFINBUF (Prop_DIFFINBUF_HPIOBDIFFINBUF_DIFF_IN_P_O)
+                                                      0.863     0.963 r  static                              <hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=1, routed)           0.050     1.013    static                              <hidden>/<hidden>/<hidden>/<hidden>
+    BJ4                  IBUFCTRL (Prop_IBUFCTRL_HPIOB_M_I_O)
+                                                      0.000     1.013 r  static                              <hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=1, routed)           0.348     1.361    static                              <hidden>/<hidden>/<hidden>
+    BUFGCE_X0Y122        BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     1.389 r  static                              <hidden>/<hidden>/<hidden>
+                         net (fo=3, routed)           1.811     3.200    static                              <hidden>/<hidden>/<hidden>/<hidden>/<hidden>
+    SLR Crossing[1->0]   
+    MMCM_X0Y2            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                     -0.127     3.073 r  static                              <hidden>/<hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=2, routed)           0.245     3.318    static                              <hidden>/<hidden>/<hidden>
+    BUFGCE_X0Y70         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     3.346 r  static                              <hidden>/<hidden>/<hidden>
+                         net (fo=921, routed)         2.890     6.236    boundary                            WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clk_in1
+    MMCM_X0Y0            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                     -0.127     6.109 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/mmcme4_adv_inst/CLKOUT0
+                         net (fo=2, routed)           0.244     6.353    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clk_out1_cl_hbm_mmcm
+    BUFGCE_X0Y14         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     6.381 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clkout1_buf/O
+    X3Y1 (CLOCK_ROOT)    net (fo=3829, routed)        1.715     8.096    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/AXI_15_ACLK
+    BLI_HBM_AXI_INTF_X15Y0
+                         HBM_SNGLBLI_INTF_AXI                         r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/HBM_SNGLBLI_INTF_AXI<15>_INST/ACLK
+  -------------------------------------------------------------------    -------------------------------------------------------
+    BLI_HBM_AXI_INTF_X15Y0
+                         HBM_SNGLBLI_INTF_AXI (Prop_BLI_AXI_BLI_HBM_AXI_INTF_ACLK_WREADY_PIPE)
+                                                      0.464     8.560 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/HBM_SNGLBLI_INTF_AXI<15>_INST/WREADY_PIPE
+                         net (fo=5, routed)           0.758     9.317    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_axi_wready
+    SLICE_X84Y11         LUT2 (Prop_A6LUT_SLICEL_I0_O)
+                                                      0.035     9.352 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i[255]_i_1/O
+                         net (fo=257, routed)         0.934    10.287    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/p_1_in
+    SLICE_X69Y75         FDRE                                         r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i_reg[133]/CE
+  -------------------------------------------------------------------    -------------------------------------------------------
+
+                         (clock clk_out1_cl_hbm_mmcm rise edge)
+                                                      2.222     2.222 r                                      
+    BJ4                                               0.000     2.222 r  static                              <hidden>
+                         net (fo=0)                   0.079     2.301    static                              <hidden>/<hidden>/<hidden>/<hidden>
+    HPIOBDIFFINBUF_X0Y130
+                         DIFFINBUF (Prop_DIFFINBUF_HPIOBDIFFINBUF_DIFF_IN_P_O)
+                                                      0.750     3.052 r  static                              <hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=1, routed)           0.040     3.092    static                              <hidden>/<hidden>/<hidden>/<hidden>
+    BJ4                  IBUFCTRL (Prop_IBUFCTRL_HPIOB_M_I_O)
+                                                      0.000     3.092 r  static                              <hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=1, routed)           0.309     3.401    static                              <hidden>/<hidden>/<hidden>
+    BUFGCE_X0Y122        BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024     3.425 r  static                              <hidden>/<hidden>/<hidden>
+                         net (fo=3, routed)           1.624     5.049    static                              <hidden>/<hidden>/<hidden>/<hidden>/<hidden>
+    SLR Crossing[1->0]   
+    MMCM_X0Y2            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                      0.630     5.679 r  static                              <hidden>/<hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=2, routed)           0.215     5.894    static                              <hidden>/<hidden>/<hidden>
+    BUFGCE_X0Y70         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024     5.918 r  static                              <hidden>/<hidden>/<hidden>
+                         net (fo=921, routed)         2.599     8.517    boundary                            WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clk_in1
+    MMCM_X0Y0            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                      0.630     9.147 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/mmcme4_adv_inst/CLKOUT0
+                         net (fo=2, routed)           0.214     9.361    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clk_out1_cl_hbm_mmcm
+    BUFGCE_X0Y14         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024     9.385 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clkout1_buf/O
+    X3Y1 (CLOCK_ROOT)    net (fo=3829, routed)        1.634    11.019    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/aclk
+    SLICE_X69Y75         FDRE                                         r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i_reg[133]/C
+                         clock pessimism             -0.719    10.300                                            
+                         clock uncertainty           -0.064    10.236                                            
+    SLICE_X69Y75         FDRE (Setup_CFF_SLICEL_C_CE)
+                                                     -0.060    10.176    reconfigurable   pblock_CL/pblock_CL_SLR0
+                                                                                                                 WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i_reg[133]
+  -------------------------------------------------------------------
+                         required time                         10.176                                            
+                         arrival time                         -10.287                                            
+  -------------------------------------------------------------------
+                         slack                                 -0.111                                            
+
+Slack (VIOLATED) :        -0.111ns  (required time - arrival time)
+  Source:                 WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/HBM_SNGLBLI_INTF_AXI<15>_INST/ACLK
+                            (rising edge-triggered cell HBM_SNGLBLI_INTF_AXI clocked by clk_out1_cl_hbm_mmcm  {rise@0.000ns fall@1.111ns period=2.222ns})
+  Destination:            WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i_reg[182]/CE
+                            (rising edge-triggered cell FDRE clocked by clk_out1_cl_hbm_mmcm  {rise@0.000ns fall@1.111ns period=2.222ns})
+  Path Group:             clk_out1_cl_hbm_mmcm
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            2.222ns  (clk_out1_cl_hbm_mmcm rise@2.222ns - clk_out1_cl_hbm_mmcm rise@0.000ns)
+  Data Path Delay:        2.192ns  (logic 0.499ns (22.762%)  route 1.693ns (77.238%))
+  Logic Levels:           1  (LUT2=1)
+  Clock Path Skew:        -0.018ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    8.797ns = ( 11.019 - 2.222 ) 
+    Source Clock Delay      (SCD):    8.096ns
+    Clock Pessimism Removal (CPR):    -0.719ns
+  Clock Uncertainty:      0.064ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.107ns
+    Phase Error              (PE):    0.000ns
+  Clock Net Delay (Source):      1.715ns (routing 0.675ns, distribution 1.040ns)
+  Clock Net Delay (Destination): 1.634ns (routing 0.616ns, distribution 1.018ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Partition      PBlock               Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------------------------------------------
+                         (clock clk_out1_cl_hbm_mmcm rise edge)
+                                                      0.000     0.000 r                                      
+    BJ4                                               0.000     0.000 r  static                              <hidden>
+                         net (fo=0)                   0.100     0.100    static                              <hidden>/<hidden>/<hidden>/<hidden>
+    HPIOBDIFFINBUF_X0Y130
+                         DIFFINBUF (Prop_DIFFINBUF_HPIOBDIFFINBUF_DIFF_IN_P_O)
+                                                      0.863     0.963 r  static                              <hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=1, routed)           0.050     1.013    static                              <hidden>/<hidden>/<hidden>/<hidden>
+    BJ4                  IBUFCTRL (Prop_IBUFCTRL_HPIOB_M_I_O)
+                                                      0.000     1.013 r  static                              <hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=1, routed)           0.348     1.361    static                              <hidden>/<hidden>/<hidden>
+    BUFGCE_X0Y122        BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     1.389 r  static                              <hidden>/<hidden>/<hidden>
+                         net (fo=3, routed)           1.811     3.200    static                              <hidden>/<hidden>/<hidden>/<hidden>/<hidden>
+    SLR Crossing[1->0]   
+    MMCM_X0Y2            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                     -0.127     3.073 r  static                              <hidden>/<hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=2, routed)           0.245     3.318    static                              <hidden>/<hidden>/<hidden>
+    BUFGCE_X0Y70         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     3.346 r  static                              <hidden>/<hidden>/<hidden>
+                         net (fo=921, routed)         2.890     6.236    boundary                            WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clk_in1
+    MMCM_X0Y0            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                     -0.127     6.109 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/mmcme4_adv_inst/CLKOUT0
+                         net (fo=2, routed)           0.244     6.353    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clk_out1_cl_hbm_mmcm
+    BUFGCE_X0Y14         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     6.381 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clkout1_buf/O
+    X3Y1 (CLOCK_ROOT)    net (fo=3829, routed)        1.715     8.096    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/AXI_15_ACLK
+    BLI_HBM_AXI_INTF_X15Y0
+                         HBM_SNGLBLI_INTF_AXI                         r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/HBM_SNGLBLI_INTF_AXI<15>_INST/ACLK
+  -------------------------------------------------------------------    -------------------------------------------------------
+    BLI_HBM_AXI_INTF_X15Y0
+                         HBM_SNGLBLI_INTF_AXI (Prop_BLI_AXI_BLI_HBM_AXI_INTF_ACLK_WREADY_PIPE)
+                                                      0.464     8.560 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/HBM_SNGLBLI_INTF_AXI<15>_INST/WREADY_PIPE
+                         net (fo=5, routed)           0.758     9.317    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_axi_wready
+    SLICE_X84Y11         LUT2 (Prop_A6LUT_SLICEL_I0_O)
+                                                      0.035     9.352 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i[255]_i_1/O
+                         net (fo=257, routed)         0.935    10.288    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/p_1_in
+    SLICE_X69Y75         FDRE                                         r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i_reg[182]/CE
+  -------------------------------------------------------------------    -------------------------------------------------------
+
+                         (clock clk_out1_cl_hbm_mmcm rise edge)
+                                                      2.222     2.222 r                                      
+    BJ4                                               0.000     2.222 r  static                              <hidden>
+                         net (fo=0)                   0.079     2.301    static                              <hidden>/<hidden>/<hidden>/<hidden>
+    HPIOBDIFFINBUF_X0Y130
+                         DIFFINBUF (Prop_DIFFINBUF_HPIOBDIFFINBUF_DIFF_IN_P_O)
+                                                      0.750     3.052 r  static                              <hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=1, routed)           0.040     3.092    static                              <hidden>/<hidden>/<hidden>/<hidden>
+    BJ4                  IBUFCTRL (Prop_IBUFCTRL_HPIOB_M_I_O)
+                                                      0.000     3.092 r  static                              <hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=1, routed)           0.309     3.401    static                              <hidden>/<hidden>/<hidden>
+    BUFGCE_X0Y122        BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024     3.425 r  static                              <hidden>/<hidden>/<hidden>
+                         net (fo=3, routed)           1.624     5.049    static                              <hidden>/<hidden>/<hidden>/<hidden>/<hidden>
+    SLR Crossing[1->0]   
+    MMCM_X0Y2            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                      0.630     5.679 r  static                              <hidden>/<hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=2, routed)           0.215     5.894    static                              <hidden>/<hidden>/<hidden>
+    BUFGCE_X0Y70         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024     5.918 r  static                              <hidden>/<hidden>/<hidden>
+                         net (fo=921, routed)         2.599     8.517    boundary                            WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clk_in1
+    MMCM_X0Y0            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                      0.630     9.147 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/mmcme4_adv_inst/CLKOUT0
+                         net (fo=2, routed)           0.214     9.361    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clk_out1_cl_hbm_mmcm
+    BUFGCE_X0Y14         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024     9.385 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clkout1_buf/O
+    X3Y1 (CLOCK_ROOT)    net (fo=3829, routed)        1.634    11.019    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/aclk
+    SLICE_X69Y75         FDRE                                         r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i_reg[182]/C
+                         clock pessimism             -0.719    10.300                                            
+                         clock uncertainty           -0.064    10.236                                            
+    SLICE_X69Y75         FDRE (Setup_DFF2_SLICEL_C_CE)
+                                                     -0.059    10.177    reconfigurable   pblock_CL/pblock_CL_SLR0
+                                                                                                                 WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i_reg[182]
+  -------------------------------------------------------------------
+                         required time                         10.177                                            
+                         arrival time                         -10.288                                            
+  -------------------------------------------------------------------
+                         slack                                 -0.111                                            
+
+Slack (VIOLATED) :        -0.111ns  (required time - arrival time)
+  Source:                 WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/HBM_SNGLBLI_INTF_AXI<15>_INST/ACLK
+                            (rising edge-triggered cell HBM_SNGLBLI_INTF_AXI clocked by clk_out1_cl_hbm_mmcm  {rise@0.000ns fall@1.111ns period=2.222ns})
+  Destination:            WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i_reg[212]/CE
+                            (rising edge-triggered cell FDRE clocked by clk_out1_cl_hbm_mmcm  {rise@0.000ns fall@1.111ns period=2.222ns})
+  Path Group:             clk_out1_cl_hbm_mmcm
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            2.222ns  (clk_out1_cl_hbm_mmcm rise@2.222ns - clk_out1_cl_hbm_mmcm rise@0.000ns)
+  Data Path Delay:        2.191ns  (logic 0.499ns (22.772%)  route 1.692ns (77.228%))
+  Logic Levels:           1  (LUT2=1)
+  Clock Path Skew:        -0.018ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    8.797ns = ( 11.019 - 2.222 ) 
+    Source Clock Delay      (SCD):    8.096ns
+    Clock Pessimism Removal (CPR):    -0.719ns
+  Clock Uncertainty:      0.064ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.107ns
+    Phase Error              (PE):    0.000ns
+  Clock Net Delay (Source):      1.715ns (routing 0.675ns, distribution 1.040ns)
+  Clock Net Delay (Destination): 1.634ns (routing 0.616ns, distribution 1.018ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Partition      PBlock               Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------------------------------------------
+                         (clock clk_out1_cl_hbm_mmcm rise edge)
+                                                      0.000     0.000 r                                      
+    BJ4                                               0.000     0.000 r  static                              <hidden>
+                         net (fo=0)                   0.100     0.100    static                              <hidden>/<hidden>/<hidden>/<hidden>
+    HPIOBDIFFINBUF_X0Y130
+                         DIFFINBUF (Prop_DIFFINBUF_HPIOBDIFFINBUF_DIFF_IN_P_O)
+                                                      0.863     0.963 r  static                              <hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=1, routed)           0.050     1.013    static                              <hidden>/<hidden>/<hidden>/<hidden>
+    BJ4                  IBUFCTRL (Prop_IBUFCTRL_HPIOB_M_I_O)
+                                                      0.000     1.013 r  static                              <hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=1, routed)           0.348     1.361    static                              <hidden>/<hidden>/<hidden>
+    BUFGCE_X0Y122        BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     1.389 r  static                              <hidden>/<hidden>/<hidden>
+                         net (fo=3, routed)           1.811     3.200    static                              <hidden>/<hidden>/<hidden>/<hidden>/<hidden>
+    SLR Crossing[1->0]   
+    MMCM_X0Y2            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                     -0.127     3.073 r  static                              <hidden>/<hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=2, routed)           0.245     3.318    static                              <hidden>/<hidden>/<hidden>
+    BUFGCE_X0Y70         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     3.346 r  static                              <hidden>/<hidden>/<hidden>
+                         net (fo=921, routed)         2.890     6.236    boundary                            WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clk_in1
+    MMCM_X0Y0            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                     -0.127     6.109 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/mmcme4_adv_inst/CLKOUT0
+                         net (fo=2, routed)           0.244     6.353    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clk_out1_cl_hbm_mmcm
+    BUFGCE_X0Y14         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     6.381 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clkout1_buf/O
+    X3Y1 (CLOCK_ROOT)    net (fo=3829, routed)        1.715     8.096    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/AXI_15_ACLK
+    BLI_HBM_AXI_INTF_X15Y0
+                         HBM_SNGLBLI_INTF_AXI                         r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/HBM_SNGLBLI_INTF_AXI<15>_INST/ACLK
+  -------------------------------------------------------------------    -------------------------------------------------------
+    BLI_HBM_AXI_INTF_X15Y0
+                         HBM_SNGLBLI_INTF_AXI (Prop_BLI_AXI_BLI_HBM_AXI_INTF_ACLK_WREADY_PIPE)
+                                                      0.464     8.560 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/HBM_SNGLBLI_INTF_AXI<15>_INST/WREADY_PIPE
+                         net (fo=5, routed)           0.758     9.317    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_axi_wready
+    SLICE_X84Y11         LUT2 (Prop_A6LUT_SLICEL_I0_O)
+                                                      0.035     9.352 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i[255]_i_1/O
+                         net (fo=257, routed)         0.934    10.287    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/p_1_in
+    SLICE_X70Y75         FDRE                                         r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i_reg[212]/CE
+  -------------------------------------------------------------------    -------------------------------------------------------
+
+                         (clock clk_out1_cl_hbm_mmcm rise edge)
+                                                      2.222     2.222 r                                      
+    BJ4                                               0.000     2.222 r  static                              <hidden>
+                         net (fo=0)                   0.079     2.301    static                              <hidden>/<hidden>/<hidden>/<hidden>
+    HPIOBDIFFINBUF_X0Y130
+                         DIFFINBUF (Prop_DIFFINBUF_HPIOBDIFFINBUF_DIFF_IN_P_O)
+                                                      0.750     3.052 r  static                              <hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=1, routed)           0.040     3.092    static                              <hidden>/<hidden>/<hidden>/<hidden>
+    BJ4                  IBUFCTRL (Prop_IBUFCTRL_HPIOB_M_I_O)
+                                                      0.000     3.092 r  static                              <hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=1, routed)           0.309     3.401    static                              <hidden>/<hidden>/<hidden>
+    BUFGCE_X0Y122        BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024     3.425 r  static                              <hidden>/<hidden>/<hidden>
+                         net (fo=3, routed)           1.624     5.049    static                              <hidden>/<hidden>/<hidden>/<hidden>/<hidden>
+    SLR Crossing[1->0]   
+    MMCM_X0Y2            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                      0.630     5.679 r  static                              <hidden>/<hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=2, routed)           0.215     5.894    static                              <hidden>/<hidden>/<hidden>
+    BUFGCE_X0Y70         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024     5.918 r  static                              <hidden>/<hidden>/<hidden>
+                         net (fo=921, routed)         2.599     8.517    boundary                            WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clk_in1
+    MMCM_X0Y0            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                      0.630     9.147 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/mmcme4_adv_inst/CLKOUT0
+                         net (fo=2, routed)           0.214     9.361    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clk_out1_cl_hbm_mmcm
+    BUFGCE_X0Y14         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024     9.385 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clkout1_buf/O
+    X3Y1 (CLOCK_ROOT)    net (fo=3829, routed)        1.634    11.019    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/aclk
+    SLICE_X70Y75         FDRE                                         r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i_reg[212]/C
+                         clock pessimism             -0.719    10.300                                            
+                         clock uncertainty           -0.064    10.236                                            
+    SLICE_X70Y75         FDRE (Setup_DFF_SLICEL_C_CE)
+                                                     -0.060    10.176    reconfigurable   pblock_CL/pblock_CL_SLR0
+                                                                                                                 WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i_reg[212]
+  -------------------------------------------------------------------
+                         required time                         10.176                                            
+                         arrival time                         -10.287                                            
+  -------------------------------------------------------------------
+                         slack                                 -0.111                                            
+
+Slack (VIOLATED) :        -0.111ns  (required time - arrival time)
+  Source:                 WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/HBM_SNGLBLI_INTF_AXI<15>_INST/ACLK
+                            (rising edge-triggered cell HBM_SNGLBLI_INTF_AXI clocked by clk_out1_cl_hbm_mmcm  {rise@0.000ns fall@1.111ns period=2.222ns})
+  Destination:            WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i_reg[221]/CE
+                            (rising edge-triggered cell FDRE clocked by clk_out1_cl_hbm_mmcm  {rise@0.000ns fall@1.111ns period=2.222ns})
+  Path Group:             clk_out1_cl_hbm_mmcm
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            2.222ns  (clk_out1_cl_hbm_mmcm rise@2.222ns - clk_out1_cl_hbm_mmcm rise@0.000ns)
+  Data Path Delay:        2.191ns  (logic 0.499ns (22.772%)  route 1.692ns (77.228%))
+  Logic Levels:           1  (LUT2=1)
+  Clock Path Skew:        -0.018ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    8.797ns = ( 11.019 - 2.222 ) 
+    Source Clock Delay      (SCD):    8.096ns
+    Clock Pessimism Removal (CPR):    -0.719ns
+  Clock Uncertainty:      0.064ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.107ns
+    Phase Error              (PE):    0.000ns
+  Clock Net Delay (Source):      1.715ns (routing 0.675ns, distribution 1.040ns)
+  Clock Net Delay (Destination): 1.634ns (routing 0.616ns, distribution 1.018ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Partition      PBlock               Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------------------------------------------
+                         (clock clk_out1_cl_hbm_mmcm rise edge)
+                                                      0.000     0.000 r                                      
+    BJ4                                               0.000     0.000 r  static                              <hidden>
+                         net (fo=0)                   0.100     0.100    static                              <hidden>/<hidden>/<hidden>/<hidden>
+    HPIOBDIFFINBUF_X0Y130
+                         DIFFINBUF (Prop_DIFFINBUF_HPIOBDIFFINBUF_DIFF_IN_P_O)
+                                                      0.863     0.963 r  static                              <hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=1, routed)           0.050     1.013    static                              <hidden>/<hidden>/<hidden>/<hidden>
+    BJ4                  IBUFCTRL (Prop_IBUFCTRL_HPIOB_M_I_O)
+                                                      0.000     1.013 r  static                              <hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=1, routed)           0.348     1.361    static                              <hidden>/<hidden>/<hidden>
+    BUFGCE_X0Y122        BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     1.389 r  static                              <hidden>/<hidden>/<hidden>
+                         net (fo=3, routed)           1.811     3.200    static                              <hidden>/<hidden>/<hidden>/<hidden>/<hidden>
+    SLR Crossing[1->0]   
+    MMCM_X0Y2            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                     -0.127     3.073 r  static                              <hidden>/<hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=2, routed)           0.245     3.318    static                              <hidden>/<hidden>/<hidden>
+    BUFGCE_X0Y70         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     3.346 r  static                              <hidden>/<hidden>/<hidden>
+                         net (fo=921, routed)         2.890     6.236    boundary                            WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clk_in1
+    MMCM_X0Y0            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                     -0.127     6.109 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/mmcme4_adv_inst/CLKOUT0
+                         net (fo=2, routed)           0.244     6.353    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clk_out1_cl_hbm_mmcm
+    BUFGCE_X0Y14         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     6.381 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clkout1_buf/O
+    X3Y1 (CLOCK_ROOT)    net (fo=3829, routed)        1.715     8.096    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/AXI_15_ACLK
+    BLI_HBM_AXI_INTF_X15Y0
+                         HBM_SNGLBLI_INTF_AXI                         r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/HBM_SNGLBLI_INTF_AXI<15>_INST/ACLK
+  -------------------------------------------------------------------    -------------------------------------------------------
+    BLI_HBM_AXI_INTF_X15Y0
+                         HBM_SNGLBLI_INTF_AXI (Prop_BLI_AXI_BLI_HBM_AXI_INTF_ACLK_WREADY_PIPE)
+                                                      0.464     8.560 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/HBM_SNGLBLI_INTF_AXI<15>_INST/WREADY_PIPE
+                         net (fo=5, routed)           0.758     9.317    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_axi_wready
+    SLICE_X84Y11         LUT2 (Prop_A6LUT_SLICEL_I0_O)
+                                                      0.035     9.352 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i[255]_i_1/O
+                         net (fo=257, routed)         0.934    10.287    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/p_1_in
+    SLICE_X70Y75         FDRE                                         r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i_reg[221]/CE
+  -------------------------------------------------------------------    -------------------------------------------------------
+
+                         (clock clk_out1_cl_hbm_mmcm rise edge)
+                                                      2.222     2.222 r                                      
+    BJ4                                               0.000     2.222 r  static                              <hidden>
+                         net (fo=0)                   0.079     2.301    static                              <hidden>/<hidden>/<hidden>/<hidden>
+    HPIOBDIFFINBUF_X0Y130
+                         DIFFINBUF (Prop_DIFFINBUF_HPIOBDIFFINBUF_DIFF_IN_P_O)
+                                                      0.750     3.052 r  static                              <hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=1, routed)           0.040     3.092    static                              <hidden>/<hidden>/<hidden>/<hidden>
+    BJ4                  IBUFCTRL (Prop_IBUFCTRL_HPIOB_M_I_O)
+                                                      0.000     3.092 r  static                              <hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=1, routed)           0.309     3.401    static                              <hidden>/<hidden>/<hidden>
+    BUFGCE_X0Y122        BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024     3.425 r  static                              <hidden>/<hidden>/<hidden>
+                         net (fo=3, routed)           1.624     5.049    static                              <hidden>/<hidden>/<hidden>/<hidden>/<hidden>
+    SLR Crossing[1->0]   
+    MMCM_X0Y2            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                      0.630     5.679 r  static                              <hidden>/<hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=2, routed)           0.215     5.894    static                              <hidden>/<hidden>/<hidden>
+    BUFGCE_X0Y70         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024     5.918 r  static                              <hidden>/<hidden>/<hidden>
+                         net (fo=921, routed)         2.599     8.517    boundary                            WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clk_in1
+    MMCM_X0Y0            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                      0.630     9.147 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/mmcme4_adv_inst/CLKOUT0
+                         net (fo=2, routed)           0.214     9.361    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clk_out1_cl_hbm_mmcm
+    BUFGCE_X0Y14         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024     9.385 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clkout1_buf/O
+    X3Y1 (CLOCK_ROOT)    net (fo=3829, routed)        1.634    11.019    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/aclk
+    SLICE_X70Y75         FDRE                                         r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i_reg[221]/C
+                         clock pessimism             -0.719    10.300                                            
+                         clock uncertainty           -0.064    10.236                                            
+    SLICE_X70Y75         FDRE (Setup_BFF_SLICEL_C_CE)
+                                                     -0.060    10.176    reconfigurable   pblock_CL/pblock_CL_SLR0
+                                                                                                                 WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i_reg[221]
+  -------------------------------------------------------------------
+                         required time                         10.176                                            
+                         arrival time                         -10.287                                            
+  -------------------------------------------------------------------
+                         slack                                 -0.111                                            
+
+Slack (VIOLATED) :        -0.109ns  (required time - arrival time)
+  Source:                 WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/HBM_SNGLBLI_INTF_AXI<15>_INST/ACLK
+                            (rising edge-triggered cell HBM_SNGLBLI_INTF_AXI clocked by clk_out1_cl_hbm_mmcm  {rise@0.000ns fall@1.111ns period=2.222ns})
+  Destination:            WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i_reg[118]/CE
+                            (rising edge-triggered cell FDRE clocked by clk_out1_cl_hbm_mmcm  {rise@0.000ns fall@1.111ns period=2.222ns})
+  Path Group:             clk_out1_cl_hbm_mmcm
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            2.222ns  (clk_out1_cl_hbm_mmcm rise@2.222ns - clk_out1_cl_hbm_mmcm rise@0.000ns)
+  Data Path Delay:        2.151ns  (logic 0.499ns (23.200%)  route 1.652ns (76.800%))
+  Logic Levels:           1  (LUT2=1)
+  Clock Path Skew:        -0.056ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    8.758ns = ( 10.980 - 2.222 ) 
+    Source Clock Delay      (SCD):    8.096ns
+    Clock Pessimism Removal (CPR):    -0.719ns
+  Clock Uncertainty:      0.064ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.107ns
+    Phase Error              (PE):    0.000ns
+  Clock Net Delay (Source):      1.715ns (routing 0.675ns, distribution 1.040ns)
+  Clock Net Delay (Destination): 1.596ns (routing 0.616ns, distribution 0.980ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Partition      PBlock               Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------------------------------------------
+                         (clock clk_out1_cl_hbm_mmcm rise edge)
+                                                      0.000     0.000 r                                      
+    BJ4                                               0.000     0.000 r  static                              <hidden>
+                         net (fo=0)                   0.100     0.100    static                              <hidden>/<hidden>/<hidden>/<hidden>
+    HPIOBDIFFINBUF_X0Y130
+                         DIFFINBUF (Prop_DIFFINBUF_HPIOBDIFFINBUF_DIFF_IN_P_O)
+                                                      0.863     0.963 r  static                              <hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=1, routed)           0.050     1.013    static                              <hidden>/<hidden>/<hidden>/<hidden>
+    BJ4                  IBUFCTRL (Prop_IBUFCTRL_HPIOB_M_I_O)
+                                                      0.000     1.013 r  static                              <hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=1, routed)           0.348     1.361    static                              <hidden>/<hidden>/<hidden>
+    BUFGCE_X0Y122        BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     1.389 r  static                              <hidden>/<hidden>/<hidden>
+                         net (fo=3, routed)           1.811     3.200    static                              <hidden>/<hidden>/<hidden>/<hidden>/<hidden>
+    SLR Crossing[1->0]   
+    MMCM_X0Y2            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                     -0.127     3.073 r  static                              <hidden>/<hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=2, routed)           0.245     3.318    static                              <hidden>/<hidden>/<hidden>
+    BUFGCE_X0Y70         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     3.346 r  static                              <hidden>/<hidden>/<hidden>
+                         net (fo=921, routed)         2.890     6.236    boundary                            WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clk_in1
+    MMCM_X0Y0            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                     -0.127     6.109 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/mmcme4_adv_inst/CLKOUT0
+                         net (fo=2, routed)           0.244     6.353    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clk_out1_cl_hbm_mmcm
+    BUFGCE_X0Y14         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     6.381 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clkout1_buf/O
+    X3Y1 (CLOCK_ROOT)    net (fo=3829, routed)        1.715     8.096    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/AXI_15_ACLK
+    BLI_HBM_AXI_INTF_X15Y0
+                         HBM_SNGLBLI_INTF_AXI                         r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/HBM_SNGLBLI_INTF_AXI<15>_INST/ACLK
+  -------------------------------------------------------------------    -------------------------------------------------------
+    BLI_HBM_AXI_INTF_X15Y0
+                         HBM_SNGLBLI_INTF_AXI (Prop_BLI_AXI_BLI_HBM_AXI_INTF_ACLK_WREADY_PIPE)
+                                                      0.464     8.560 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/HBM_SNGLBLI_INTF_AXI<15>_INST/WREADY_PIPE
+                         net (fo=5, routed)           0.758     9.317    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_axi_wready
+    SLICE_X84Y11         LUT2 (Prop_A6LUT_SLICEL_I0_O)
+                                                      0.035     9.352 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i[255]_i_1/O
+                         net (fo=257, routed)         0.894    10.246    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/p_1_in
+    SLICE_X79Y87         FDRE                                         r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i_reg[118]/CE
+  -------------------------------------------------------------------    -------------------------------------------------------
+
+                         (clock clk_out1_cl_hbm_mmcm rise edge)
+                                                      2.222     2.222 r                                      
+    BJ4                                               0.000     2.222 r  static                              <hidden>
+                         net (fo=0)                   0.079     2.301    static                              <hidden>/<hidden>/<hidden>/<hidden>
+    HPIOBDIFFINBUF_X0Y130
+                         DIFFINBUF (Prop_DIFFINBUF_HPIOBDIFFINBUF_DIFF_IN_P_O)
+                                                      0.750     3.052 r  static                              <hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=1, routed)           0.040     3.092    static                              <hidden>/<hidden>/<hidden>/<hidden>
+    BJ4                  IBUFCTRL (Prop_IBUFCTRL_HPIOB_M_I_O)
+                                                      0.000     3.092 r  static                              <hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=1, routed)           0.309     3.401    static                              <hidden>/<hidden>/<hidden>
+    BUFGCE_X0Y122        BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024     3.425 r  static                              <hidden>/<hidden>/<hidden>
+                         net (fo=3, routed)           1.624     5.049    static                              <hidden>/<hidden>/<hidden>/<hidden>/<hidden>
+    SLR Crossing[1->0]   
+    MMCM_X0Y2            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                      0.630     5.679 r  static                              <hidden>/<hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=2, routed)           0.215     5.894    static                              <hidden>/<hidden>/<hidden>
+    BUFGCE_X0Y70         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024     5.918 r  static                              <hidden>/<hidden>/<hidden>
+                         net (fo=921, routed)         2.599     8.517    boundary                            WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clk_in1
+    MMCM_X0Y0            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                      0.630     9.147 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/mmcme4_adv_inst/CLKOUT0
+                         net (fo=2, routed)           0.214     9.361    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clk_out1_cl_hbm_mmcm
+    BUFGCE_X0Y14         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024     9.385 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clkout1_buf/O
+    X3Y1 (CLOCK_ROOT)    net (fo=3829, routed)        1.596    10.980    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/aclk
+    SLICE_X79Y87         FDRE                                         r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i_reg[118]/C
+                         clock pessimism             -0.719    10.261                                            
+                         clock uncertainty           -0.064    10.197                                            
+    SLICE_X79Y87         FDRE (Setup_EFF2_SLICEL_C_CE)
+                                                     -0.060    10.137    reconfigurable   pblock_CL/pblock_CL_SLR0
+                                                                                                                 WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i_reg[118]
+  -------------------------------------------------------------------
+                         required time                         10.137                                            
+                         arrival time                         -10.246                                            
+  -------------------------------------------------------------------
+                         slack                                 -0.109                                            
+
+Slack (VIOLATED) :        -0.109ns  (required time - arrival time)
+  Source:                 WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/HBM_SNGLBLI_INTF_AXI<15>_INST/ACLK
+                            (rising edge-triggered cell HBM_SNGLBLI_INTF_AXI clocked by clk_out1_cl_hbm_mmcm  {rise@0.000ns fall@1.111ns period=2.222ns})
+  Destination:            WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i_reg[188]/CE
+                            (rising edge-triggered cell FDRE clocked by clk_out1_cl_hbm_mmcm  {rise@0.000ns fall@1.111ns period=2.222ns})
+  Path Group:             clk_out1_cl_hbm_mmcm
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            2.222ns  (clk_out1_cl_hbm_mmcm rise@2.222ns - clk_out1_cl_hbm_mmcm rise@0.000ns)
+  Data Path Delay:        2.151ns  (logic 0.499ns (23.200%)  route 1.652ns (76.800%))
+  Logic Levels:           1  (LUT2=1)
+  Clock Path Skew:        -0.056ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    8.758ns = ( 10.980 - 2.222 ) 
+    Source Clock Delay      (SCD):    8.096ns
+    Clock Pessimism Removal (CPR):    -0.719ns
+  Clock Uncertainty:      0.064ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.107ns
+    Phase Error              (PE):    0.000ns
+  Clock Net Delay (Source):      1.715ns (routing 0.675ns, distribution 1.040ns)
+  Clock Net Delay (Destination): 1.596ns (routing 0.616ns, distribution 0.980ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Partition      PBlock               Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------------------------------------------
+                         (clock clk_out1_cl_hbm_mmcm rise edge)
+                                                      0.000     0.000 r                                      
+    BJ4                                               0.000     0.000 r  static                              <hidden>
+                         net (fo=0)                   0.100     0.100    static                              <hidden>/<hidden>/<hidden>/<hidden>
+    HPIOBDIFFINBUF_X0Y130
+                         DIFFINBUF (Prop_DIFFINBUF_HPIOBDIFFINBUF_DIFF_IN_P_O)
+                                                      0.863     0.963 r  static                              <hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=1, routed)           0.050     1.013    static                              <hidden>/<hidden>/<hidden>/<hidden>
+    BJ4                  IBUFCTRL (Prop_IBUFCTRL_HPIOB_M_I_O)
+                                                      0.000     1.013 r  static                              <hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=1, routed)           0.348     1.361    static                              <hidden>/<hidden>/<hidden>
+    BUFGCE_X0Y122        BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     1.389 r  static                              <hidden>/<hidden>/<hidden>
+                         net (fo=3, routed)           1.811     3.200    static                              <hidden>/<hidden>/<hidden>/<hidden>/<hidden>
+    SLR Crossing[1->0]   
+    MMCM_X0Y2            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                     -0.127     3.073 r  static                              <hidden>/<hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=2, routed)           0.245     3.318    static                              <hidden>/<hidden>/<hidden>
+    BUFGCE_X0Y70         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     3.346 r  static                              <hidden>/<hidden>/<hidden>
+                         net (fo=921, routed)         2.890     6.236    boundary                            WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clk_in1
+    MMCM_X0Y0            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                     -0.127     6.109 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/mmcme4_adv_inst/CLKOUT0
+                         net (fo=2, routed)           0.244     6.353    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clk_out1_cl_hbm_mmcm
+    BUFGCE_X0Y14         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     6.381 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clkout1_buf/O
+    X3Y1 (CLOCK_ROOT)    net (fo=3829, routed)        1.715     8.096    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/AXI_15_ACLK
+    BLI_HBM_AXI_INTF_X15Y0
+                         HBM_SNGLBLI_INTF_AXI                         r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/HBM_SNGLBLI_INTF_AXI<15>_INST/ACLK
+  -------------------------------------------------------------------    -------------------------------------------------------
+    BLI_HBM_AXI_INTF_X15Y0
+                         HBM_SNGLBLI_INTF_AXI (Prop_BLI_AXI_BLI_HBM_AXI_INTF_ACLK_WREADY_PIPE)
+                                                      0.464     8.560 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/HBM_SNGLBLI_INTF_AXI<15>_INST/WREADY_PIPE
+                         net (fo=5, routed)           0.758     9.317    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_axi_wready
+    SLICE_X84Y11         LUT2 (Prop_A6LUT_SLICEL_I0_O)
+                                                      0.035     9.352 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i[255]_i_1/O
+                         net (fo=257, routed)         0.894    10.246    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/p_1_in
+    SLICE_X80Y87         FDRE                                         r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i_reg[188]/CE
+  -------------------------------------------------------------------    -------------------------------------------------------
+
+                         (clock clk_out1_cl_hbm_mmcm rise edge)
+                                                      2.222     2.222 r                                      
+    BJ4                                               0.000     2.222 r  static                              <hidden>
+                         net (fo=0)                   0.079     2.301    static                              <hidden>/<hidden>/<hidden>/<hidden>
+    HPIOBDIFFINBUF_X0Y130
+                         DIFFINBUF (Prop_DIFFINBUF_HPIOBDIFFINBUF_DIFF_IN_P_O)
+                                                      0.750     3.052 r  static                              <hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=1, routed)           0.040     3.092    static                              <hidden>/<hidden>/<hidden>/<hidden>
+    BJ4                  IBUFCTRL (Prop_IBUFCTRL_HPIOB_M_I_O)
+                                                      0.000     3.092 r  static                              <hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=1, routed)           0.309     3.401    static                              <hidden>/<hidden>/<hidden>
+    BUFGCE_X0Y122        BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024     3.425 r  static                              <hidden>/<hidden>/<hidden>
+                         net (fo=3, routed)           1.624     5.049    static                              <hidden>/<hidden>/<hidden>/<hidden>/<hidden>
+    SLR Crossing[1->0]   
+    MMCM_X0Y2            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                      0.630     5.679 r  static                              <hidden>/<hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=2, routed)           0.215     5.894    static                              <hidden>/<hidden>/<hidden>
+    BUFGCE_X0Y70         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024     5.918 r  static                              <hidden>/<hidden>/<hidden>
+                         net (fo=921, routed)         2.599     8.517    boundary                            WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clk_in1
+    MMCM_X0Y0            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                      0.630     9.147 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/mmcme4_adv_inst/CLKOUT0
+                         net (fo=2, routed)           0.214     9.361    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clk_out1_cl_hbm_mmcm
+    BUFGCE_X0Y14         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024     9.385 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clkout1_buf/O
+    X3Y1 (CLOCK_ROOT)    net (fo=3829, routed)        1.596    10.980    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/aclk
+    SLICE_X80Y87         FDRE                                         r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i_reg[188]/C
+                         clock pessimism             -0.719    10.261                                            
+                         clock uncertainty           -0.064    10.197                                            
+    SLICE_X80Y87         FDRE (Setup_FFF2_SLICEL_C_CE)
+                                                     -0.060    10.137    reconfigurable   pblock_CL/pblock_CL_SLR0
+                                                                                                                 WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i_reg[188]
+  -------------------------------------------------------------------
+                         required time                         10.137                                            
+                         arrival time                         -10.246                                            
+  -------------------------------------------------------------------
+                         slack                                 -0.109                                            
+
+Slack (VIOLATED) :        -0.109ns  (required time - arrival time)
+  Source:                 WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i_reg[26]/C
+                            (rising edge-triggered cell FDRE clocked by clk_out1_cl_hbm_mmcm  {rise@0.000ns fall@1.111ns period=2.222ns})
+  Destination:            WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/HBM_SNGLBLI_INTF_AXI<15>_INST/WDATA[26]
+                            (rising edge-triggered cell HBM_SNGLBLI_INTF_AXI clocked by clk_out1_cl_hbm_mmcm  {rise@0.000ns fall@1.111ns period=2.222ns})
+  Path Group:             clk_out1_cl_hbm_mmcm
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            2.222ns  (clk_out1_cl_hbm_mmcm rise@2.222ns - clk_out1_cl_hbm_mmcm rise@0.000ns)
+  Data Path Delay:        1.502ns  (logic 0.080ns (5.326%)  route 1.422ns (94.674%))
+  Logic Levels:           0  
+  Clock Path Skew:        -0.350ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    8.667ns = ( 10.890 - 2.222 ) 
+    Source Clock Delay      (SCD):    8.299ns
+    Clock Pessimism Removal (CPR):    -0.719ns
+  Clock Uncertainty:      0.064ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.107ns
+    Phase Error              (PE):    0.000ns
+  Clock Net Delay (Source):      1.918ns (routing 0.675ns, distribution 1.243ns)
+  Clock Net Delay (Destination): 1.505ns (routing 0.616ns, distribution 0.889ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Partition      PBlock               Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------------------------------------------
+                         (clock clk_out1_cl_hbm_mmcm rise edge)
+                                                      0.000     0.000 r                                      
+    BJ4                                               0.000     0.000 r  static                              <hidden>
+                         net (fo=0)                   0.100     0.100    static                              <hidden>/<hidden>/<hidden>/<hidden>
+    HPIOBDIFFINBUF_X0Y130
+                         DIFFINBUF (Prop_DIFFINBUF_HPIOBDIFFINBUF_DIFF_IN_P_O)
+                                                      0.863     0.963 r  static                              <hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=1, routed)           0.050     1.013    static                              <hidden>/<hidden>/<hidden>/<hidden>
+    BJ4                  IBUFCTRL (Prop_IBUFCTRL_HPIOB_M_I_O)
+                                                      0.000     1.013 r  static                              <hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=1, routed)           0.348     1.361    static                              <hidden>/<hidden>/<hidden>
+    BUFGCE_X0Y122        BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     1.389 r  static                              <hidden>/<hidden>/<hidden>
+                         net (fo=3, routed)           1.811     3.200    static                              <hidden>/<hidden>/<hidden>/<hidden>/<hidden>
+    SLR Crossing[1->0]   
+    MMCM_X0Y2            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                     -0.127     3.073 r  static                              <hidden>/<hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=2, routed)           0.245     3.318    static                              <hidden>/<hidden>/<hidden>
+    BUFGCE_X0Y70         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     3.346 r  static                              <hidden>/<hidden>/<hidden>
+                         net (fo=921, routed)         2.890     6.236    boundary                            WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clk_in1
+    MMCM_X0Y0            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                     -0.127     6.109 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/mmcme4_adv_inst/CLKOUT0
+                         net (fo=2, routed)           0.244     6.353    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clk_out1_cl_hbm_mmcm
+    BUFGCE_X0Y14         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     6.381 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clkout1_buf/O
+    X3Y1 (CLOCK_ROOT)    net (fo=3829, routed)        1.918     8.299    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/aclk
+    SLICE_X83Y87         FDRE                                         r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i_reg[26]/C
+  -------------------------------------------------------------------    -------------------------------------------------------
+    SLICE_X83Y87         FDRE (Prop_BFF2_SLICEL_C_Q)
+                                                      0.080     8.379 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i_reg[26]/Q
+                         net (fo=1, routed)           1.422     9.801    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/AXI_15_WDATA[26]
+    BLI_HBM_AXI_INTF_X15Y0
+                         HBM_SNGLBLI_INTF_AXI                         r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/HBM_SNGLBLI_INTF_AXI<15>_INST/WDATA[26]
+  -------------------------------------------------------------------    -------------------------------------------------------
+
+                         (clock clk_out1_cl_hbm_mmcm rise edge)
+                                                      2.222     2.222 r                                      
+    BJ4                                               0.000     2.222 r  static                              <hidden>
+                         net (fo=0)                   0.079     2.301    static                              <hidden>/<hidden>/<hidden>/<hidden>
+    HPIOBDIFFINBUF_X0Y130
+                         DIFFINBUF (Prop_DIFFINBUF_HPIOBDIFFINBUF_DIFF_IN_P_O)
+                                                      0.750     3.052 r  static                              <hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=1, routed)           0.040     3.092    static                              <hidden>/<hidden>/<hidden>/<hidden>
+    BJ4                  IBUFCTRL (Prop_IBUFCTRL_HPIOB_M_I_O)
+                                                      0.000     3.092 r  static                              <hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=1, routed)           0.309     3.401    static                              <hidden>/<hidden>/<hidden>
+    BUFGCE_X0Y122        BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024     3.425 r  static                              <hidden>/<hidden>/<hidden>
+                         net (fo=3, routed)           1.624     5.049    static                              <hidden>/<hidden>/<hidden>/<hidden>/<hidden>
+    SLR Crossing[1->0]   
+    MMCM_X0Y2            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                      0.630     5.679 r  static                              <hidden>/<hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=2, routed)           0.215     5.894    static                              <hidden>/<hidden>/<hidden>
+    BUFGCE_X0Y70         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024     5.918 r  static                              <hidden>/<hidden>/<hidden>
+                         net (fo=921, routed)         2.599     8.517    boundary                            WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clk_in1
+    MMCM_X0Y0            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                      0.630     9.147 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/mmcme4_adv_inst/CLKOUT0
+                         net (fo=2, routed)           0.214     9.361    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clk_out1_cl_hbm_mmcm
+    BUFGCE_X0Y14         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024     9.385 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clkout1_buf/O
+    X3Y1 (CLOCK_ROOT)    net (fo=3829, routed)        1.505    10.890    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/AXI_15_ACLK
+    BLI_HBM_AXI_INTF_X15Y0
+                         HBM_SNGLBLI_INTF_AXI                         r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/HBM_SNGLBLI_INTF_AXI<15>_INST/ACLK
+                         clock pessimism             -0.719    10.171                                            
+                         clock uncertainty           -0.064    10.107                                            
+    BLI_HBM_AXI_INTF_X15Y0
+                         HBM_SNGLBLI_INTF_AXI (Setup_BLI_AXI_BLI_HBM_AXI_INTF_ACLK_WDATA[26])
+                                                     -0.415     9.692    reconfigurable   pblock_CL/pblock_CL_SLR0
+                                                                                                                 WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/HBM_SNGLBLI_INTF_AXI<15>_INST
+  -------------------------------------------------------------------
+                         required time                          9.692                                            
+                         arrival time                          -9.801                                            
+  -------------------------------------------------------------------
+                         slack                                 -0.109                                            
+
+Slack (VIOLATED) :        -0.108ns  (required time - arrival time)
+  Source:                 WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/HBM_SNGLBLI_INTF_AXI<15>_INST/ACLK
+                            (rising edge-triggered cell HBM_SNGLBLI_INTF_AXI clocked by clk_out1_cl_hbm_mmcm  {rise@0.000ns fall@1.111ns period=2.222ns})
+  Destination:            WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i_reg[77]/CE
+                            (rising edge-triggered cell FDRE clocked by clk_out1_cl_hbm_mmcm  {rise@0.000ns fall@1.111ns period=2.222ns})
+  Path Group:             clk_out1_cl_hbm_mmcm
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            2.222ns  (clk_out1_cl_hbm_mmcm rise@2.222ns - clk_out1_cl_hbm_mmcm rise@0.000ns)
+  Data Path Delay:        2.134ns  (logic 0.499ns (23.384%)  route 1.635ns (76.616%))
+  Logic Levels:           1  (LUT2=1)
+  Clock Path Skew:        -0.072ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    8.742ns = ( 10.964 - 2.222 ) 
+    Source Clock Delay      (SCD):    8.096ns
+    Clock Pessimism Removal (CPR):    -0.719ns
+  Clock Uncertainty:      0.064ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.107ns
+    Phase Error              (PE):    0.000ns
+  Clock Net Delay (Source):      1.715ns (routing 0.675ns, distribution 1.040ns)
+  Clock Net Delay (Destination): 1.580ns (routing 0.616ns, distribution 0.964ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Partition      PBlock               Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------------------------------------------
+                         (clock clk_out1_cl_hbm_mmcm rise edge)
+                                                      0.000     0.000 r                                      
+    BJ4                                               0.000     0.000 r  static                              <hidden>
+                         net (fo=0)                   0.100     0.100    static                              <hidden>/<hidden>/<hidden>/<hidden>
+    HPIOBDIFFINBUF_X0Y130
+                         DIFFINBUF (Prop_DIFFINBUF_HPIOBDIFFINBUF_DIFF_IN_P_O)
+                                                      0.863     0.963 r  static                              <hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=1, routed)           0.050     1.013    static                              <hidden>/<hidden>/<hidden>/<hidden>
+    BJ4                  IBUFCTRL (Prop_IBUFCTRL_HPIOB_M_I_O)
+                                                      0.000     1.013 r  static                              <hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=1, routed)           0.348     1.361    static                              <hidden>/<hidden>/<hidden>
+    BUFGCE_X0Y122        BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     1.389 r  static                              <hidden>/<hidden>/<hidden>
+                         net (fo=3, routed)           1.811     3.200    static                              <hidden>/<hidden>/<hidden>/<hidden>/<hidden>
+    SLR Crossing[1->0]   
+    MMCM_X0Y2            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                     -0.127     3.073 r  static                              <hidden>/<hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=2, routed)           0.245     3.318    static                              <hidden>/<hidden>/<hidden>
+    BUFGCE_X0Y70         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     3.346 r  static                              <hidden>/<hidden>/<hidden>
+                         net (fo=921, routed)         2.890     6.236    boundary                            WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clk_in1
+    MMCM_X0Y0            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                     -0.127     6.109 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/mmcme4_adv_inst/CLKOUT0
+                         net (fo=2, routed)           0.244     6.353    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clk_out1_cl_hbm_mmcm
+    BUFGCE_X0Y14         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     6.381 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clkout1_buf/O
+    X3Y1 (CLOCK_ROOT)    net (fo=3829, routed)        1.715     8.096    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/AXI_15_ACLK
+    BLI_HBM_AXI_INTF_X15Y0
+                         HBM_SNGLBLI_INTF_AXI                         r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/HBM_SNGLBLI_INTF_AXI<15>_INST/ACLK
+  -------------------------------------------------------------------    -------------------------------------------------------
+    BLI_HBM_AXI_INTF_X15Y0
+                         HBM_SNGLBLI_INTF_AXI (Prop_BLI_AXI_BLI_HBM_AXI_INTF_ACLK_WREADY_PIPE)
+                                                      0.464     8.560 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/HBM_SNGLBLI_INTF_AXI<15>_INST/WREADY_PIPE
+                         net (fo=5, routed)           0.758     9.317    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_axi_wready
+    SLICE_X84Y11         LUT2 (Prop_A6LUT_SLICEL_I0_O)
+                                                      0.035     9.352 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i[255]_i_1/O
+                         net (fo=257, routed)         0.877    10.229    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/p_1_in
+    SLICE_X83Y90         FDRE                                         r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i_reg[77]/CE
+  -------------------------------------------------------------------    -------------------------------------------------------
+
+                         (clock clk_out1_cl_hbm_mmcm rise edge)
+                                                      2.222     2.222 r                                      
+    BJ4                                               0.000     2.222 r  static                              <hidden>
+                         net (fo=0)                   0.079     2.301    static                              <hidden>/<hidden>/<hidden>/<hidden>
+    HPIOBDIFFINBUF_X0Y130
+                         DIFFINBUF (Prop_DIFFINBUF_HPIOBDIFFINBUF_DIFF_IN_P_O)
+                                                      0.750     3.052 r  static                              <hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=1, routed)           0.040     3.092    static                              <hidden>/<hidden>/<hidden>/<hidden>
+    BJ4                  IBUFCTRL (Prop_IBUFCTRL_HPIOB_M_I_O)
+                                                      0.000     3.092 r  static                              <hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=1, routed)           0.309     3.401    static                              <hidden>/<hidden>/<hidden>
+    BUFGCE_X0Y122        BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024     3.425 r  static                              <hidden>/<hidden>/<hidden>
+                         net (fo=3, routed)           1.624     5.049    static                              <hidden>/<hidden>/<hidden>/<hidden>/<hidden>
+    SLR Crossing[1->0]   
+    MMCM_X0Y2            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                      0.630     5.679 r  static                              <hidden>/<hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=2, routed)           0.215     5.894    static                              <hidden>/<hidden>/<hidden>
+    BUFGCE_X0Y70         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024     5.918 r  static                              <hidden>/<hidden>/<hidden>
+                         net (fo=921, routed)         2.599     8.517    boundary                            WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clk_in1
+    MMCM_X0Y0            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                      0.630     9.147 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/mmcme4_adv_inst/CLKOUT0
+                         net (fo=2, routed)           0.214     9.361    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clk_out1_cl_hbm_mmcm
+    BUFGCE_X0Y14         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024     9.385 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clkout1_buf/O
+    X3Y1 (CLOCK_ROOT)    net (fo=3829, routed)        1.580    10.964    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/aclk
+    SLICE_X83Y90         FDRE                                         r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i_reg[77]/C
+                         clock pessimism             -0.719    10.245                                            
+                         clock uncertainty           -0.064    10.181                                            
+    SLICE_X83Y90         FDRE (Setup_CFF_SLICEL_C_CE)
+                                                     -0.060    10.121    reconfigurable   pblock_CL/pblock_CL_SLR0
+                                                                                                                 WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i_reg[77]
+  -------------------------------------------------------------------
+                         required time                         10.121                                            
+                         arrival time                         -10.229                                            
+  -------------------------------------------------------------------
+                         slack                                 -0.108                                            
+
+Slack (VIOLATED) :        -0.107ns  (required time - arrival time)
+  Source:                 WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/HBM_SNGLBLI_INTF_AXI<15>_INST/ACLK
+                            (rising edge-triggered cell HBM_SNGLBLI_INTF_AXI clocked by clk_out1_cl_hbm_mmcm  {rise@0.000ns fall@1.111ns period=2.222ns})
+  Destination:            WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i_reg[117]/CE
+                            (rising edge-triggered cell FDRE clocked by clk_out1_cl_hbm_mmcm  {rise@0.000ns fall@1.111ns period=2.222ns})
+  Path Group:             clk_out1_cl_hbm_mmcm
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            2.222ns  (clk_out1_cl_hbm_mmcm rise@2.222ns - clk_out1_cl_hbm_mmcm rise@0.000ns)
+  Data Path Delay:        2.145ns  (logic 0.499ns (23.265%)  route 1.646ns (76.735%))
+  Logic Levels:           1  (LUT2=1)
+  Clock Path Skew:        -0.060ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    8.754ns = ( 10.977 - 2.222 ) 
+    Source Clock Delay      (SCD):    8.096ns
+    Clock Pessimism Removal (CPR):    -0.719ns
+  Clock Uncertainty:      0.064ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.107ns
+    Phase Error              (PE):    0.000ns
+  Clock Net Delay (Source):      1.715ns (routing 0.675ns, distribution 1.040ns)
+  Clock Net Delay (Destination): 1.592ns (routing 0.616ns, distribution 0.976ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Partition      PBlock               Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------------------------------------------
+                         (clock clk_out1_cl_hbm_mmcm rise edge)
+                                                      0.000     0.000 r                                      
+    BJ4                                               0.000     0.000 r  static                              <hidden>
+                         net (fo=0)                   0.100     0.100    static                              <hidden>/<hidden>/<hidden>/<hidden>
+    HPIOBDIFFINBUF_X0Y130
+                         DIFFINBUF (Prop_DIFFINBUF_HPIOBDIFFINBUF_DIFF_IN_P_O)
+                                                      0.863     0.963 r  static                              <hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=1, routed)           0.050     1.013    static                              <hidden>/<hidden>/<hidden>/<hidden>
+    BJ4                  IBUFCTRL (Prop_IBUFCTRL_HPIOB_M_I_O)
+                                                      0.000     1.013 r  static                              <hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=1, routed)           0.348     1.361    static                              <hidden>/<hidden>/<hidden>
+    BUFGCE_X0Y122        BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     1.389 r  static                              <hidden>/<hidden>/<hidden>
+                         net (fo=3, routed)           1.811     3.200    static                              <hidden>/<hidden>/<hidden>/<hidden>/<hidden>
+    SLR Crossing[1->0]   
+    MMCM_X0Y2            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                     -0.127     3.073 r  static                              <hidden>/<hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=2, routed)           0.245     3.318    static                              <hidden>/<hidden>/<hidden>
+    BUFGCE_X0Y70         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     3.346 r  static                              <hidden>/<hidden>/<hidden>
+                         net (fo=921, routed)         2.890     6.236    boundary                            WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clk_in1
+    MMCM_X0Y0            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                     -0.127     6.109 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/mmcme4_adv_inst/CLKOUT0
+                         net (fo=2, routed)           0.244     6.353    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clk_out1_cl_hbm_mmcm
+    BUFGCE_X0Y14         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.028     6.381 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clkout1_buf/O
+    X3Y1 (CLOCK_ROOT)    net (fo=3829, routed)        1.715     8.096    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/AXI_15_ACLK
+    BLI_HBM_AXI_INTF_X15Y0
+                         HBM_SNGLBLI_INTF_AXI                         r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/HBM_SNGLBLI_INTF_AXI<15>_INST/ACLK
+  -------------------------------------------------------------------    -------------------------------------------------------
+    BLI_HBM_AXI_INTF_X15Y0
+                         HBM_SNGLBLI_INTF_AXI (Prop_BLI_AXI_BLI_HBM_AXI_INTF_ACLK_WREADY_PIPE)
+                                                      0.464     8.560 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_CORE_I/inst/TWO_STACK.u_hbm_top/TWO_STACK_HBM.hbm_two_stack_intf/HBM_ONE_STACK_INTF<0>_INST/HBM_SNGLBLI_INTF_AXI<15>_INST/WREADY_PIPE
+                         net (fo=5, routed)           0.758     9.317    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_axi_wready
+    SLICE_X84Y11         LUT2 (Prop_A6LUT_SLICEL_I0_O)
+                                                      0.035     9.352 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i[255]_i_1/O
+                         net (fo=257, routed)         0.888    10.240    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/p_1_in
+    SLICE_X78Y87         FDRE                                         r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i_reg[117]/CE
+  -------------------------------------------------------------------    -------------------------------------------------------
+
+                         (clock clk_out1_cl_hbm_mmcm rise edge)
+                                                      2.222     2.222 r                                      
+    BJ4                                               0.000     2.222 r  static                              <hidden>
+                         net (fo=0)                   0.079     2.301    static                              <hidden>/<hidden>/<hidden>/<hidden>
+    HPIOBDIFFINBUF_X0Y130
+                         DIFFINBUF (Prop_DIFFINBUF_HPIOBDIFFINBUF_DIFF_IN_P_O)
+                                                      0.750     3.052 r  static                              <hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=1, routed)           0.040     3.092    static                              <hidden>/<hidden>/<hidden>/<hidden>
+    BJ4                  IBUFCTRL (Prop_IBUFCTRL_HPIOB_M_I_O)
+                                                      0.000     3.092 r  static                              <hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=1, routed)           0.309     3.401    static                              <hidden>/<hidden>/<hidden>
+    BUFGCE_X0Y122        BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024     3.425 r  static                              <hidden>/<hidden>/<hidden>
+                         net (fo=3, routed)           1.624     5.049    static                              <hidden>/<hidden>/<hidden>/<hidden>/<hidden>
+    SLR Crossing[1->0]   
+    MMCM_X0Y2            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                      0.630     5.679 r  static                              <hidden>/<hidden>/<hidden>/<hidden>/<hidden>
+                         net (fo=2, routed)           0.215     5.894    static                              <hidden>/<hidden>/<hidden>
+    BUFGCE_X0Y70         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024     5.918 r  static                              <hidden>/<hidden>/<hidden>
+                         net (fo=921, routed)         2.599     8.517    boundary                            WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clk_in1
+    MMCM_X0Y0            MMCME4_ADV (Prop_MMCM_CLKIN1_CLKOUT0)
+                                                      0.630     9.147 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/mmcme4_adv_inst/CLKOUT0
+                         net (fo=2, routed)           0.214     9.361    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clk_out1_cl_hbm_mmcm
+    BUFGCE_X0Y14         BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.024     9.385 r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.HBM_WRAPPER_I/HBM_MMCM_I/inst/clkout1_buf/O
+    X3Y1 (CLOCK_ROOT)    net (fo=3829, routed)        1.592    10.977    reconfigurable                      WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/aclk
+    SLICE_X78Y87         FDRE                                         r  reconfigurable pblock_CL/pblock_CL_SLR0
+                                                                                                             WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i_reg[117]/C
+                         clock pessimism             -0.719    10.258                                            
+                         clock uncertainty           -0.064    10.194                                            
+    SLICE_X78Y87         FDRE (Setup_CFF_SLICEL_C_CE)
+                                                     -0.060    10.134    reconfigurable   pblock_CL/pblock_CL_SLR0
+                                                                                                                 WRAPPER/CL/CL_HBM/HBM_PRESENT_EQ_1.AXI3_REG_SLC_HBM/inst/w.w_pipe/m_payload_i_reg[117]
+  -------------------------------------------------------------------
+                         required time                         10.134                                            
+                         arrival time                         -10.240                                            
+  -------------------------------------------------------------------
+                         slack                                 -0.107                                            
+
+
+
+

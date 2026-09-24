@@ -18,12 +18,12 @@ match the provisional CPU oracle, but maximum logit errors are 0.270663 and
 [Measured results and timing scope](full_model/F2_V13_TESTING.md#completed-hardware-test--september-24-2026).
 This serialized prototype has not demonstrated competitive GPU latency or cost.
 
-**Parallel RTL v14 is implemented and its full shell build is running.** It adds
+**Parallel RTL v14 is implemented, but its full shell build failed routed setup timing.** It adds
 four attention query lanes and a 64-byte HBM read buffer. Attention simulation
 is bit-identical to the serial implementation across 7,668 outputs and measures
 1.537x aggregate cycle speedup for multiquery cases with fixed memory latency.
-This is not full-model or physical FPGA speedup. Routed timing and F2 testing
-remain pending. See [v14 changes and validation](full_model/PARALLEL_V14.md).
+This is not full-model or physical FPGA speedup. Worst setup slack is -0.111 ns across 335 failing endpoints; F2 testing
+is blocked until timing closes. See [v14 changes and validation](full_model/PARALLEL_V14.md).
 
 CPU work in the FPGA benchmark is limited to input preparation, transfers/control
 and output handling. The separate CPU oracle is a provisional correctness

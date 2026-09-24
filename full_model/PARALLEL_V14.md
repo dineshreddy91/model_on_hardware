@@ -1,10 +1,20 @@
 # v14 parallel-compute revision
 
-Status: RTL and simulation verified; standalone head-dispatch synthesis passes
-at 4 ns on xcvu47p-fsvh2892-2-e. The full shell build has started at
-`/home/ubuntu/openjev-full-shell-v14/cl_dram_hbm_dma` on the builder; its log is
-`/home/ubuntu/openjev-full-shell-v14-build.txt`. Routed timing and hardware
-speedup remain unverified. v13 continues running separately as the measurement baseline.
+Status: full shell build completed September 24 at 05:40 UTC after 1h33m,
+but **failed routed setup timing and is rejected for AFI submission/testing**.
+Independent checkpoint inspection reports WNS -0.111 ns, TNS -16.674 ns,
+335 failing setup endpoints; hold +0.010 ns with zero failing endpoints.
+All 190,227 routable nets are routed with zero routing errors. All ten bus-skew
+constraints pass (minimum +2.730 ns). DRC has zero errors, 190 warnings and
+one advisory. Raw reports are in `sim/validation/parallel-v14/routed/`.
+
+The worst reported path is the 450 MHz HBM WREADY-to-write-payload clock-enable
+path, with a 257-load control net and substantial routing delay. The next
+revision needs to improve that interface's control fanout/placement or pipeline
+structure and repeat routed validation. Do not weaken timing constraints to
+accept this artifact. The generated tar is not evidence of timing closure.
+No v14 AFI was submitted or loaded; physical speedup remains unmeasured.
+v13 completed both full-model requests; see `F2_V13_TESTING.md`.
 
 ## Implemented
 
