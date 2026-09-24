@@ -1,0 +1,94 @@
+{
+  "scope": "Complete compiled model in RTL simulation; no CPU model fallback",
+  "model_revision": "f004f37e52695d6ddfb914a64dbf93942839ba1e",
+  "manifest_sha256": "2c07cec3adc9713797fc01ed7867ee54260e4e46ac5d646a116b677d183adc5c",
+  "program_sha256": "7e94063752dd14767f26f5e37d258bdd30ce61b0a09e44ab8c1e558def30549a",
+  "instructions": 1291,
+  "tensors": 2458,
+  "input": {
+    "image": "/home/ubuntu/openjev-runtime-recovery-v6/full_model/benchmark/inputs/gameplay-doom.jpg",
+    "image_sha256": "48674ebec3e9e187d74ce11b8b11b6f343fc5eac98333392e26c8aaacf8a9f38",
+    "hypothesis": "An enemy is visible in front of the player.",
+    "text_tokens_unpadded": 66,
+    "image_grid": [
+      [
+        1,
+        14,
+        14
+      ]
+    ],
+    "resize": "224x224 bicubic",
+    "cpu_preprocessing_ms": 23.624975,
+    "transformers_version": "5.17.0",
+    "learned_cpu_computation": false,
+    "model_revision": "f004f37e52695d6ddfb914a64dbf93942839ba1e",
+    "inputs": [
+      {
+        "tensor_id": 732,
+        "file": "input_732.bin",
+        "bytes": 1204224,
+        "sha256": "63f1279d4aef3fbecbdf546f5c652d54c374b642d8c79c7da213d9104ff1baa6"
+      },
+      {
+        "tensor_id": 733,
+        "file": "input_733.bin",
+        "bytes": 512,
+        "sha256": "d3dbe798d71fddd14903d16f0c65b01449c6fcd6a756d50bf504c9deb0569048"
+      },
+      {
+        "tensor_id": 734,
+        "file": "input_734.bin",
+        "bytes": 3136,
+        "sha256": "8cbde129b353f79317ef026e07653f2ebe72a6b453c2586339dd8b59b4c442c6"
+      },
+      {
+        "tensor_id": 735,
+        "file": "input_735.bin",
+        "bytes": 3136,
+        "sha256": "4ec2ab41d3f7534cc8c48b9d9000910f8db116ea5707ef4b3f7564b9a304a3ae"
+      },
+      {
+        "tensor_id": 736,
+        "file": "input_736.bin",
+        "bytes": 50176,
+        "sha256": "bf8fc969464b6424f5802340c1b909392d687e11dbacfd929ef2e98f9694cd5c"
+      },
+      {
+        "tensor_id": 737,
+        "file": "input_737.bin",
+        "bytes": 50176,
+        "sha256": "70dbe003d19541bb090482855eb977aa8b871cd29a8f36c35bb8e0eb0d036664"
+      },
+      {
+        "tensor_id": 738,
+        "file": "input_738.bin",
+        "bytes": 32768,
+        "sha256": "f22d0dd7119d5551971ae880c686318b8d0b25221d987a29463afea5d962c3de"
+      },
+      {
+        "tensor_id": 739,
+        "file": "input_739.bin",
+        "bytes": 32768,
+        "sha256": "d67cd743ccc94f5f87136679fb1e28e94189f0501627153b052ed9cad015ddb5"
+      },
+      {
+        "tensor_id": 740,
+        "file": "input_740.bin",
+        "bytes": 196,
+        "sha256": "d4b6fc56f3ca4c0a3e3f5583371276d4318227bcad4c18f7ec015fa185ff7354"
+      },
+      {
+        "tensor_id": 741,
+        "file": "input_741.bin",
+        "bytes": 512,
+        "sha256": "6267e2c43cb6c186095e65d7733c47ed2f7068948eb1ded62f67cb121e435f55"
+      },
+      {
+        "tensor_id": 742,
+        "file": "input_742.bin",
+        "bytes": 4,
+        "sha256": "daaf62de76f04e09a55d751f98b97c440bd2dba3f4d9d55a6e93ce8446266f92"
+      }
+    ]
+  }
+}

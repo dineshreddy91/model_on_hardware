@@ -39,6 +39,14 @@ Model source: [AlexWortega/openjev](https://huggingface.co/AlexWortega/openjev),
 checkpoint directory `qwen3.5-0.8b-nli-v2s-long`. AWS HDK-derived files retain
 their original copyright headers and are accompanied by `AWS_HDK_LICENSE.txt`.
 
+## Complete-model virtual testing
+
+Both complete 0.8B model RTL simulations have started with real Box Runner and
+Doom inputs, all weight banks and all 1291 graph instructions. They are still
+running; no complete simulated-model prediction is available yet. The compiled
+RTL simulator performs all model arithmetic and uses a behavioral AXI memory
+model. See [run details and limitations](full_model/FULL_RTL_SIMULATION.md).
+
 ## What is implemented
 
 - A custom AWS F2 classifier-head design with the real 3 x 1024 INT8 OpenJEV
