@@ -34,11 +34,15 @@ module openjev_gated_delta #(
     G_FETCH,G_EXP,G_SAVE,BETA_FETCH,BETA_SAVE,V_FETCH,V_SAVE,
     DECAY,DECAY_SAVE,MEM_MUL,MEM_ADD,MEM_SUM,DELTA_SUB,DELTA_MUL,
     DELTA_SAVE,UPDATE_MUL,UPDATE_ADD,UPDATE_SAVE,OUT_MUL,OUT_ADD,
-    OUT_SUM,EMIT_VALUE,EXPORT,FAULTED} state_t;
-  state_t state,read_return,alu_return;
-  logic [31:0] state_mem[0:MAX_KEY_DIM*MAX_VALUE_DIM-1];
+    OUT_SUM,EMIT_VALUE,EXPORT,FAULTED,STATE_READ,STATE_LATCH,DECAY_ALU,UPDATE_ALU,EXPORT_READ} state_t;
+  state_t state,read_return,alu_return,state_return;
+  localparam integer STATE_ADDR_WIDTH=$clog2(MAX_KEY_DIM*MAX_VALUE_DIM);
+  logic [STATE_ADDR_WIDTH-1:0] state_address;
+  logic [31:0] state_raw,state_word,state_offset;
+  (* ram_style="block" *) logic [31:0] state_mem[0:MAX_KEY_DIM*MAX_VALUE_DIM-1];
   logic [31:0] qmem[0:MAX_KEY_DIM-1],kmem[0:MAX_KEY_DIM-1];
   logic [31:0] nt,kd,vd,ti,ki,vj,si,stored_kd,stored_vd,state_count;
+  logic [31:0] key_base,value_base;
   logic [63:0] cycles;
   logic state_valid,load_state;
   logic [31:0] loaded,result,qsum,ksum,qfactor,kfactor,query_scale,decay,beta,value,delta,sum;
@@ -50,8 +54,8 @@ module openjev_gated_delta #(
   assign response_ready=rst_n && state==READ_WAIT;
   assign output_valid=rst_n && (state==EMIT_VALUE || state==EXPORT);
   assign output_state=state==EXPORT;
-  assign output_index=state==EXPORT ? si : ti*vd+vj;
-  assign output_data=state==EXPORT ? state_mem[si] : sum;
+  assign output_index=state==EXPORT ? si : value_base+vj;
+  assign output_data=state==EXPORT ? state_word : sum;
   assign output_last=state==EXPORT && si==state_count-1;
   assign fault=state==FAULTED;
   openjev_scalar arithmetic(.clk(clk),.rst_n(rst_n),.input_valid(state==ALU_ISSUE),
@@ -64,7 +68,15 @@ module openjev_gated_delta #(
     begin alu_opcode<=op; alu_a<=a; alu_b<=b; alu_return<=next_state; state<=ALU_ISSUE; end
   endtask
   always_ff @(posedge clk) begin
+    state_raw <= state_mem[state_address];
+    state_word <= state_raw;
+  end
+  task automatic fetch_state(input logic [31:0] address,input state_t next_state);
+    begin state_address<=address[STATE_ADDR_WIDTH-1:0];state_return<=next_state;state<=STATE_READ;end
+  endtask
+  always_ff @(posedge clk) begin
     if(!rst_n) begin
+      state_address<=0;state_offset<=0;state_return<=IDLE;key_base<=0;value_base<=0;
       state<=IDLE; read_return<=IDLE; alu_return<=IDLE; command_error<=0; done<=0; fault_code<=0;
       nt<=0; kd<=0; vd<=0; ti<=0; ki<=0; vj<=0; si<=0; cycles<=0; stored_kd<=0; stored_vd<=0; state_count<=0;
       state_valid<=0; load_state<=0; loaded<=0; result<=0; qsum<=0; ksum<=0;
@@ -79,7 +91,7 @@ module openjev_gated_delta #(
              (reuse_state && (initial_state_from_memory || !state_valid || key_dim!=stored_kd || value_dim!=stored_vd)))
             command_error<=1;
           else begin
-            state_count<=key_dim*value_dim;
+            state_count<=key_dim*value_dim;key_base<=0;value_base<=0;
             nt<=token_count; kd<=key_dim; vd<=value_dim; ti<=0; ki<=0; vj<=0; si<=0; cycles<=0;
             qsum<=0; ksum<=0; state_valid<=0; stored_kd<=key_dim; stored_vd<=value_dim;
             load_state<=initial_state_from_memory;
@@ -98,17 +110,19 @@ module openjev_gated_delta #(
           if(alu_error) begin fault_code<=2; state<=FAULTED; end
           else begin result<=alu_output; state<=alu_return; end
         end
+        STATE_READ: state<=STATE_LATCH;
+        STATE_LATCH: state<=state_return;
         INIT: begin
           if(load_state) fetch(3,si,INIT_SAVE);
           else begin loaded<=0; state<=INIT_SAVE; end
         end
         INIT_SAVE: begin
-          state_mem[si]<=loaded;
+          state_mem[si[STATE_ADDR_WIDTH-1:0]]<=loaded;
           if(si==state_count-1) begin si<=0; calculate(4,fp_from_u13(kd[12:0]),0,SCALE_SAVE); end
           else begin si<=si+1; state<=INIT; end
         end
         SCALE_SAVE: begin query_scale<=result; state<=Q_FETCH; end
-        Q_FETCH: fetch(0,ti*kd+ki,Q_SQUARE);
+        Q_FETCH: fetch(0,key_base+ki,Q_SQUARE);
         Q_SQUARE: begin qmem[ki]<=loaded; calculate(1,loaded,loaded,Q_SUM); end
         Q_SUM: calculate(0,qsum,result,Q_SUM_SAVE);
         Q_SUM_SAVE: begin
@@ -116,7 +130,7 @@ module openjev_gated_delta #(
           if(ki==kd-1) begin ki<=0; state<=K_FETCH; end
           else begin ki<=ki+1; state<=Q_FETCH; end
         end
-        K_FETCH: fetch(1,ti*kd+ki,K_SQUARE);
+        K_FETCH: fetch(1,key_base+ki,K_SQUARE);
         K_SQUARE: begin kmem[ki]<=loaded; calculate(1,loaded,loaded,K_SUM); end
         K_SUM: calculate(0,ksum,result,K_SUM_SAVE);
         K_SUM_SAVE: begin
@@ -150,38 +164,41 @@ module openjev_gated_delta #(
           if((loaded[31] && loaded[30:0]!=0) || fp_less(32'h3f800000,loaded)) begin fault_code<=3; state<=FAULTED; end
           else begin beta<=loaded; vj<=0; state<=V_FETCH; end
         end
-        V_FETCH: fetch(2,ti*vd+vj,V_SAVE);
-        V_SAVE: begin value<=loaded; ki<=0; sum<=0; state<=DECAY; end
-        DECAY: calculate(1,state_mem[ki*vd+vj],decay,DECAY_SAVE);
-        DECAY_SAVE: begin state_mem[ki*vd+vj]<=result; state<=MEM_MUL; end
+        V_FETCH: fetch(2,value_base+vj,V_SAVE);
+        V_SAVE: begin value<=loaded; ki<=0; state_offset<=vj; sum<=0; state<=DECAY; end
+        DECAY: fetch_state(state_offset,DECAY_ALU);
+        DECAY_ALU: calculate(1,state_word,decay,DECAY_SAVE);
+        DECAY_SAVE: begin state_mem[state_offset[STATE_ADDR_WIDTH-1:0]]<=result; state<=MEM_MUL; end
         MEM_MUL: calculate(1,result,kmem[ki],MEM_ADD);
         MEM_ADD: calculate(0,sum,result,MEM_SUM);
         MEM_SUM: begin
           sum<=result;
           if(ki==kd-1) state<=DELTA_SUB;
-          else begin ki<=ki+1; state<=DECAY; end
+          else begin ki<=ki+1; state_offset<=state_offset+vd; state<=DECAY; end
         end
         DELTA_SUB: calculate(0,value,{~sum[31],sum[30:0]},DELTA_MUL);
         DELTA_MUL: calculate(1,result,beta,DELTA_SAVE);
-        DELTA_SAVE: begin delta<=result; ki<=0; sum<=0; state<=UPDATE_MUL; end
+        DELTA_SAVE: begin delta<=result; ki<=0; state_offset<=vj; sum<=0; state<=UPDATE_MUL; end
         UPDATE_MUL: calculate(1,kmem[ki],delta,UPDATE_ADD);
-        UPDATE_ADD: calculate(0,state_mem[ki*vd+vj],result,UPDATE_SAVE);
-        UPDATE_SAVE: begin state_mem[ki*vd+vj]<=result; state<=OUT_MUL; end
+        UPDATE_ADD: fetch_state(state_offset,UPDATE_ALU);
+        UPDATE_ALU: calculate(0,state_word,result,UPDATE_SAVE);
+        UPDATE_SAVE: begin state_mem[state_offset[STATE_ADDR_WIDTH-1:0]]<=result; state<=OUT_MUL; end
         OUT_MUL: calculate(1,result,qmem[ki],OUT_ADD);
         OUT_ADD: calculate(0,sum,result,OUT_SUM);
         OUT_SUM: begin
           sum<=result;
           if(ki==kd-1) state<=EMIT_VALUE;
-          else begin ki<=ki+1; state<=UPDATE_MUL; end
+          else begin ki<=ki+1; state_offset<=state_offset+vd; state<=UPDATE_MUL; end
         end
         EMIT_VALUE: if(output_ready) begin
           if(vj!=vd-1) begin vj<=vj+1; state<=V_FETCH; end
-          else if(ti!=nt-1) begin ti<=ti+1; ki<=0; qsum<=0; ksum<=0; state<=Q_FETCH; end
-          else begin si<=0; state<=EXPORT; end
+          else if(ti!=nt-1) begin ti<=ti+1; key_base<=key_base+kd;value_base<=value_base+vd;ki<=0; qsum<=0; ksum<=0; state<=Q_FETCH; end
+          else begin si<=0; state<=EXPORT_READ; end
         end
+        EXPORT_READ: fetch_state(si,EXPORT);
         EXPORT: if(output_ready) begin
           if(si==state_count-1) begin state_valid<=1; done<=1; state<=IDLE; end
-          else si<=si+1;
+          else begin si<=si+1;state<=EXPORT_READ;end
         end
         FAULTED: state<=FAULTED;
         default: begin fault_code<=6; state<=FAULTED; end

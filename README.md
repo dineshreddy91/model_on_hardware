@@ -3,24 +3,28 @@
 FPGA work for running the quantized OpenJEV Qwen 3.5 0.8B NLI model on an AWS
 EC2 F2 (`f2.6xlarge`) instance.
 
-## Full-model status — September 22, 2026
+## Full-model status — September 24, 2026
 
-The complete graph compiler, attention, gated-delta recurrence, remaining
-operators, HBM integration and host benchmark runner are implemented. The graph
-contains 1,291 instructions and 2,458 tensor descriptors. CPU work in the FPGA
-benchmark is limited to input preparation, transfers/control and output handling;
-the separate CPU oracle is used only for validation.
+The complete 1,291-instruction graph and 2,458 tensor descriptors are deployed
+as v13 AFI `afi-00f49a1efd465abda` / `agfi-03b2976d4db937929` on AWS F2.
+Routed validation passes setup (+0.023 ns), hold (+0.001 ns), bus skew and
+routing checks, with zero DRC errors. Both synthetic hardware smoke runs pass.
 
-Integrated RTL simulation passes repeated synthetic graph execution. The v8
-standalone synthesis meets its 4 ns constraint (+0.170 ns setup slack); the AWS
-shell build has passed synthesis and is in physical implementation. This is not
-yet routed timing closure or full-model hardware execution.
+**The full-model test is still running; no completed model prediction or final
+latency is available yet.** The latest captured Box Runner progress is 1,076
+instructions retired after 2,340 seconds, at `text.18.mlp_gate.matrix`. Doom
+is queued. This scalar, serialized implementation is a functional prototype;
+it has not demonstrated competitive GPU latency or cost.
 
-AWS terminated the previous F2 Spot instance. The active r6i.xlarge is the CPU
-builder; a replacement F2 endpoint is needed to load the new AFI and measure
-Doom/Box Runner inference. **Full-model FPGA predictions and latency are not
-available yet.** See [implementation and validation status](full_model/MODEL_INTEGRATION.md)
-and [benchmark runner](full_model/program/run_fpga_benchmark.py).
+CPU work in the FPGA benchmark is limited to input preparation, transfers/control
+and output handling. The separate CPU oracle is a provisional correctness
+reference: two retained CPU runs disagree, native-model parity is not established,
+and no model-wide numerical acceptance threshold is defined. Successful execution
+alone does not establish correctness. See the [baseline audit](full_model/BASELINE_AUDIT.md).
+
+See [implementation history](full_model/MODEL_INTEGRATION.md),
+[F2 execution instructions](full_model/F2_V13_TESTING.md), and
+[v13 validation evidence](full_model/sim/validation/model-integration/v13/).
 
 Model source: [AlexWortega/openjev](https://huggingface.co/AlexWortega/openjev),
 checkpoint directory `qwen3.5-0.8b-nli-v2s-long`. AWS HDK-derived files retain
@@ -46,13 +50,10 @@ path meeting timing at **+0.080 ns slack**. AWS created AFI
 F2 slot 0 with status `ok`. Five consecutive hardware runs reproduced all three
 reference accumulators exactly.
 
-This repository does not claim that the entire 0.8B model currently executes in
-FPGA fabric. The previously tested HBM AFI, `afi-0c11d6d84c69c667d` /
-`agfi-0c98e7286f4bae29b`, executes real-weight INT8 matrix operations from physical
-HBM. Three runs each matched all 6,144 QKV and 768 vision outputs exactly.
-The complete-model operators are now implemented and simulation-tested, but
-have not been deployed as a full-model AFI. See
-[the matrix engine validation record](full_model/MATVEC.md).
+Earlier matrix-only hardware validation used `afi-0c11d6d84c69c667d` /
+`agfi-0c98e7286f4bae29b`: three runs each matched all 6,144 QKV and 768 vision
+outputs exactly. Those results are operator tests, not complete-model results.
+See [the matrix engine validation record](full_model/MATVEC.md).
 
 ## Repository layout
 

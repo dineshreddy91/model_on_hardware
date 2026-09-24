@@ -1,0 +1,13 @@
+PASS attention protocol: 18 commands, masks, causal offsets, stalls, bus/numeric/domain faults, reset
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_attention.sv:78: $finish called at 3784140000 (1ps)
+PASS attention numerical reference: 18 commands, 2076 values, max absolute error 9.54655234e-08
+PASS gated-delta protocol: 7 commands, state import/reuse/export, stalls, bus/numeric/domain faults, reset
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_gated_delta.sv:90: $finish called at 46016140000 (1ps)
+PASS delta numerical reference: 7 commands, 17253 values, max absolute error 1.2101877e-07
+PASS graph sequencer: 14 scenarios plus reset
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_graph_sequencer.sv:93: $finish called at 4140 (1s)
+PASS graph chain: real attention -> stored tensor -> real gated delta, 12 committed values
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_graph_chain.sv:114: $finish called at 69190000 (1ps)
+PASS graph chain numerical comparison: 12 values; max abs error 4.25399809e-08
+PASS attention and gated-delta bounded watchdog, sticky fault, reset
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_operator_watchdog.sv:29: $finish called at 240000 (1ps)

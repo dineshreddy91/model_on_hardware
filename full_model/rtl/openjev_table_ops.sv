@@ -26,7 +26,7 @@ module openjev_table_ops #(
   localparam IDLE=0,CLEAR_MAP=1,SLOT_READ=2,SLOT_CHECK=3,ROW=4,INDEX_CHECK=5,
     SCALE_SAVE=6,WEIGHT_READ=7,WEIGHT_SAVE=8,SCALE_ISSUE=9,SCALE_WAIT=10,
     COEFF_SAVE=11,PRODUCT_SAVE=12,SUM_SAVE=13,COPY_SAVE=14,STORE=15,NEXT=16,
-    MEM_ISSUE=17,MEM_WAIT=18,ALU_ISSUE=19,ALU_WAIT=20,FAILED=21,ADDRESS_MULT=22,ADDRESS_ISSUE=23;
+    MEM_ISSUE=17,MEM_WAIT=18,ALU_ISSUE=19,ALU_WAIT=20,FAILED=21,ADDRESS_MULT=22,ADDRESS_ISSUE=23,MAP_READ=24,MAP_LATCH=25,SLOT_VALIDATE=26,MAP_COPY=27;
   reg [4:0] state,return_state,alu_return,address_return;
   reg [17:0] address_row;
   reg [30:0] address_product;
@@ -34,8 +34,10 @@ module openjev_table_ops #(
   reg [7:0] op;
   reg [31:0] nt,nc,nr,ni,ti,ci,corner,index,row_id,map_index;
   reg [31:0] s0,s1,s2,s3,dst,result_q,sum,scaled_value,alu_a,alu_b;
-  reg [31:0] image_map[0:4095];
-  reg [4095:0] occupied;
+  (* ram_style="block" *) reg [31:0] image_map[0:4095];
+  reg [11:0] map_address;
+  reg [31:0] map_raw,map_word;
+  reg [4:0] map_return;
   reg [15:0] scale_value;
   reg signed [31:0] weight_integer;
   reg [3:0] alu_op;
@@ -76,11 +78,20 @@ module openjev_table_ops #(
     input [4:0] next_state;
     begin alu_op<=operation;alu_a<=a;alu_b<=b;alu_return<=next_state;state<=ALU_ISSUE;end
   endtask
+  wire map_write_enable=rst_n&&(state==CLEAR_MAP||(state==SLOT_VALIDATE&&map_word==32'hffffffff));
+  wire [11:0] map_write_address=state==CLEAR_MAP ? map_index[11:0] : map_address;
+  wire [31:0] map_write_data=state==CLEAR_MAP ? 32'hffffffff : map_index;
+  always @(posedge clk) begin
+    if(map_write_enable) image_map[map_write_address]<=map_write_data;
+    map_raw<=image_map[map_address];
+    map_word<=map_raw;
+  end
   always @(posedge clk) begin
     if(!rst_n) begin
+      map_address<=0;map_return<=IDLE;
       address_return<=IDLE;address_row<=0;address_product<=0;address_tensor<=0;
       state<=IDLE;return_state<=IDLE;alu_return<=IDLE;op<=0;nt<=0;nc<=0;nr<=0;ni<=0;
-      ti<=0;ci<=0;corner<=0;index<=0;row_id<=0;map_index<=0;cycles<=0;occupied<=0;
+      ti<=0;ci<=0;corner<=0;index<=0;row_id<=0;map_index<=0;cycles<=0;
       s0<=0;s1<=0;s2<=0;s3<=0;dst<=0;result_q<=0;sum<=0;scaled_value<=0;
       alu_a<=0;alu_b<=0;scale_value<=0;weight_integer<=0;alu_op<=0;
       memory_write<=0;memory_tensor<=0;memory_index<=0;memory_data<=0;done<=0;
@@ -97,20 +108,24 @@ module openjev_table_ops #(
           else begin
             op<=opcode;nt<=token_count;nc<=channel_count;nr<=table_rows;ni<=image_count;
             s0<=source0;s1<=source1;s2<=source2;s3<=source3;dst<=destination;
-            ti<=0;ci<=0;corner<=0;index<=0;map_index<=0;sum<=0;cycles<=0;occupied<=0;
+            ti<=0;ci<=0;corner<=0;index<=0;map_index<=0;sum<=0;cycles<=0;
             state<=opcode==19 ? CLEAR_MAP : ROW;
           end
         end
         CLEAR_MAP: begin
-          image_map[map_index]<=32'hffffffff;
           if(map_index==nt-1) begin map_index<=0;state<=ni==0 ? ROW : SLOT_READ;end
           else map_index<=map_index+1;
         end
         SLOT_READ: access(0,s2,map_index,0,SLOT_CHECK);
         SLOT_CHECK: begin
-          if(result_q>=nt||occupied[result_q[11:0]]) state<=FAILED;
+          if(result_q>=nt) state<=FAILED;
+          else begin map_address<=result_q[11:0];map_return<=SLOT_VALIDATE;state<=MAP_READ;end
+        end
+        MAP_READ: state<=MAP_LATCH;
+        MAP_LATCH: state<=map_return;
+        SLOT_VALIDATE: begin
+          if(map_word!=32'hffffffff) state<=FAILED;
           else begin
-            image_map[result_q[11:0]]<=map_index;occupied[result_q[11:0]]<=1;
             if(map_index==ni-1) state<=ROW;
             else begin map_index<=map_index+1;state<=SLOT_READ;end
           end
@@ -118,11 +133,12 @@ module openjev_table_ops #(
         ROW: case(op)
           16: access(0,s0,ti,0,INDEX_CHECK);
           17: access(0,s2,ti*4+corner,0,INDEX_CHECK);
-          19: if(image_map[ti]==32'hffffffff) access(0,s0,index,0,COPY_SAVE);
-              else indexed_access(s1,image_map[ti],COPY_SAVE);
+          19: begin map_address<=ti[11:0];map_return<=MAP_COPY;state<=MAP_READ;end
           20: access(0,s1,0,0,INDEX_CHECK);
           default: state<=FAILED;
         endcase
+        MAP_COPY: if(map_word==32'hffffffff) access(0,s0,index,0,COPY_SAVE);
+                  else indexed_access(s1,map_word,COPY_SAVE);
         INDEX_CHECK: begin
           if(result_q>=(op==20 ? nt : nr)) state<=FAILED;
           else begin

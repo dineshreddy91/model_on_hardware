@@ -1,0 +1,10 @@
+Thu Sep 24 03:55:42 UTC 2026
+FULL_MODEL_BENCHMARK
+{"request": "box_runner", "progress": {"instructions_retired": 1076, "stage": "text.18.mlp_gate.matrix", "elapsed_device_request_ms": 2340073.869551}}
+{"request": "box_runner", "progress": {"instructions_retired": 1087, "stage": "text.19.input_norm", "elapsed_device_request_ms": 2360074.290636}}
+{"request": "box_runner", "progress": {"instructions_retired": 1101, "stage": "text.19.attention", "elapsed_device_request_ms": 2380075.062072}}
+{"request": "box_runner", "progress": {"instructions_retired": 1105, "stage": "text.19.out_proj.matrix", "elapsed_device_request_ms": 2400075.231748}}
+Type  FpgaImageSlot  FpgaImageId             StatusName    StatusCode   ErrorName    ErrorCode   ShVersion
+AFI          0       agfi-03b2976d4db937929  loaded            0        ok               0       0x10212415
+Type  FpgaImageSlot  VendorId    DeviceId    DBDF
+AFIDEVICE    0       0x1d0f      0xf001      0000:34:00.0

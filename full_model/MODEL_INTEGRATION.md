@@ -2,15 +2,16 @@
 
 The full 1,291-instruction OpenJEV graph has a hardware dispatcher for all 23
 compute opcodes and a host benchmark runner. **No complete-model FPGA result
-or latency has been measured yet.** The previous F2 ran a matrix-only AFI;
-the new runtime refused that identity before writing model data. AWS terminated
-Spot instance `i-08d637784fd83abd2` at 2026-09-22 20:48:18 UTC with
-`Server.SpotInstanceTermination`. Its root volume is no longer in the EBS
-inventory. The separate `r6i.xlarge` builder `i-0d924d0c09281d49e` remains
-running, with sources and the active physical build intact. The user will
-provide a replacement F2 endpoint. Recovery on the builder's EBS disk reproduced
-all 732 tensor hashes and all 32 HBM-bank hashes. The pinned original checkpoint
-SHA-256 is `cf6d62a341c0c804f9a926eec71aefc9859adb28978736e757b49bce35d9b8f8`.
+or latency has been measured yet.** As of September 23, the v13 physical build
+has completed on builder `i-0d924d0c09281d49e` at `3.88.106.252`. The previous v12
+routed checkpoint failed setup timing (WNS -0.155 ns) and must not be submitted
+as an AFI. The current F2 `i-049c97612201b3b80` at `44.204.90.121`
+has the v13 AFI loaded and both hardware smoke runs passed. The full-model
+Box Runner test is in progress, with Doom queued. Recovered weights and sources
+are retained on builder EBS. The older instance/address references below are
+historical build records, not current connection instructions.
+The pinned original checkpoint SHA-256 is
+`cf6d62a341c0c804f9a926eec71aefc9859adb28978736e757b49bce35d9b8f8`.
 
 The CPU handles image decoding/resizing, tokenization, input coordinates,
 PCIe transfers/control, and label decoding. No learned inference executes on
@@ -156,3 +157,98 @@ is [publish-regression.txt](sim/validation/model-integration/publish-regression.
 This regression is simulation and host testing, not the requested full-model
 FPGA hardware benchmark. That benchmark awaits a routed, validated AFI and a
 replacement F2 instance.
+
+## v9 timing repair
+
+The resumed v8 route completed with all 209,965 routable nets connected and
+zero routing errors, but failed setup timing: WNS -0.955 ns, TNS -27962.213 ns,
+and 98,435 failing endpoints. Hold slack was +0.006 ns. The checkpoint is
+marked VIOLATED and must not be registered as an AFI.
+
+The v9 recurrence state memory uses a bounded registered read address and two
+read-pipeline registers so Vivado can infer block RAM. A stepped state offset
+replaces repeated key-index multiplication in state reads/writes. Export waits
+for the read pipeline and remains stable under output backpressure. Arithmetic,
+external graph ABI and requested clock frequencies are unchanged.
+
+The attention/recurrence regression passes, including 17,253 recurrence values,
+state import/reuse/export, stalls, invalid inputs, memory faults, reset and
+watchdogs. These are simulation results; physical timing closure remains pending.
+
+Final v9 targeted synthesis on the shell's `xcvu47p-fsvh2892-2-e` part
+reports +0.164 ns setup slack and +0.043 ns hold slack at 4 ns, 3,670
+LUTs and 14.5 block-RAM tiles for the recurrence kernel. Vendor shell
+simulation passes repeated requests and numerical comparison. The full
+physical rebuild is staged at `/home/ubuntu/openjev-full-shell-v9/cl_dram_hbm_dma`;
+its routed timing, not this standalone result, remains the deployment gate.
+
+## v10 attention memory pipeline
+
+The v9 physical route improved setup slack to -0.378 ns (TNS -506.676 ns),
+with positive +0.006 ns hold slack, but still produced a VIOLATED checkpoint.
+It has not been deployed. The v10 attention score store now uses registered
+block-RAM reads; mask bits are sampled in the same pipeline. Exponentiation,
+probability normalization and value accumulation wait for the selected score.
+No timing exceptions or clock changes are introduced. Attention, recurrence,
+graph-chain, fault and watchdog regression tests pass. Physical closure is
+still required before claiming a deployable full-model AFI.
+
+## v11 physical timing repair
+
+The v10 full route finished with WNS -0.232 ns, TNS -154.223 ns and
+WHS +0.001 ns. Its checkpoint is marked VIOLATED and has not been deployed.
+The worst reported setup path spends about 81% of data-path delay in routing.
+A separate post-route fanout-optimization and rerouting attempt is staged at
+`/home/ubuntu/openjev-v11-route-repair`, starting from the preserved v10
+checkpoint. RTL, clock frequencies and timing exceptions are unchanged.
+It records critical endpoints and requires final setup/hold timing, routing,
+DRC, bus-skew and unconstrained-path review before any deployment.
+
+## v12 image-map timing repair
+
+The v11 post-route repair ended at -0.192 ns WNS, -119.567 ns TNS,
+1,785 failing setup endpoints, and no failing hold endpoints. Extracted
+critical endpoints identify instruction-register fanout into the table
+operator's 4,096-bit occupied vector and image-map write logic.
+
+The v12 RTL removes the occupied vector. Each image-insertion command
+clears its active map entries to the existing empty sentinel; slot validation
+checks that sentinel before writing a mapping, retaining duplicate rejection.
+The map uses bounded addresses and a two-register block-RAM read pipeline for
+both slot validation and per-token lookup. Clocks and timing requirements
+remain unchanged. Physical timing closure is still required.
+
+## September 23: v13 timing repair
+
+The v12 routed endpoint report identified a recurrence address multiplier,
+vector operand-buffer control paths, and descriptor-valid reset fanout among
+the failing endpoints. v13 replaces token-index multiplications in attention
+and recurrence with running base addresses, and replaces the vector unit's
+asynchronous operand/work memories with synchronous block RAM. Loads commit
+through a registered stage; consumers honor `input_ready`. A softmax state
+selection error introduced during this refactor was caught by numerical tests
+and corrected before the physical build was launched.
+
+At the actual -2-e device grade and a 4 ns standalone synthesis constraint,
+head dispatch reports +1.268 ns setup slack and the 8192-element vector unit
+reports +1.293 ns. The vector unit uses 30 block-RAM tiles, 2815 LUTs, and zero
+LUTs as memory. These are synthesis estimates, not routed timing closure.
+The remaining descriptor-valid reset paths must be checked in the new route.
+
+Attention, recurrence, vector/HBM, and complete integration regressions pass.
+The integration suite verifies 13,523 row outputs, 30,515 table outputs,
+6,210 matrix outputs and 49 Python tests. The final Vivado shell simulation
+passes the synthetic seven-instruction graph and independent output comparison
+(110,079 simulated cycles). This is not a complete-model hardware benchmark.
+Evidence is retained under `full_model/sim/validation/model-integration/v13/`.
+
+The full build is in `/home/ubuntu/openjev-full-shell-v13/cl_dram_hbm_dma`;
+its launch log is `/home/ubuntu/openjev-full-shell-v13-build.txt`. Next gates:
+inspect routed setup/hold, route status, bus skew and DRC; create and load an
+AFI only from an accepted checkpoint; run the physical core smoke test; then
+execute both complete image requests, recording FPGA cycles, request latency,
+instruction retirement and comparison with the offline numerical oracle.
+
+The v13 build completed at 17:48 UTC on September 23. Independent validation
+passes setup, hold, routing and bus skew with zero DRC errors. The AFI is available and loaded; the full-model test is running. See [F2 v13 testing handoff](F2_V13_TESTING.md) for measured
+build results, remaining warnings, artifact location and execution commands.

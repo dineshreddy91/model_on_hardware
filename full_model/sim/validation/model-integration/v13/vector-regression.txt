@@ -1,0 +1,15 @@
+PASS FP32 add/multiply: 120156 bit-exact vectors
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_fp32.sv:20: $finish called at 0 (1ps)
+PASS scalar protocol: 1001 commands, backpressure, reset
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_scalar.sv:42: $finish called at 2405520000 (1ps)
+PASS vector protocol: 132 vectors, stalls, framing/domain faults, reset
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_vector.sv:68: $finish called at 7293410000 (1ps)
+PASS command scheduler: 19 success/fault scenarios, reset in flight
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_command_scheduler.sv:87: $finish called at 5800000 (1ps)
+PASS scheduled HBM vector pipeline: 134 commands, AXI stalls, write completion, padding guards, read/write/ID faults
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_hbm_pipeline.sv:151: $finish called at 8730650000 (1ps)
+PASS scalar numerical references: 1001 cases; max relative errors above 1e-37 [0.0, 0.0, 9.926260786495362e-08, 1.0073771234124617e-07, 1.1920927533992823e-07, 1.877204777010599e-07, 1.1220556418416344e-07, 6.661103904783517e-06]; underflow-floor cases 4
+PASS vector numerical references: 132 vectors, 2772 outputs
+Maximum absolute error by opcode: [2.9921531677246094e-05, 5.960644921287894e-05, 0.0006860507164674345, 3.9935579465577575e-07, 1.3915620589166622e-07, 9.783608068136829e-08, 2.8949950836576477e-07, 3.690520595789337e-07, 1.5606643910537343e-07, 5.847365574440655e-05, 4.20015415780739e-08]
+PASS vector numerical references: 134 vectors, 8925 outputs
+Maximum absolute error by opcode: [2.9921531677246094e-05, 5.960644921287894e-05, 0.0006860507164674345, 3.9935579465577575e-07, 1.3915620589166622e-07, 9.783608068136829e-08, 2.8949950836576477e-07, 3.690520595789337e-07, 1.5606643910537343e-07, 5.847365574440655e-05, 4.20015415780739e-08]

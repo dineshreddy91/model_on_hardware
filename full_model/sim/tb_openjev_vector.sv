@@ -23,10 +23,15 @@ module tb_openjev_vector;
       if(ce) $fatal(1,"rejected fixture");
       for(index=0;index<len;index=index+1) begin
         scanned=$fscanf(fd,"%h %h %h\n",a,b,c);
-        if(scanned!=3 || !ir) $fatal(1,"input");
+        if(scanned!=3) $fatal(1,"input");
         // Bubbles in the producer must not shift tensor indices.
         repeat(index%3) @(negedge clk);
-        iv=1; il=index==len-1; @(negedge clk); iv=0;
+        iv=1; il=index==len-1; cycles=0;
+        while(!ir) begin
+          @(negedge clk);cycles=cycles+1;
+          if(fault||cycles>100) $fatal(1,"input stalled");
+        end
+        @(negedge clk); iv=0;
       end
       for(index=0;index<len;index=index+1) begin
         cycles=0;

@@ -1,0 +1,50 @@
+{
+  "scope": "Synthetic seven-operation graph; not full-model inference",
+  "passed": true,
+  "runs": [
+    {
+      "execution": "synthetic_fpga_core_check",
+      "instructions_retired": 7,
+      "device_cycles": 187402,
+      "input_transfer_ms": 0.072962,
+      "start_to_committed_completion_ms": 1.090389,
+      "output_transfer_ms": 0.054401,
+      "device_request_wall_ms": 1.217752,
+      "outputs": {
+        "last_logits": [
+          2.281569242477417,
+          1.1346125602722168,
+          0.47125115990638733
+        ],
+        "probabilities": [
+          0.6751264333724976,
+          0.21442140638828278,
+          0.1104520931839943
+        ]
+      },
+      "cpu_model_fallback": false
+    },
+    {
+      "execution": "synthetic_fpga_core_check",
+      "instructions_retired": 7,
+      "device_cycles": 187663,
+      "input_transfer_ms": 0.01277,
+      "start_to_committed_completion_ms": 1.084589,
+      "output_transfer_ms": 0.036701,
+      "device_request_wall_ms": 1.13406,
+      "outputs": {
+        "last_logits": [
+          2.281569242477417,
+          1.1346125602722168,
+          0.47125115990638733
+        ],
+        "probabilities": [
+          0.6751264333724976,
+          0.21442140638828278,
+          0.1104520931839943
+        ]
+      },
+      "cpu_model_fallback": false
+    }
+  ]
+}
