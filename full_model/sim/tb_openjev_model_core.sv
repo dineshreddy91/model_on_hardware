@@ -1,5 +1,5 @@
 `timescale 1ns/1ps
-module tb_openjev_model_core;
+module tb_openjev_model_core #(parameter integer READ_LATENCY=0);
   reg clk=0,rst_n=0;
   always #5 clk=~clk;
   reg program_valid=0,metadata_valid=0,tensor_valid=0,start=0;
@@ -27,7 +27,8 @@ module tb_openjev_model_core;
   reg [511:0] programs[0:63];
   reg [255:0] metadata[0:63];
   reg [1023:0] tensors[0:63];
-  reg have_aw=0,have_w=0,freeze_bus=0;
+  reg have_aw=0,have_w=0,freeze_bus=0,read_pending=0;
+  integer read_delay=0,run_transactions=0;
   reg [63:0] saved_addr,saved_strobe;
   reg [511:0] saved_data;
   integer cycle=0,transactions=0,index,i,j,fd,outfd,n,address,deadline;
@@ -65,18 +66,24 @@ module tb_openjev_model_core;
   endfunction
   always @(posedge clk) begin
     if(!rst_n) begin
-      cycle<=0;arready<=0;awready<=0;wready<=0;rvalid<=0;bvalid<=0;have_aw<=0;have_w<=0;
+      cycle<=0;arready<=0;awready<=0;wready<=0;rvalid<=0;bvalid<=0;have_aw<=0;have_w<=0;read_pending<=0;read_delay<=0;
     end else begin
       cycle<=cycle+1;
-      arready<=!freeze_bus && !rvalid && cycle%3!=0;
+      arready<=!freeze_bus && !rvalid && !read_pending && cycle%3!=0;
       awready<=!freeze_bus && !have_aw && !bvalid && cycle%5==0;
       wready<=!freeze_bus && !have_w && !bvalid && cycle%3==0;
       if(arvalid&&arready) begin
         if(arlen!=0||arsize!=6||arburst!=1||arid!=0||araddr[5:0]!=0) $fatal(1,"AR shape");
         index=decode(araddr);
         for(i=0;i<64;i=i+1) rdata[i*8+:8]<=memory[index+i];
-        rvalid<=1;transactions<=transactions+1;
+        if(READ_LATENCY==0) rvalid<=1;
+        else begin read_pending<=1;read_delay<=READ_LATENCY;end
+        transactions<=transactions+1;
       end else if(rvalid&&rready) rvalid<=0;
+      if(read_pending) begin
+        if(read_delay==1) begin rvalid<=1;read_pending<=0;end
+        else read_delay<=read_delay-1;
+      end
       if(awvalid&&awready) begin
         if(awlen!=0||awsize!=6||awburst!=1||awid!=0||awaddr[5:0]!=0) $fatal(1,"AW shape");
         saved_addr<=awaddr;have_aw<=1;
@@ -115,13 +122,15 @@ module tb_openjev_model_core;
     end
     program_valid=0;metadata_valid=0;
     for(integer run=0;run<2;run=run+1) begin
+    run_transactions=transactions;
     repeat(3) @(negedge clk);start=1;@(negedge clk);start=0;deadline=0;
     while(!done) begin
       @(negedge clk);deadline=deadline+1;
       if(fault||deadline>5000000) $fatal(1,"core fault %0d pc=%0d state=%0d",fault_code,dut.sequencer.pc,dut.dispatch.state);
       if(tensor_ready||metadata_ready||program_ready) $fatal(1,"configuration unlocked during graph");
     end
-    if(instructions_retired!=program_length-1||rvalid||bvalid||have_aw||have_w) $fatal(1,"early graph completion");
+    if(instructions_retired!=program_length-1||rvalid||read_pending||bvalid||have_aw||have_w) $fatal(1,"early graph completion");
+    $display("CORE_PERF run=%0d read_latency=%0d cycles=%0d axi_transactions=%0d",run,READ_LATENCY,cycles,transactions-run_transactions);
     end
     path={directory,"/results.txt"};outfd=$fopen(path,"w");
     for(j=0;j<6;j=j+1) begin

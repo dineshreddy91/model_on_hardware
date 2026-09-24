@@ -1,0 +1,60 @@
+{
+  "scope": "Seven-operation synthetic graph; behavioral AXI memory; not full-model simulation",
+  "intermediate_and_final_bit_exact": true,
+  "runs": [
+    {
+      "read_latency": 0,
+      "run": 0,
+      "serial_cycles": 110070,
+      "parallel_cycles": 110560,
+      "serial_axi_transactions": 1128,
+      "parallel_axi_transactions": 943,
+      "cycle_speedup": 0.995568017366136
+    },
+    {
+      "read_latency": 0,
+      "run": 1,
+      "serial_cycles": 110076,
+      "parallel_cycles": 110561,
+      "serial_axi_transactions": 1128,
+      "parallel_axi_transactions": 943,
+      "cycle_speedup": 0.9956132813559935
+    },
+    {
+      "read_latency": 16,
+      "run": 0,
+      "serial_cycles": 123156,
+      "parallel_cycles": 120711,
+      "serial_axi_transactions": 1128,
+      "parallel_axi_transactions": 943,
+      "cycle_speedup": 1.0202549891890549
+    },
+    {
+      "read_latency": 16,
+      "run": 1,
+      "serial_cycles": 123161,
+      "parallel_cycles": 120705,
+      "serial_axi_transactions": 1128,
+      "parallel_axi_transactions": 943,
+      "cycle_speedup": 1.0203471272938156
+    },
+    {
+      "read_latency": 64,
+      "run": 0,
+      "serial_cycles": 162010,
+      "parallel_cycles": 150565,
+      "serial_axi_transactions": 1128,
+      "parallel_axi_transactions": 943,
+      "cycle_speedup": 1.0760136817985588
+    },
+    {
+      "read_latency": 64,
+      "run": 1,
+      "serial_cycles": 162011,
+      "parallel_cycles": 150566,
+      "serial_axi_transactions": 1128,
+      "parallel_axi_transactions": 943,
+      "cycle_speedup": 1.0760131769456585
+    }
+  ]
+}

@@ -70,3 +70,11 @@ cost or safety-accuracy claim is supported.
 
 Small single-query commands have additional scheduling/buffering overhead;
 the 1.537x aggregate explicitly covers multiquery attention, not every workload.
+
+## Fresh virtual validation
+
+See [virtual end-to-end results](VIRTUAL_E2E_V14.md) for the rerun and
+matched v13/v14 core comparison under three memory delays. The small AXI
+graph improves 1.076x at 64-cycle reads, with identical intermediate/final
+outputs; it is slightly slower at zero added delay. Full-model speed remains
+unestablished.
