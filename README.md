@@ -10,11 +10,20 @@ as v13 AFI `afi-00f49a1efd465abda` / `agfi-03b2976d4db937929` on AWS F2.
 Routed validation passes setup (+0.023 ns), hold (+0.001 ns), bus skew and
 routing checks, with zero DRC errors. Both synthetic hardware smoke runs pass.
 
-**The full-model test is still running; no completed model prediction or final
-latency is available yet.** The latest captured Box Runner progress is 1,076
-instructions retired after 2,340 seconds, at `text.18.mlp_gate.matrix`. Doom
-is queued. This scalar, serialized implementation is a functional prototype;
-it has not demonstrated competitive GPU latency or cost.
+**Box Runner completed full-model execution on v13:** 1,290 instructions
+retired, with a measured request latency of **2,699,046 ms (about 45 minutes)**.
+The top class matches the provisional CPU oracle, but maximum logit error is
+0.270663 and maximum probability error is 0.016018; correctness is not yet
+established. [Raw partial results](full_model/sim/validation/model-integration/v13/box-runner-partial-results.json).
+Doom is still running as of September 24, 04:17 UTC. This serialized prototype
+has not demonstrated competitive GPU latency or cost.
+
+**Parallel RTL v14 is implemented and its full shell build is running.** It adds
+four attention query lanes and a 64-byte HBM read buffer. Attention simulation
+is bit-identical to the serial implementation across 7,668 outputs and measures
+1.537x aggregate cycle speedup for multiquery cases with fixed memory latency.
+This is not full-model or physical FPGA speedup. Routed timing and F2 testing
+remain pending. See [v14 changes and validation](full_model/PARALLEL_V14.md).
 
 CPU work in the FPGA benchmark is limited to input preparation, transfers/control
 and output handling. The separate CPU oracle is a provisional correctness

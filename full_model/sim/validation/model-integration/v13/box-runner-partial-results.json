@@ -1,0 +1,83 @@
+{
+  "benchmark_complete": false,
+  "requests_expected": 2,
+  "hardware": "Type  FpgaImageSlot  FpgaImageId             StatusName    StatusCode   ErrorName    ErrorCode   ShVersion\nAFI          0       agfi-03b2976d4db937929  loaded            0        ok               0       0x10212415\nType  FpgaImageSlot  VendorId    DeviceId    DBDF\nAFIDEVICE    0       0x1d0f      0xf001      0000:34:00.0\n",
+  "model_revision": "f004f37e52695d6ddfb914a64dbf93942839ba1e",
+  "hbm_manifest_sha256": "2c07cec3adc9713797fc01ed7867ee54260e4e46ac5d646a116b677d183adc5c",
+  "weight_transfer": "pci_bar4_with_full_readback",
+  "setup_excluded_from_request_ms": 195461.978869,
+  "results": [
+    {
+      "execution": "full_model_fpga",
+      "instructions_retired": 1290,
+      "device_cycles": 674725510056,
+      "input_transfer_ms": 73.425251,
+      "start_to_committed_completion_ms": 2698903.330517,
+      "output_transfer_ms": 0.157354,
+      "device_request_wall_ms": 2698976.913122,
+      "outputs": {
+        "classifier.logits.scaled": [
+          0.29360952973365784,
+          3.43237042427063,
+          -3.455106258392334
+        ],
+        "classifier.probabilities": [
+          0.04149583727121353,
+          0.9575269818305969,
+          0.0009771422483026981
+        ]
+      },
+      "cpu_model_fallback": false,
+      "request": "box_runner",
+      "input": {
+        "image": "/home/ec2-user/model_on_hardware/full_model/benchmark/inputs/gameplay-trex.jpg",
+        "image_sha256": "15670001eef8f56b4abe1098072810488e8f680e729df3bbab273f6fc7a48109",
+        "hypothesis": "The runner should jump to avoid the obstacle.",
+        "text_tokens_unpadded": 65,
+        "image_grid": [
+          [
+            1,
+            14,
+            14
+          ]
+        ],
+        "resize": "224x224 bicubic",
+        "cpu_preprocessing_ms": 69.296642,
+        "transformers_version": "5.17.0",
+        "learned_cpu_computation": false,
+        "model_revision": "f004f37e52695d6ddfb914a64dbf93942839ba1e"
+      },
+      "end_to_end_request_ms": 2699046.411899,
+      "label_index": 1,
+      "label": "entailment",
+      "independent_comparison": {
+        "reference_kind": "offline_cpu_reference_only",
+        "metrics": {
+          "classifier.logits.scaled": {
+            "max_absolute_error": 0.2706628143787384,
+            "rmse": 0.2059540090006792,
+            "argmax_matches": true,
+            "reference": [
+              0.5642723441123962,
+              3.3598954677581787,
+              -3.6758780479431152
+            ]
+          },
+          "classifier.probabilities": {
+            "max_absolute_error": 0.016017630696296692,
+            "rmse": 0.013018071219088613,
+            "argmax_matches": true,
+            "reference": [
+              0.05751346796751022,
+              0.9416580200195312,
+              0.0008285060757771134
+            ]
+          }
+        },
+        "acceptance": "Measured differences; no model-wide numerical tolerance or safety accuracy established"
+      }
+    }
+  ],
+  "scope": "Single-image classification; no video throughput, GPU speedup or safety accuracy claim",
+  "correctness_status": "See per-request independent_comparison metrics; finite outputs alone do not establish model accuracy"
+}

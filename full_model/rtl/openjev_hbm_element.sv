@@ -1,11 +1,14 @@
 `timescale 1ns/1ps
 // Raw 1/2/4-byte access to striped tensors through the shell's AXI512 port.
 // A write response is produced only after B succeeds. Reset the AXI fabric
-// together with this unit after timeout/protocol faults.
+// together with this unit after timeout/protocol faults. A one-line read buffer
+// reuses all bytes in an AXI beat. Writes invalidate it conservatively. Assert
+// cache_invalidate whenever an external writer can modify this address space;
+// the integrated tensor port asserts it between graph executions.
 module openjev_hbm_element #(
   parameter integer WATCHDOG_CYCLES=1000000
 )(
-  input wire clk,rst_n,request_valid,
+  input wire clk,rst_n,request_valid,cache_invalidate,
   output wire request_ready,
   input wire request_write,
   input wire [31:0] base_address,bank_extent,logical_bytes,byte_offset,
@@ -45,8 +48,11 @@ module openjev_hbm_element #(
   input wire bvalid,
   output wire bready
 );
-  localparam IDLE=0,READ_ADDRESS=1,READ_DATA=2,WRITE_SEND=3,WRITE_RESPONSE=4,RESULT=5,FAILED=6;
+  localparam IDLE=0,READ_ADDRESS=1,READ_DATA=2,WRITE_SEND=3,WRITE_RESPONSE=4,RESULT=5,FAILED=6,READ_CHECK=7;
   reg [2:0] state;
+  reg cache_valid;
+  reg [63:0] cache_address;
+  reg [511:0] cache_data;
   reg [63:0] address_q;
   reg [5:0] lane;
   reg [2:0] size_q;
@@ -84,6 +90,7 @@ module openjev_hbm_element #(
   endtask
   always @(posedge clk) begin
     if(!rst_n) begin
+      cache_valid<=0;cache_address<=0;cache_data<=0;
       state<=IDLE;address_q<=0;lane<=0;size_q<=0;payload<=0;cycles<=0;
       aw_pending<=0;w_pending<=0;response_data<=0;response_error<=0;fault_code<=0;
     end else begin
@@ -97,14 +104,25 @@ module openjev_hbm_element #(
             address_q<=64'h1000000000+({59'b0,byte_offset[12:8]}<<29)+
                        {31'b0,local_address[32:6],6'b0};
             lane<=local_address[5:0];size_q<=element_bytes;payload<=write_data;
-            if(request_write) begin aw_pending<=1;w_pending<=1;state<=WRITE_SEND;end
-            else state<=READ_ADDRESS;
+            if(request_write) begin cache_valid<=0;aw_pending<=1;w_pending<=1;state<=WRITE_SEND;end
+            else state<=READ_CHECK;
           end
+        end
+        READ_CHECK: begin
+          if(cache_valid && !cache_invalidate && cache_address==address_q) begin
+            case(size_q)
+              1: response_data<={24'b0,cache_data[lane*8+:8]};
+              2: response_data<={16'b0,cache_data[lane*8+:16]};
+              default: response_data<=cache_data[lane*8+:32];
+            endcase
+            state<=RESULT;
+          end else state<=READ_ADDRESS;
         end
         READ_ADDRESS: if(arready) state<=READ_DATA;
         READ_DATA: if(rvalid) begin
           if(rresp!=0 || rid!=0 || !rlast) fail(1);
           else begin
+            cache_valid<=1;cache_address<=address_q;cache_data<=rdata;
             case(size_q)
               1: response_data<={24'b0,rdata[lane*8+:8]};
               2: response_data<={16'b0,rdata[lane*8+:16]};
@@ -126,6 +144,7 @@ module openjev_hbm_element #(
         FAILED: state<=FAILED;
         default: fail(3);
       endcase
+      if(cache_invalidate) cache_valid<=0;
     end
   end
 endmodule

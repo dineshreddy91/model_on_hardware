@@ -3,7 +3,7 @@
 module openjev_tensor_memory #(
   parameter integer WATCHDOG_CYCLES=1000000
 )(
-  input wire clk,rst_n,request_valid,
+  input wire clk,rst_n,request_valid,cache_invalidate,
   output wire request_ready,
   input wire request_write,
   input wire [1023:0] descriptor,root_descriptor,
@@ -59,7 +59,7 @@ module openjev_tensor_memory #(
     .response_error(map_error),.base_address(base_address),.bank_extent(bank_extent),
     .logical_bytes(logical_bytes),.byte_offset(byte_offset),.element_bytes(element_bytes));
   openjev_hbm_element #(.WATCHDOG_CYCLES(WATCHDOG_CYCLES)) memory(
-    .clk(clk),.rst_n(rst_n),.request_valid(state==MAP&&map_valid&&!map_error),
+    .clk(clk),.rst_n(rst_n),.cache_invalidate(cache_invalidate),.request_valid(state==MAP&&map_valid&&!map_error),
     .request_ready(element_ready),.request_write(write_q),
     .base_address(base_address),.bank_extent(bank_extent),.logical_bytes(logical_bytes),
     .byte_offset(byte_offset),.element_bytes(element_bytes),.write_data(payload),

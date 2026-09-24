@@ -1,8 +1,170 @@
 `timescale 1ns/1ps
-// One attention head per command. External read interface supplies FP32 Q/K/V
+// Parallel query tiles for one attention head; per-query FP32 order is retained.
+// External read interface supplies FP32 Q/K/V
 // by logical element index; tensor 3 supplies integer 0/1 key-valid masks.
 // A memory adapter (not host arithmetic) maps these indices to HBM tensor views.
 module openjev_attention #(
+  parameter integer PARALLEL_QUERIES=4,
+  parameter integer MAX_KEYS=4096,
+  parameter integer MAX_DIM=256,
+  parameter logic [63:0] WATCHDOG_CYCLES=64'd20000000000
+)(
+  input logic clk,rst_n,command_valid,
+  output logic command_ready,command_error,
+  input logic [31:0] query_count,key_count,head_dim,query_offset,
+  input logic causal,use_key_mask,
+  output logic read_valid,
+  input logic read_ready,
+  output logic [1:0] read_tensor,
+  output logic [31:0] read_index,
+  input logic response_valid,
+  output logic response_ready,
+  input logic [31:0] response_data,
+  input logic response_error,
+  output logic output_valid,
+  input logic output_ready,
+  output logic [31:0] output_index,output_data,
+  output logic output_last,
+  output logic done,fault,
+  output logic [3:0] fault_code
+);
+  localparam IDLE=0,LAUNCH=1,RUN=2,FAILED=3,DRAIN_READ=4,DRAIN_LATCH=5,EMIT=6;
+  logic [2:0] state;
+  logic [31:0] nq,nk,dim,qoff,batch_query,batch_address,emit_lane,emit_dim;
+  wire [31:0] buffered_output[PARALLEL_QUERIES];
+  logic causal_q,masked_q;
+  logic [63:0] cycles;
+  logic [PARALLEL_QUERIES-1:0] active,launched,finished,pending;
+  wire [PARALLEL_QUERIES-1:0] cr,ce,rv,rr,pv,pr,ov,orr,ol,ld,lf;
+  wire [1:0] rt[PARALLEL_QUERIES];
+  wire [31:0] ri[PARALLEL_QUERIES],oi[PARALLEL_QUERIES],od[PARALLEL_QUERIES];
+  wire [3:0] fc[PARALLEL_QUERIES];
+  wire [31:0] global_read[PARALLEL_QUERIES];
+  logic [31:0] query_address[PARALLEL_QUERIES];
+  logic waiting;
+  integer selected,j;
+  logic found;
+  wire running=state==RUN;
+  wire lane_reset=rst_n && state!=IDLE && state!=FAILED;
+  assign command_ready=rst_n && state==IDLE;
+  assign fault=state==FAILED;
+  assign response_ready=rst_n && running && waiting && (&(pr|~pending));
+  assign output_valid=rst_n && state==EMIT;
+  assign output_data=buffered_output[emit_lane];
+  assign output_index=query_address[emit_lane]+emit_dim;
+  assign output_last=emit_dim==dim-1 && batch_query+emit_lane==nq-1;
+
+  // Lock the first pending lane until the external request handshakes. Every
+  // lane requesting the same tensor element shares the one memory response.
+  // In particular, concurrent queries reuse their K/V fetches without changing
+  // each dot product's FP32 reduction order.
+  logic request_locked;
+  integer locked_lane;
+  always_comb begin
+    selected=0;found=0;
+    for(integer i=0;i<PARALLEL_QUERIES;i=i+1)
+      if(!found && rv[i] && active[i]) begin selected=i;found=1;end
+    if(request_locked) begin selected=locked_lane;found=1;end
+    read_valid=rst_n && running && !waiting && found;
+    read_tensor=rt[selected];read_index=global_read[selected];
+  end
+  for(genvar l=0;l<PARALLEL_QUERIES;l=l+1) begin: lanes
+    localparam integer LANE=l;
+    localparam integer OUTPUT_ADDR_WIDTH=MAX_DIM>1?$clog2(MAX_DIM):1;
+    (* ram_style="block" *) logic [31:0] output_buffer[0:MAX_DIM-1];
+    logic [31:0] output_raw,output_word;
+    always_ff @(posedge clk) begin
+      if(ov[LANE] && orr[LANE]) output_buffer[oi[LANE][OUTPUT_ADDR_WIDTH-1:0]]<=od[LANE];
+      output_raw<=output_buffer[emit_dim[OUTPUT_ADDR_WIDTH-1:0]];
+      output_word<=output_raw;
+    end
+    assign buffered_output[LANE]=output_word;
+    assign global_read[LANE]=rt[LANE]==0 ? query_address[LANE]+ri[LANE] : ri[LANE];
+    assign rr[LANE]=read_valid && read_ready && rv[LANE] && active[LANE] &&
+                 rt[LANE]==read_tensor && global_read[LANE]==read_index;
+    assign pv[LANE]=response_valid && waiting && pending[LANE] && running;
+    assign orr[LANE]=rst_n && running;
+    openjev_attention_lane #(.MAX_KEYS(MAX_KEYS),.MAX_DIM(MAX_DIM),.WATCHDOG_CYCLES(WATCHDOG_CYCLES)) unit(
+      .clk(clk),.rst_n(lane_reset),.command_valid(state==LAUNCH && active[LANE] && !launched[LANE]),
+      .command_ready(cr[LANE]),.command_error(ce[LANE]),.query_count(32'd1),.key_count(nk),
+      .head_dim(dim),.query_offset(qoff+batch_query+LANE),.causal(causal_q),.use_key_mask(masked_q),
+      .read_valid(rv[LANE]),.read_ready(rr[LANE]),.read_tensor(rt[LANE]),.read_index(ri[LANE]),
+      .response_valid(pv[LANE]),.response_ready(pr[LANE]),.response_data(response_data),.response_error(response_error),
+      .output_valid(ov[LANE]),.output_ready(orr[LANE]),.output_index(oi[LANE]),.output_data(od[LANE]),
+      .output_last(ol[LANE]),.done(ld[LANE]),.fault(lf[LANE]),.fault_code(fc[LANE]));
+  end
+  always_ff @(posedge clk) begin
+    if(!rst_n) begin
+      state<=IDLE;command_error<=0;done<=0;fault_code<=0;cycles<=0;
+      nq<=0;nk<=0;dim<=0;qoff<=0;batch_query<=0;batch_address<=0;emit_lane<=0;emit_dim<=0;
+      causal_q<=0;masked_q<=0;active<=0;launched<=0;finished<=0;pending<=0;
+      waiting<=0;request_locked<=0;locked_lane<=0;
+      for(j=0;j<PARALLEL_QUERIES;j=j+1) query_address[j]<=0;
+    end else begin
+      command_error<=0;done<=0;
+      case(state)
+        IDLE: if(command_valid) begin
+          if(query_count==0 || query_count>MAX_KEYS || key_count==0 || key_count>MAX_KEYS ||
+             head_dim==0 || head_dim>MAX_DIM || WATCHDOG_CYCLES==0 ||
+             (causal && ({1'b0,query_offset}+{1'b0,query_count}>{1'b0,key_count}))) command_error<=1;
+          else begin
+            nq<=query_count;nk<=key_count;dim<=head_dim;qoff<=query_offset;
+            causal_q<=causal;masked_q<=use_key_mask;batch_query<=0;batch_address<=0;
+            emit_lane<=0;emit_dim<=0;launched<=0;finished<=0;waiting<=0;request_locked<=0;pending<=0;cycles<=0;
+            for(j=0;j<PARALLEL_QUERIES;j=j+1) begin
+              active[j]<=j<query_count;query_address[j]<=j*head_dim;
+            end
+            state<=LAUNCH;
+          end
+        end
+        LAUNCH: begin
+          launched<=launched|(cr&active);
+          if(&((launched|cr)|~active)) state<=RUN;
+        end
+        RUN: begin
+          finished<=finished|(ld&active);
+          if(read_valid && !read_ready) begin request_locked<=1;locked_lane<=selected;end
+          if(read_valid && read_ready) begin pending<=rr;waiting<=1;request_locked<=0;end
+          if(response_valid && response_ready) begin pending<=0;waiting<=0;end
+          if(&(finished|~active)) state<=DRAIN_READ;
+        end
+        DRAIN_READ: state<=DRAIN_LATCH;
+        DRAIN_LATCH: state<=EMIT;
+        EMIT: if(output_ready) begin
+          if(emit_dim!=dim-1) begin emit_dim<=emit_dim+1;state<=DRAIN_READ;end
+          else if(emit_lane+1<PARALLEL_QUERIES && batch_query+emit_lane+1<nq) begin
+            emit_lane<=emit_lane+1;emit_dim<=0;state<=DRAIN_READ;
+          end else if(batch_query+PARALLEL_QUERIES>=nq) begin done<=1;state<=IDLE;end
+          else begin
+            batch_query<=batch_query+PARALLEL_QUERIES;
+            batch_address<=batch_address+PARALLEL_QUERIES*dim;
+            emit_lane<=0;emit_dim<=0;launched<=0;finished<=0;
+            for(j=0;j<PARALLEL_QUERIES;j=j+1) begin
+              active[j]<=batch_query+PARALLEL_QUERIES+j<nq;
+              query_address[j]<=batch_address+(PARALLEL_QUERIES+j)*dim;
+            end
+            state<=LAUNCH;
+          end
+        end
+        FAILED: state<=FAILED;
+        default: begin state<=FAILED;fault_code<=6;end
+      endcase
+      if(state!=IDLE && state!=FAILED) begin
+        cycles<=cycles+1;
+        for(j=0;j<PARALLEL_QUERIES;j=j+1) begin
+          if(active[j] && (lf[j]||ce[j])) begin state<=FAILED;fault_code<=lf[j]?fc[j]:6;done<=0;end
+        end
+        if(cycles>=WATCHDOG_CYCLES-1) begin state<=FAILED;fault_code<=5;done<=0;end
+      end
+    end
+  end
+endmodule
+
+`timescale 1ns/1ps
+// One attention head per command. External read interface supplies FP32 Q/K/V
+// by logical element index; tensor 3 supplies integer 0/1 key-valid masks.
+// A memory adapter (not host arithmetic) maps these indices to HBM tensor views.
+module openjev_attention_lane #(
   parameter integer MAX_KEYS=4096,
   parameter integer MAX_DIM=256,
   parameter logic [63:0] WATCHDOG_CYCLES=64'd20000000000

@@ -1,0 +1,43 @@
+PERF case=0 lanes=4 queries=1 keys=1 dim=1 cycles=1022 reads=3
+PERF case=1 lanes=4 queries=1 keys=1 dim=1 cycles=1022 reads=3
+PERF case=2 lanes=4 queries=1 keys=1 dim=1 cycles=1022 reads=3
+PERF case=3 lanes=4 queries=3 keys=5 dim=3 cycles=2502 reads=78
+PERF case=4 lanes=4 queries=3 keys=5 dim=3 cycles=2504 reads=78
+PERF case=5 lanes=4 queries=3 keys=5 dim=3 cycles=2504 reads=78
+PERF case=6 lanes=4 queries=4 keys=4 dim=8 cycles=4808 reads=184
+PERF case=7 lanes=4 queries=4 keys=4 dim=8 cycles=4807 reads=184
+PERF case=8 lanes=4 queries=4 keys=4 dim=8 cycles=4806 reads=184
+PERF case=9 lanes=4 queries=2 keys=6 dim=5 cycles=3777 reads=92
+PERF case=10 lanes=4 queries=2 keys=6 dim=5 cycles=3776 reads=92
+PERF case=11 lanes=4 queries=2 keys=6 dim=5 cycles=3775 reads=92
+PERF case=12 lanes=4 queries=2 keys=3 dim=64 cycles=18181 reads=896
+PERF case=13 lanes=4 queries=2 keys=3 dim=64 cycles=18179 reads=896
+PERF case=14 lanes=4 queries=2 keys=3 dim=64 cycles=18176 reads=896
+PERF case=15 lanes=4 queries=2 keys=3 dim=256 cycles=48319 reads=2054
+PERF case=16 lanes=4 queries=2 keys=3 dim=256 cycles=48319 reads=2054
+PERF case=17 lanes=4 queries=2 keys=3 dim=256 cycles=48320 reads=2054
+PERF case=18 lanes=4 queries=5 keys=7 dim=8 cycles=11741 reads=398
+PERF case=19 lanes=4 queries=5 keys=7 dim=8 cycles=11741 reads=398
+PERF case=20 lanes=4 queries=5 keys=7 dim=8 cycles=11742 reads=398
+PERF case=21 lanes=4 queries=9 keys=12 dim=32 cycles=60352 reads=2752
+PERF case=22 lanes=4 queries=9 keys=12 dim=32 cycles=60353 reads=2752
+PERF case=23 lanes=4 queries=9 keys=12 dim=32 cycles=59322 reads=2912
+PERF case=24 lanes=4 queries=8 keys=16 dim=64 cycles=181872 reads=12800
+PERF case=25 lanes=4 queries=8 keys=16 dim=64 cycles=181871 reads=12800
+PERF case=26 lanes=4 queries=8 keys=16 dim=64 cycles=180287 reads=12801
+PERF case=27 lanes=4 queries=16 keys=16 dim=64 cycles=239069 reads=16551
+PERF case=28 lanes=4 queries=16 keys=16 dim=64 cycles=239069 reads=16551
+PERF case=29 lanes=4 queries=16 keys=16 dim=64 cycles=235684 reads=16549
+PASS attention protocol: 30 commands, masks, causal offsets, stalls, bus/numeric/domain faults, reset
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_attention.sv:88: $finish called at 17105190000 (1ps)
+PASS attention numerical reference: 30 commands, 7668 values, max absolute error 6.61029001e-07
+PASS gated-delta protocol: 7 commands, state import/reuse/export, stalls, bus/numeric/domain faults, reset
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_gated_delta.sv:90: $finish called at 46016140000 (1ps)
+PASS delta numerical reference: 7 commands, 17253 values, max absolute error 8.55575323e-08
+PASS graph sequencer: 14 scenarios plus reset
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_graph_sequencer.sv:93: $finish called at 4140 (1s)
+PASS graph chain: real attention -> stored tensor -> real gated delta, 12 committed values
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_graph_chain.sv:114: $finish called at 57140000 (1ps)
+PASS graph chain numerical comparison: 12 values; max abs error 4.25399809e-08
+PASS attention and gated-delta bounded watchdog, sticky fault, reset
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_operator_watchdog.sv:29: $finish called at 240000 (1ps)

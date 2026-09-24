@@ -67,7 +67,7 @@ module openjev_tensor_port #(
   assign request_ready=rst_n && run_enable && state==IDLE && !fault;
   assign response_valid=rst_n && state==RESULT;
   openjev_tensor_memory #(.WATCHDOG_CYCLES(WATCHDOG_CYCLES)) memory(
-    .clk(clk),.rst_n(rst_n),.request_valid(state==ISSUE),.request_ready(memory_ready),
+    .clk(clk),.rst_n(rst_n),.cache_invalidate(!run_enable),.request_valid(state==ISSUE),.request_ready(memory_ready),
     .request_write(write_q),.descriptor(descriptor),.root_descriptor(root_descriptor),
     .element_index(index_q),.write_data(payload),.response_valid(memory_valid),
     .response_ready(state==WAIT_MEMORY),.response_data(memory_data),.response_error(memory_error),

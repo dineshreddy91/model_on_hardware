@@ -1,5 +1,6 @@
 `timescale 1ns/1ps
 module tb_openjev_hbm_element;
+  reg cache_invalidate=0;
   reg clk=0,rst_n=0,request_valid=0,request_write=0,response_ready=0;
   always #5 clk=~clk;
   wire request_ready,response_valid,response_error,fault;
@@ -98,6 +99,13 @@ module tb_openjev_hbm_element;
   initial begin
     for(j=0;j<131072;j=j+1) memory[j]=8'ha5;
     reset;
+    previous_transactions=transactions;
+    for(i=0;i<16;i=i+1) access(0,i*4,4,32'ha5a5a5a5,0);
+    if(transactions-previous_transactions!=1) $fatal(1,"adjacent reads did not reuse line");
+    // Host writes between graphs require explicit invalidation.
+    memory[0]=8'h55;cache_invalidate=1;@(negedge clk);cache_invalidate=0;
+    access(0,0,4,32'ha5a5a555,0);
+    access(1,0,4,32'ha5a5a5a5,0);access(0,0,4,32'ha5a5a5a5,0);
     for(b=0;b<32;b=b+1) begin
       for(size=1;size<=4;size=size*2) begin
         expected=(32'h12345678+b)&(32'hffffffff>>(32-8*size));

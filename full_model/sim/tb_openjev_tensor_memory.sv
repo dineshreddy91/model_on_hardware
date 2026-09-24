@@ -1,5 +1,6 @@
 `timescale 1ns/1ps
 module tb_openjev_tensor_memory;
+  reg cache_invalidate=0;
   reg clk=0,rst_n=0,request_valid=0,request_write=0,response_ready=0;
   always #5 clk=~clk;
   wire request_ready,response_valid,response_error,fault;

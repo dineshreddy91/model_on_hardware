@@ -20,7 +20,9 @@ class AttentionDeltaFixtures:
         cases = []
         geometries = [(1, 1, 1, 0, 0, 0), (3, 5, 3, 0, 0, 1),
                       (4, 4, 8, 0, 1, 0), (2, 6, 5, 4, 1, 1),
-                      (2, 3, 64, 0, 0, 0), (2, 3, 256, 1, 1, 1)]
+                      (2, 3, 64, 0, 0, 0), (2, 3, 256, 1, 1, 1),
+                      (5, 7, 8, 0, 0, 1), (9, 12, 32, 2, 1, 1),
+                      (8, 16, 64, 0, 0, 0), (16, 16, 64, 0, 1, 0)]
         with (self.directory / "attention.txt").open("w") as stream:
             for nq, nk, dim, offset, causal, masked in geometries:
                 for variant in range(3):
