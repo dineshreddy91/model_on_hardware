@@ -368,6 +368,15 @@ cl_axi3_256b_reg_slice AXI3_REG_SLC_HBM
     .m_axi_rready           (axi3_256b_bus_q.rready     )
     );
 
+  wire openjev_wvalid,openjev_wready;
+  wire [288:0] openjev_wpayload;
+  openjev_ready_fifo #(.WIDTH(289)) OPENJEV_HBM_WRITE_FIFO (
+    .clk(axi_clk),.rst_n(axi_rst_n),
+    .s_valid(axi3_256b_bus_q.wvalid),.s_ready(openjev_wready),
+    .s_data({axi3_256b_bus_q.wlast,axi3_256b_bus_q.wstrb,axi3_256b_bus_q.wdata}),
+    .m_valid(openjev_wvalid),.m_ready(hbm_wready[0]),.m_data(openjev_wpayload)
+  );
+
   // convert from interface to ports
   always_comb begin
     hbm_araddr[0]            = axi3_256b_bus_q.araddr;
@@ -384,10 +393,10 @@ cl_axi3_256b_reg_slice AXI3_REG_SLC_HBM
     hbm_awvalid [0]          = axi3_256b_bus_q.awvalid;
     hbm_rready[0]            = axi3_256b_bus_q.rready;
     hbm_bready[0]            = axi3_256b_bus_q.bready;
-    hbm_wdata[0]             = axi3_256b_bus_q.wdata;
-    hbm_wlast[0]             = axi3_256b_bus_q.wlast;
-    hbm_wstrb[0]             = axi3_256b_bus_q.wstrb;
-    hbm_wvalid[0]            = axi3_256b_bus_q.wvalid;
+    hbm_wdata[0]             = openjev_wpayload[255:0];
+    hbm_wlast[0]             = openjev_wpayload[288];
+    hbm_wstrb[0]             = openjev_wpayload[287:256];
+    hbm_wvalid[0]            = openjev_wvalid;
     axi3_256b_bus_q.arready  = hbm_arready[0];
     axi3_256b_bus_q.awready  = hbm_awready[0];
     axi3_256b_bus_q.rdata    = hbm_rdata[0];
@@ -395,7 +404,7 @@ cl_axi3_256b_reg_slice AXI3_REG_SLC_HBM
     axi3_256b_bus_q.rlast    = hbm_rlast[0];
     axi3_256b_bus_q.rresp    = hbm_rresp[0];
     axi3_256b_bus_q.rvalid   = hbm_rvalid[0];
-    axi3_256b_bus_q.wready   = hbm_wready[0];
+    axi3_256b_bus_q.wready   = openjev_wready;
     axi3_256b_bus_q.bid      = hbm_bid[0];
     axi3_256b_bus_q.bresp    = hbm_bresp[0];
     axi3_256b_bus_q.bvalid   = hbm_bvalid[0];

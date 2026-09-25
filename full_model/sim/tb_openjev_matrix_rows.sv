@@ -1,5 +1,6 @@
 `timescale 1ns/1ps
-module tb_openjev_matrix_rows;
+module tb_openjev_matrix_rows #(parameter integer LANES=2);
+  reg [65535:0] seen;
   reg clk=0,rst_n=0,command_valid=0;
   always #5 clk=~clk;
   wire command_ready,memory_valid,memory_write,memory_response_ready,done,fault;
@@ -17,7 +18,11 @@ module tb_openjev_matrix_rows;
   reg [31:0] tid,index,data;
   integer cycle=0,delay_count=0,wdelay=0,weight_offset=0,writes=0,requests=0;
   integer lane,j,expected,row,batch,deadline,case_id,total=0;
-  openjev_matrix_rows dut(.*);
+  generate if(LANES==0) begin: serial
+    openjev_matrix_rows_lane dut(.*);
+  end else begin: parallel
+    openjev_matrix_rows #(.PARALLEL_BATCHES(LANES)) dut(.*);
+  end endgenerate
   function integer activation(input integer index); activation=(index*3+4)%255-127;endfunction
   function integer weight(input integer index); weight=(index*13+7)%255-127;endfunction
   always @(posedge clk) begin
@@ -35,11 +40,11 @@ module tb_openjev_matrix_rows;
         if(delay_count>0) delay_count<=delay_count-1;
         else begin
           if(wr) begin
-            if(tid!=1||index!=writes) $fatal(1,"matrix output address");
+            if(tid!=1||index>=batch_count*rows||seen[index]) $fatal(1,"matrix output address");
             row=index%rows;batch=index/rows;expected=0;
             for(j=0;j<columns;j=j+1) expected=expected+activation(batch*columns+j)*weight(row*columns+j);
             if(data!==32'(expected)) $fatal(1,"matrix mismatch index %0d got %h expected %h",index,data,expected);
-            writes<=writes+1;total<=total+1;
+            seen[index]<=1;writes<=writes+1;total<=total+1;
           end else begin
             if(tid!=0||index>=batch_count*columns) $fatal(1,"activation bounds");
             memory_response_data<=activation(index)&255;
@@ -66,16 +71,32 @@ module tb_openjev_matrix_rows;
   end
   task run_case(input integer batches,m,n);
     begin
-      batch_count=batches;rows=m;columns=n;writes=0;requests=0;
+      batch_count=batches;rows=m;columns=n;writes=0;requests=0;seen=0;
       command_valid=1;@(negedge clk);command_valid=0;deadline=0;
       while(!done) begin @(negedge clk);deadline=deadline+1;if(fault||deadline>3000000) $fatal(1,"matrix failed");end
-      if(writes!=batches*m||requests!=batches*m*n/32||pending||memory_response_valid||wpending||weight_response_valid)
+      if(writes!=batches*m||requests!=((LANES==0?batches:(batches+LANES-1)/LANES)*m*n/32)||pending||memory_response_valid||wpending||weight_response_valid)
         $fatal(1,"matrix early completion or missing weights");
+      $display("MATRIX_PERF lanes=%0d batches=%0d rows=%0d columns=%0d cycles=%0d weight_reads=%0d",LANES,batches,m,n,deadline,requests);
+    end
+  endtask
+  task run_fault(input integer on_weights);
+    begin
+      rst_n=0;command_valid=0;memory_response_error=0;weight_response_status=0;
+      repeat(3)@(negedge clk);rst_n=1;@(negedge clk);
+      batch_count=2;rows=3;columns=32;writes=0;requests=0;seen=0;
+      if(on_weights)weight_response_status=2;else memory_response_error=1;
+      command_valid=1;@(negedge clk);command_valid=0;deadline=0;
+      while(!fault)begin @(negedge clk);deadline=deadline+1;if(done||deadline>10000)$fatal(1,"matrix fault not propagated");end
+      repeat(5)begin @(negedge clk);if(!fault||done||memory_valid||weight_request_valid)$fatal(1,"matrix fault not contained");end
+      rst_n=0;memory_response_error=0;weight_response_status=0;
+      repeat(3)@(negedge clk);rst_n=1;@(negedge clk);
+      if(!command_ready||fault)$fatal(1,"matrix failed reset recovery");
     end
   endtask
   initial begin
     repeat(3) @(negedge clk);rst_n=1;@(negedge clk);
-    run_case(3,20,64);run_case(2,3,1024);run_case(1,6144,32);
+    run_case(3,20,64);run_case(2,3,1024);run_case(1,6144,32);run_case(4,128,256);run_case(5,7,4096);run_case(4,1024,1024);
+    run_fault(0);run_fault(1);run_case(2,2,32);
     columns=33;command_valid=1;@(negedge clk);command_valid=0;
     if(!fault||memory_valid||weight_request_valid) $fatal(1,"invalid columns accepted");
     $display("PASS batched HBM matrix: %0d exact INT32 outputs, striped weights, stalls, committed writes, invalid shape",total);$finish;

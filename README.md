@@ -39,6 +39,14 @@ Model source: [AlexWortega/openjev](https://huggingface.co/AlexWortega/openjev),
 checkpoint directory `qwen3.5-0.8b-nli-v2s-long`. AWS HDK-derived files retain
 their original copyright headers and are accompanied by `AWS_HDK_LICENSE.txt`.
 
+## Parallel v15 build
+
+A new revision adds two matrix lanes sharing each weight fetch and an HBM
+write-channel buffer targeting the v14 timing violation. A 4 × 1024 × 1024
+matrix fixture shows 1.891x cycle speedup with exact INT32 outputs and half the
+weight reads. Full-model hardware speed and routed timing remain unverified.
+The full-shell build is running; see [v15 details](full_model/PARALLEL_V15.md).
+
 ## Complete-model virtual testing
 
 Both complete 0.8B model RTL simulations have started with real Box Runner and

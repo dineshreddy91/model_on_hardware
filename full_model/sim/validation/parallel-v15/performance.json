@@ -1,0 +1,82 @@
+{
+  "scope": "Matrix RTL fixtures only; deterministic behavioral memory delays/stalls; not full-model or physical speedup",
+  "cases": [
+    {
+      "lanes": 2,
+      "batches": 3,
+      "rows": 20,
+      "columns": 64,
+      "cycles": 2815,
+      "weight_reads": 80,
+      "serial_cycles": 3124,
+      "serial_weight_reads": 120,
+      "cycle_speedup": 1.1097690941385434
+    },
+    {
+      "lanes": 2,
+      "batches": 2,
+      "rows": 3,
+      "columns": 1024,
+      "cycles": 19438,
+      "weight_reads": 96,
+      "serial_cycles": 20474,
+      "serial_weight_reads": 192,
+      "cycle_speedup": 1.0532976643687622
+    },
+    {
+      "lanes": 2,
+      "batches": 1,
+      "rows": 6144,
+      "columns": 32,
+      "cycles": 83250,
+      "weight_reads": 6144,
+      "serial_cycles": 83247,
+      "serial_weight_reads": 6144,
+      "cycle_speedup": 0.9999639639639639
+    },
+    {
+      "lanes": 2,
+      "batches": 4,
+      "rows": 128,
+      "columns": 256,
+      "cycles": 32293,
+      "weight_reads": 2048,
+      "serial_cycles": 50281,
+      "serial_weight_reads": 4096,
+      "cycle_speedup": 1.557024742204193
+    },
+    {
+      "lanes": 2,
+      "batches": 5,
+      "rows": 7,
+      "columns": 4096,
+      "cycles": 211590,
+      "weight_reads": 2688,
+      "serial_cycles": 230153,
+      "serial_weight_reads": 4480,
+      "cycle_speedup": 1.0877309891771823
+    },
+    {
+      "lanes": 2,
+      "batches": 4,
+      "rows": 1024,
+      "columns": 1024,
+      "cycles": 712738,
+      "weight_reads": 65536,
+      "serial_cycles": 1347834,
+      "serial_weight_reads": 131072,
+      "cycle_speedup": 1.8910651599886634
+    },
+    {
+      "lanes": 2,
+      "batches": 2,
+      "rows": 2,
+      "columns": 32,
+      "cycles": 633,
+      "weight_reads": 2,
+      "serial_cycles": 656,
+      "serial_weight_reads": 4,
+      "cycle_speedup": 1.0363349131121642
+    }
+  ]
+}

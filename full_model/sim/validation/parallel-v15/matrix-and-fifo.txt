@@ -1,0 +1,20 @@
+MATRIX_PERF lanes=0 batches=3 rows=20 columns=64 cycles=3124 weight_reads=120
+MATRIX_PERF lanes=0 batches=2 rows=3 columns=1024 cycles=20474 weight_reads=192
+MATRIX_PERF lanes=0 batches=1 rows=6144 columns=32 cycles=83247 weight_reads=6144
+MATRIX_PERF lanes=0 batches=4 rows=128 columns=256 cycles=50281 weight_reads=4096
+MATRIX_PERF lanes=0 batches=5 rows=7 columns=4096 cycles=230153 weight_reads=4480
+MATRIX_PERF lanes=0 batches=4 rows=1024 columns=1024 cycles=1347834 weight_reads=131072
+MATRIX_PERF lanes=0 batches=2 rows=2 columns=32 cycles=656 weight_reads=4
+PASS batched HBM matrix: 10857 exact INT32 outputs, striped weights, stalls, committed writes, invalid shape
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_matrix_rows.sv:102: $finish called at 17361200000 (1ps)
+MATRIX_PERF lanes=2 batches=3 rows=20 columns=64 cycles=2815 weight_reads=80
+MATRIX_PERF lanes=2 batches=2 rows=3 columns=1024 cycles=19438 weight_reads=96
+MATRIX_PERF lanes=2 batches=1 rows=6144 columns=32 cycles=83250 weight_reads=6144
+MATRIX_PERF lanes=2 batches=4 rows=128 columns=256 cycles=32293 weight_reads=2048
+MATRIX_PERF lanes=2 batches=5 rows=7 columns=4096 cycles=211590 weight_reads=2688
+MATRIX_PERF lanes=2 batches=4 rows=1024 columns=1024 cycles=712738 weight_reads=65536
+MATRIX_PERF lanes=2 batches=2 rows=2 columns=32 cycles=633 weight_reads=2
+PASS batched HBM matrix: 10857 exact INT32 outputs, striped weights, stalls, committed writes, invalid shape
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_matrix_rows.sv:102: $finish called at 10633990000 (1ps)
+PASS HBM write FIFO: ordering, payload/strobes/last, backpressure, full, simultaneous push/pop, reset
+/Users/dineshreddy/vlmrun/vlm-lab/model_on_hardware/full_model/sim/tb_openjev_ready_fifo.sv:43: $finish called at 30350000 (1ps)
